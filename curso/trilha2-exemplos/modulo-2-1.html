@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 2.1 · Pitch Deck (guizang-ppt) | Curso Open Design</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }</script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; } .dark body { background-color: #111827; }
+    html:not(.dark) body { background-color: #f8fafc; } html:not(.dark) .bg-dark-900 { background-color: #fff; } html:not(.dark) .bg-dark-800 { background-color: #f9fafb; } html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; } html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; } html:not(.dark) .text-neutral-300 { color: #4b5563; } html:not(.dark) .text-neutral-400 { color: #6b7280; } html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; } html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-blue-400 { color: #2563eb; } html:not(.dark) .bg-blue-500\/20 { background-color: rgba(37,99,235,.12); } html:not(.dark) .bg-blue-500\/10 { background-color: rgba(37,99,235,.08); } html:not(.dark) .border-blue-500\/30 { border-color: rgba(37,99,235,.25); }
+    html:not(.dark) .text-emerald-400 { color: #059669; } html:not(.dark) .text-purple-400 { color: #7c3aed; } html:not(.dark) .text-amber-400 { color: #b45309; }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; } html:not(.dark) .text-sky-400 { color: #0369a1; } html:not(.dark) .text-yellow-400 { color: #a16207; } html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; } html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,.95); }
+    .topic-num { width: 3rem; height: 3rem; }
+    pre.code-block { background: #0b1220; color: #e5e7eb; padding: 1rem; border-radius: .5rem; overflow-x: auto; font-family: 'Menlo', monospace; font-size: .85rem; line-height: 1.5; }
+    html:not(.dark) pre.code-block { background: #111827; color: #f3f4f6; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"><div class="flex justify-between items-center h-14"><div class="flex items-center space-x-4"><a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300"><span class="text-2xl">🎨</span><span class="font-bold text-lg hidden sm:inline">Curso Open Design</span></a><span class="text-neutral-600">|</span><a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a></div><div class="flex items-center space-x-1 sm:space-x-2"><a href="../trilha1-fundamentos/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a><a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 bg-blue-500/10"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Exemplos</span></a><a href="../trilha3-avancado/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span></a><button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2"><svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg><svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg></button></div></div></div></nav>
+
+  <div class="border-b border-dark-700"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 text-sm text-neutral-400"><a href="../../index.html" class="hover:text-blue-400">Início</a><span class="mx-2 text-neutral-600">/</span><a href="index.html" class="hover:text-blue-400">Trilha 2 · Exemplos de Uso</a><span class="mx-2 text-neutral-600">/</span><span class="text-neutral-300">Módulo 2.1</span></div></div>
+
+  <header class="bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-4">MÓDULO 2.1</span>
+    <h1 class="text-2xl font-bold mb-3">📊 Pitch Deck com guizang-ppt</h1>
+    <p class="text-lg text-neutral-400 max-w-3xl">Pitch deck rodada-seed estilo Monocle/FT em ~10 minutos — magazine-style web PPT que exporta como HTML único e PDF.</p>
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 max-w-2xl">
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">7</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">~50 min</div><div class="text-xs text-neutral-400">Duração</div></div>
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">Prático</div><div class="text-xs text-neutral-400">Nível</div></div>
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">Deck</div><div class="text-xs text-neutral-400">Formato</div></div>
+    </div>
+    <div class="mt-6 bg-blue-500/10 border border-blue-500/30 rounded-lg p-4 max-w-3xl"><p class="text-sm text-neutral-300"><strong class="text-blue-400">🏁 Resultado:</strong> Você gera um pitch deck rodada-seed estilo Monocle/FT em ~10 minutos. Domina theme rhythm, slide counter, e escala-fit-tela.</p></div>
+  </div></header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-blue-500/20 text-blue-400 text-xl font-bold flex items-center justify-center flex-shrink-0">1</div><div><h2 class="text-2xl font-bold mb-2">📰 Por que <code>guizang-ppt</code> é default para deck</h2><p class="text-neutral-400">Magazine-style web PPT que abre no browser e imprime em PDF.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300"><code>guizang-ppt</code> é uma skill canibalizada do <a href="https://github.com/op7418/guizang-ppt-skill" target="_blank" class="text-sky-400 hover:text-sky-300">guizang-ppt-skill</a> (Op7418) — um framework de slides em HTML único, magazine-style, inspirado em Monocle/FT/The Information. Cada slide é uma section com layout próprio, sem dependência de PowerPoint, Keynote ou Google Slides. <strong>Roda no browser, exporta direto pra PDF de impressão.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">É o caminho mais rápido pra um deck profissional sem desenhar slide por slide. <strong>Você mantém o conteúdo no chat (texto), o agente entrega o deck rodável</strong>. Edita em texto, vê em browser. Não precisa abrir Keynote nem se preocupar com fonte ausente em outra máquina.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-blue-400">Magazine-style:</strong> referências editoriais (Monocle, FT)</li>
+            <li><strong class="text-blue-400">HTML único:</strong> 1 arquivo, navegação por keyboard, sem build</li>
+            <li><strong class="text-blue-400">Print-aware CSS:</strong> @media print + page-break por slide</li>
+            <li><strong class="text-blue-400">Default no OD:</strong> `od.mode: deck` ativa esta skill</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-blue-500/20 text-blue-400 text-xl font-bold flex items-center justify-center flex-shrink-0">2</div><div><h2 class="text-2xl font-bold mb-2">🗂️ A estrutura de side-files</h2><p class="text-neutral-400"><code>assets/template.html</code> + <code>references/{themes,layouts,components,checklist}.md</code>.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">A skill <code>guizang-ppt</code> tem uma das pastas mais densas do catálogo:</p>
+          <pre class="code-block mt-3">skills/guizang-ppt/
+├── SKILL.md
+├── assets/
+│   └── template.html       # base navegável + keyboard handlers
+└── references/
+    ├── themes.md           # 8 temas (FT-orange, NYT-classic, Monocle...)
+    ├── layouts.md          # 12 layouts (cover, kpi, quote, timeline, team, ...)
+    ├── components.md       # callout, marginalia, chart inline
+    └── checklist.md        # P0 (theme rhythm, fit-tela, contrast)</pre>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Cada arquivo é a "memória editorial" da skill. Themes garantem consistência visual; layouts garantem que cada tipo de slide tenha um padrão; components evitam reinvenção; checklist é o gate. <strong class="text-neutral-100">Você não precisa decorar — basta saber que existem e abrir quando precisar.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-blue-400">template.html:</strong> framework JS de navegação + slide engine</li>
+            <li><strong class="text-blue-400">themes.md:</strong> ~8 temas pré-feitos com paleta + tipografia</li>
+            <li><strong class="text-blue-400">layouts.md:</strong> ~12 layouts paste-ready (cover, kpi, quote, timeline)</li>
+            <li><strong class="text-blue-400">checklist.md:</strong> theme rhythm, fit-na-tela, contraste de impressão</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-blue-500/20 text-blue-400 text-xl font-bold flex items-center justify-center flex-shrink-0">3</div><div><h2 class="text-2xl font-bold mb-2">🌌 WebGL hero backgrounds — quando usar</h2><p class="text-neutral-400">E quando evitar.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Slides de capa podem ter um background animado em WebGL/Three.js (gradiente vivo, particle field, mesh distortion). É opcional — a skill só ativa se o usuário pediu "feel premium" ou explicitamente. <strong>Default = solid background</strong>. WebGL é luxo, não default.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">WebGL impressiona em demo (browser); falha em PDF (vira frame estático). Saber quando ligar = saber qual canal de saída domina. <strong class="text-neutral-100">Pra deck que será impresso: nunca. Pra demo executiva ao vivo: às vezes.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-blue-400">Use:</strong> deck premium ao vivo, único slide de capa</li>
+            <li><strong class="text-blue-400">Evite:</strong> deck para PDF, mais de 1 slide com WebGL</li>
+            <li><strong class="text-blue-400">Bibliotecas:</strong> Three.js (rico), p5.js (simples) — vendorizadas</li>
+            <li><strong class="text-blue-400">Performance:</strong> &lt; 60fps = corta logo</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-blue-500/20 text-blue-400 text-xl font-bold flex items-center justify-center flex-shrink-0">4</div><div><h2 class="text-2xl font-bold mb-2">🎵 Theme rhythm</h2><p class="text-neutral-400">Nunca 3+ slides do mesmo tema seguidos.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Regra de ritmo editorial: <strong>nunca repita o mesmo theme/layout em 3+ slides consecutivos</strong>. Se você tem 3 slides de KPI, intercale com um quote ou timeline. O olho cansa de monotonia visual; o ritmo mantém atenção.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">É a regra que diferencia "deck profissional" de "deck que parece tabela do Excel". Investidores escaneiam decks em 90 segundos — ritmo é o que faz o olho parar onde você quer.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-blue-400">Rule:</strong> max 2 slides do mesmo layout em sequência</li>
+            <li><strong class="text-blue-400">Solução:</strong> intercale "quote" ou "marginalia" entre KPIs</li>
+            <li><strong class="text-blue-400">Theme rotation:</strong> 8 themes disponíveis em <code>themes.md</code></li>
+            <li><strong class="text-blue-400">P0 enforcement:</strong> agente checa antes de emit</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-blue-500/20 text-blue-400 text-xl font-bold flex items-center justify-center flex-shrink-0">5</div><div><h2 class="text-2xl font-bold mb-2">🔢 Slide counter, navegação, persistência</h2><p class="text-neutral-400">Keyboard arrows, localStorage, deep-link.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">O <code>template.html</code> da guizang-ppt vem com:</p>
+          <ul class="text-neutral-300 mt-3 space-y-1 text-sm list-disc ml-5">
+            <li><strong class="text-blue-400">Keyboard:</strong> ← → entre slides, F/Esc fullscreen, P print</li>
+            <li><strong class="text-blue-400">Counter:</strong> "3 / 12" no canto inferior</li>
+            <li><strong class="text-blue-400">localStorage:</strong> reabriu? volta no slide onde parou</li>
+            <li><strong class="text-blue-400">Deep-link:</strong> <code>?slide=5</code> abre no slide 5</li>
+          </ul>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Apresentar deck em browser sem essas features = experiência amadora. Com elas, parece um app pensado. <strong>Tudo já vem pronto no template</strong>; agente não precisa reinventar — só preencher conteúdo.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-blue-400">Vanilla JS:</strong> sem framework, sem build</li>
+            <li><strong class="text-blue-400">localStorage key:</strong> <code>guizang-deck-{slug}</code></li>
+            <li><strong class="text-blue-400">Print bind:</strong> Ctrl/Cmd+P → @media print formatado</li>
+            <li><strong class="text-blue-400">Page transitions:</strong> CSS scroll-snap + smooth</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-blue-500/20 text-blue-400 text-xl font-bold flex items-center justify-center flex-shrink-0">6</div><div><h2 class="text-2xl font-bold mb-2">📤 Export: HTML único + PDF</h2><p class="text-neutral-400">Impressão deck-aware com page-break por slide.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">O deck é <strong>um único arquivo HTML</strong> autocontido (CSS + JS inline). Para PDF, basta Ctrl/Cmd+P → "Save as PDF" no browser. CSS de impressão usa <code>@page</code> + <code>page-break-after: always</code> em cada slide → cada slide vira uma página A4/Letter no PDF.</p>
+          <pre class="code-block mt-3">@page { size: 1280px 720px landscape; margin: 0; }
+section.slide { page-break-after: always; height: 720px; }
+@media print { .nav-controls, .counter { display: none; } }</pre>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">É o que torna o deck universal: link compartilhável (HTML) + arquivo enviável (PDF). <strong>Sem dependência de plataforma de slide</strong>. Você manda no email, no Slack, no WhatsApp.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-blue-400">Self-contained HTML:</strong> CSS + JS inline, sem CDN</li>
+            <li><strong class="text-blue-400">@page size:</strong> 1280x720 ou 16:9 paisagem</li>
+            <li><strong class="text-blue-400">Hide nav-controls em print:</strong> @media print esconde counter</li>
+            <li><strong class="text-blue-400">PDF generation:</strong> via browser; sem ferramenta extra</li>
+            <li><strong class="text-blue-400">Headless export:</strong> playwright pode automatizar PDF de batch</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-blue-500/20 text-blue-400 text-xl font-bold flex items-center justify-center flex-shrink-0">7</div><div><h2 class="text-2xl font-bold mb-2">🗣️ Speaker notes</h2><p class="text-neutral-400">Quando incluir e como o agente decide.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Para slides em apresentação ao vivo, o template suporta <strong>speaker notes</strong> em <code>aside.notes</code>. Visíveis em modo "presenter" (Ctrl+S), invisíveis em "audience". O agente decide automaticamente baseado em sinais do brief: "vou apresentar pra investidor" → adiciona notes; "deck pra mandar por email" → não adiciona.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Pitch deck pra apresentação ≠ pitch deck pra leitura. Notes traem o segundo uso (lê os notes em vez do slide). Saber a diferença = entregar o deck certo pro contexto certo.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-blue-400">Trigger automático:</strong> agente lê palavras "pitch ao vivo", "investidor", "presentation"</li>
+            <li><strong class="text-blue-400">Hidden by default:</strong> <code>.notes { display: none; }</code></li>
+            <li><strong class="text-blue-400">Toggle Ctrl+S:</strong> entra/sai presenter mode</li>
+            <li><strong class="text-blue-400">~30-50 palavras por slide:</strong> notas concisas; nunca paráfrase do slide</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-blue-500/10 border-2 border-blue-500/30 rounded-xl p-6 sm:p-8">
+      <h2 class="text-2xl font-bold mb-4 flex items-center"><span class="text-3xl mr-3">🛠️</span> Hands-on</h2>
+      <p class="text-neutral-300 mb-4"><strong>Brief:</strong> 10 slides para apresentar um SaaS de gestão financeira para investidores anjo brasileiros (rodada-seed, R$2M).</p>
+      <p class="text-neutral-300 mb-4"><strong>Output esperado:</strong> HTML rodável, PDF imprimível, speaker notes.</p>
+      <div class="bg-dark-700/50 rounded-lg p-4 mt-3">
+        <p class="text-sm text-blue-400 font-semibold mb-3">Estrutura sugerida (seed VC standard):</p>
+        <ol class="text-neutral-300 space-y-1 list-decimal ml-5 text-sm">
+          <li>Cover (logo + 1 frase)</li>
+          <li>Problem (dor real, número da população)</li>
+          <li>Solution (1 frase + screenshot)</li>
+          <li>Why now (timing/contexto)</li>
+          <li>Market (TAM/SAM/SOM)</li>
+          <li>Product (3-4 features-chave)</li>
+          <li>Traction (métricas atuais)</li>
+          <li>Business model (preço, unit economics)</li>
+          <li>Team (3-4 membros + creds)</li>
+          <li>Ask (R$ + uso + milestones)</li>
+        </ol>
+      </div>
+      <div class="bg-dark-800 border border-blue-500/30 rounded-lg p-4 mt-4">
+        <p class="text-xs text-blue-400 font-semibold mb-2">Comando no OD/Claude Code</p>
+        <pre class="code-block">/skill guizang-ppt
+/design-system editorial-monocle
+
+# Brief
+SaaS de gestão financeira pra PJ brasileira pequena.
+Rodada seed R$2M, audiência: anjos com background em fintech.
+Tom: editorial, sóbrio, sem emoji.
+10 slides. Speaker notes obrigatórias.</pre>
+      </div>
+    </section>
+
+    <section class="bg-dark-800 border border-dark-600 rounded-xl p-6 sm:p-8">
+      <h2 class="text-2xl font-bold mb-4 flex items-center"><span class="text-3xl mr-3">📚</span> Fontes</h2>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div><h3 class="text-blue-400 font-semibold mb-2 text-sm">No repositório</h3><ul class="text-neutral-300 space-y-1 text-sm">
+          <li><code class="text-blue-400">skills/guizang-ppt/SKILL.md</code></li>
+          <li><code class="text-blue-400">skills/guizang-ppt/assets/template.html</code></li>
+          <li><code class="text-blue-400">skills/guizang-ppt/references/checklist.md</code></li>
+          <li><code class="text-blue-400">templates/deck-framework.html</code></li>
+          <li><code class="text-blue-400">packages/contracts/src/prompts/deck-framework.ts</code> (374L)</li>
+        </ul></div>
+        <div><h3 class="text-blue-400 font-semibold mb-2 text-sm">Externas</h3><ul class="text-neutral-300 space-y-1 text-sm">
+          <li><a class="text-sky-400 hover:text-sky-300" href="https://github.com/op7418/guizang-ppt-skill" target="_blank">github.com/op7418/guizang-ppt-skill</a></li>
+          <li>YC seed-deck guidelines</li>
+          <li>Sequoia pitch deck template</li>
+        </ul></div>
+      </div>
+    </section>
+
+    <section class="bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 border border-blue-500/30 rounded-xl p-6 sm:p-8">
+      <h2 class="text-2xl font-bold mb-4 flex items-center"><span class="text-3xl mr-3">📌</span> Resumo do Módulo</h2>
+      <div class="space-y-3 text-neutral-300">
+        <p><strong class="text-blue-400">1.</strong> <code>guizang-ppt</code> é o default para deck — magazine-style web PPT, 1 HTML autocontido.</p>
+        <p><strong class="text-blue-400">2.</strong> Estrutura side-files: template.html + themes/layouts/components/checklist.</p>
+        <p><strong class="text-blue-400">3.</strong> WebGL hero é exceção (apresentação ao vivo); default = solid backgrounds.</p>
+        <p><strong class="text-blue-400">4.</strong> Theme rhythm: max 2 slides do mesmo layout consecutivos.</p>
+        <p><strong class="text-blue-400">5.</strong> Slide counter, keyboard nav, localStorage e deep-link já no template.</p>
+        <p><strong class="text-blue-400">6.</strong> Export: HTML único + PDF via Ctrl/Cmd+P, com @page + page-break.</p>
+        <p><strong class="text-blue-400">7.</strong> Speaker notes só quando contexto é apresentação ao vivo.</p>
+      </div>
+      <div class="mt-6 pt-6 border-t border-blue-500/30"><p class="text-sm text-neutral-400 mb-2">Próximo módulo:</p><a href="modulo-2-2.html" class="inline-flex items-center text-blue-400 hover:text-blue-300 font-semibold">Módulo 2.2 · Landing Page SaaS →</a></div>
+    </section>
+
+    <div class="flex flex-col sm:flex-row gap-4 mt-12">
+      <a href="index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Voltar à Trilha 2</a>
+      <a href="modulo-2-2.html" class="flex-1 text-center px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-500 transition-colors">Módulo 2.2 →</a>
+    </div>
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-16"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm"><p>Curso Open Design · Trilha 2 · Módulo 2.1 · 2026 · <a href="https://inema.club" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p></div></footer>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) { themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark'); } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => { themeToggleDarkIcon.classList.toggle('hidden'); themeToggleLightIcon.classList.toggle('hidden'); html.classList.toggle('dark'); localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light'); });
+  </script>
+</body>
+</html>

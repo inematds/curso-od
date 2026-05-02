@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 2.3 · App Mobile Multi-tela | Curso Open Design</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }</script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; } .dark body { background-color: #111827; }
+    html:not(.dark) body { background-color: #f8fafc; } html:not(.dark) .bg-dark-900 { background-color: #fff; } html:not(.dark) .bg-dark-800 { background-color: #f9fafb; } html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; } html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; } html:not(.dark) .text-neutral-300 { color: #4b5563; } html:not(.dark) .text-neutral-400 { color: #6b7280; } html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; } html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-blue-400 { color: #2563eb; } html:not(.dark) .bg-blue-500\/20 { background-color: rgba(37,99,235,.12); } html:not(.dark) .bg-blue-500\/10 { background-color: rgba(37,99,235,.08); } html:not(.dark) .border-blue-500\/30 { border-color: rgba(37,99,235,.25); }
+    html:not(.dark) .text-emerald-400 { color: #059669; } html:not(.dark) .text-purple-400 { color: #7c3aed; } html:not(.dark) .text-amber-400 { color: #b45309; }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; } html:not(.dark) .text-sky-400 { color: #0369a1; } html:not(.dark) .text-yellow-400 { color: #a16207; } html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; } html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,.95); }
+    .topic-num { width: 3rem; height: 3rem; }
+    pre.code-block { background: #0b1220; color: #e5e7eb; padding: 1rem; border-radius: .5rem; overflow-x: auto; font-family: 'Menlo', monospace; font-size: .85rem; line-height: 1.5; }
+    html:not(.dark) pre.code-block { background: #111827; color: #f3f4f6; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"><div class="flex justify-between items-center h-14"><div class="flex items-center space-x-4"><a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300"><span class="text-2xl">🎨</span><span class="font-bold text-lg hidden sm:inline">Curso Open Design</span></a><span class="text-neutral-600">|</span><a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a></div><div class="flex items-center space-x-1 sm:space-x-2"><a href="../trilha1-fundamentos/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a><a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 bg-blue-500/10"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Exemplos</span></a><a href="../trilha3-avancado/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span></a><button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2"><svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg><svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg></button></div></div></div></nav>
+
+  <div class="border-b border-dark-700"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 text-sm text-neutral-400"><a href="../../index.html" class="hover:text-blue-400">Início</a><span class="mx-2 text-neutral-600">/</span><a href="index.html" class="hover:text-blue-400">Trilha 2 · Exemplos de Uso</a><span class="mx-2 text-neutral-600">/</span><span class="text-neutral-300">Módulo 2.3</span></div></div>
+
+  <header class="bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-4">MÓDULO 2.3</span>
+    <h1 class="text-2xl font-bold mb-3">📱 App Mobile Multi-tela</h1>
+    <p class="text-lg text-neutral-400 max-w-3xl">Protótipo mobile pixel-accurate (iPhone 15 Pro Dynamic Island), 3+ telas usando frames compartilhados.</p>
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 max-w-2xl">
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">7</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">~55 min</div><div class="text-xs text-neutral-400">Duração</div></div>
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">Prático</div><div class="text-xs text-neutral-400">Nível</div></div>
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">Mobile</div><div class="text-xs text-neutral-400">Plataforma</div></div>
+    </div>
+    <div class="mt-6 bg-blue-500/10 border border-blue-500/30 rounded-lg p-4 max-w-3xl"><p class="text-sm text-neutral-300"><strong class="text-blue-400">🏁 Resultado:</strong> Você produz protótipo mobile pixel-accurate (iPhone 15 Pro Dynamic Island), com 3+ telas e frames compartilhados.</p></div>
+  </div></header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-blue-500/20 text-blue-400 text-xl font-bold flex items-center justify-center flex-shrink-0">1</div><div><h2 class="text-2xl font-bold mb-2">🧩 mobile-app vs mobile-onboarding vs gamified-app</h2><p class="text-neutral-400">Quando usar cada uma das 3 skills mobile.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Três skills, três cenários:</p>
+          <div class="grid md:grid-cols-3 gap-3 mt-4 text-sm">
+            <div class="bg-dark-700/50 rounded p-3"><strong class="text-blue-400">mobile-app</strong><p class="text-neutral-300 mt-1">Multi-tela genérica: home, list, detail, profile</p></div>
+            <div class="bg-dark-700/50 rounded p-3"><strong class="text-blue-400">mobile-onboarding</strong><p class="text-neutral-300 mt-1">Splash + 3-5 slides + signup</p></div>
+            <div class="bg-dark-700/50 rounded p-3"><strong class="text-blue-400">gamified-app</strong><p class="text-neutral-300 mt-1">Streaks, XP, achievements, animações Lottie</p></div>
+          </div>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Skills certas têm anti-patterns próprios. <strong>onboarding</strong> proíbe muitos campos no signup; <strong>gamified</strong> exige tipografia em destaque para números; <strong>mobile-app</strong> assume tab bar inferior. Trocar = quebrar premissa.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-blue-400">mobile-app:</strong> default para protótipo "qualquer app"</li>
+            <li><strong class="text-blue-400">mobile-onboarding:</strong> first-time experience</li>
+            <li><strong class="text-blue-400">gamified-app:</strong> Duolingo-style, fitness, learning</li>
+            <li><strong class="text-blue-400">Mistura?:</strong> use mobile-app + adicione 1 tela onboarding</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-blue-500/20 text-blue-400 text-xl font-bold flex items-center justify-center flex-shrink-0">2</div><div><h2 class="text-2xl font-bold mb-2">🖼️ Os 5 frames compartilhados em <code>/frames/</code></h2><p class="text-neutral-400">iPhone 15 Pro, Pixel, iPad, MacBook, Browser Chrome.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Em <code>apps/web/public/frames/</code> moram 5 wrappers HTML pixel-accurate, prontos pra envolver seu protótipo:</p>
+          <ul class="text-neutral-300 mt-3 space-y-1 text-sm list-disc ml-5">
+            <li><code>iphone-15-pro.html</code> — Dynamic Island, status bar, home indicator</li>
+            <li><code>android-pixel.html</code> — Pixel 8, status bar Material You</li>
+            <li><code>ipad-pro.html</code> — landscape/portrait toggle</li>
+            <li><code>macbook.html</code> — barra macOS no top</li>
+            <li><code>browser-chrome.html</code> — Chrome address bar + tabs</li>
+          </ul>
+          <p class="text-neutral-300 mt-3">Seu protótipo entra como <code>&lt;iframe srcdoc&gt;</code> dentro do frame. Você foca no app; o frame está pronto.</p>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Frames bons são chatos de fazer (status bar SVG, Dynamic Island com clip-path correto, safe-areas). O OD <strong>nunca</strong> deixa o agente desenhar isso do zero — sempre carrega frame existente. <strong class="text-neutral-100">Reuso massivo, output consistente.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-blue-400">Pixel-accurate:</strong> dimensões reais, não aproximação</li>
+            <li><strong class="text-blue-400">Iframe wrapper:</strong> protótipo entra via srcdoc</li>
+            <li><strong class="text-blue-400">Frame style:</strong> 100% CSS+SVG, sem imagens raster</li>
+            <li><strong class="text-blue-400">Light/dark variants:</strong> frames respondem a theme</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-blue-500/20 text-blue-400 text-xl font-bold flex items-center justify-center flex-shrink-0">3</div><div><h2 class="text-2xl font-bold mb-2">🗂️ Padrão multi-tela com <code>?screen=…</code></h2><p class="text-neutral-400">Gallery <code>index.html</code> + <code>screens/*.html</code>.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Estrutura padrão para multi-tela:</p>
+          <pre class="code-block mt-3">app-meditacao/
+├── index.html              # gallery: thumbnails de todas as telas
+└── screens/
+    ├── splash.html
+    ├── onboarding-1.html
+    ├── onboarding-2.html
+    ├── home.html
+    └── player.html</pre>
+          <p class="text-neutral-300 mt-3">Cada tela vira <code>?screen=home</code> via query param; o gallery embed via iframe.</p>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Multi-tela como arquivos separados &gt; multi-tela como tabs. <strong>Cada tela é isolada</strong>: deep-link, iframe, edição independente. Cliente pode abrir só "home" pra mostrar pra alguém. Designer pode editar uma sem regenerar todas.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-blue-400">screens/ folder:</strong> 1 HTML por tela</li>
+            <li><strong class="text-blue-400">index.html gallery:</strong> grid de iframes pequenos com label</li>
+            <li><strong class="text-blue-400">?screen= deep-link:</strong> URL parameter abre tela direto</li>
+            <li><strong class="text-blue-400">Iframe in frame:</strong> screen.html dentro de iphone-15-pro.html</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-blue-500/20 text-blue-400 text-xl font-bold flex items-center justify-center flex-shrink-0">4</div><div><h2 class="text-2xl font-bold mb-2">🔋 Status bar SVGs, Dynamic Island, home indicator</h2><p class="text-neutral-400">Pixel-accurate, sem cair em emoji.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Os 3 elementos visuais que separam "mockup amador" de "protótipo apresentável":</p>
+          <ul class="text-neutral-300 mt-3 space-y-1 text-sm list-disc ml-5">
+            <li><strong>Status bar:</strong> hora, signal SVG, wifi SVG, bateria SVG (não emoji 🔋)</li>
+            <li><strong>Dynamic Island:</strong> pill no topo com clip-path correto (iPhone 14 Pro+)</li>
+            <li><strong>Home indicator:</strong> linha branca/preta na base, 134×5px</li>
+          </ul>
+          <p class="text-neutral-300 mt-3">Tudo vem dos frames; agente <strong>nunca</strong> redesenha.</p>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Esses elementos pareceriam "detalhes minúsculos" — mas designers experientes os usam pra avaliar protótipo em 2 segundos. Errado = "feito com IA"; certo = "alguém pensou nisso".</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-blue-400">SVG inline:</strong> ícones de status como path SVG</li>
+            <li><strong class="text-blue-400">clip-path Dynamic Island:</strong> pill com 32px raio</li>
+            <li><strong class="text-blue-400">Home indicator:</strong> 134×5px com border-radius full</li>
+            <li><strong class="text-blue-400">Position fixed:</strong> sempre no top/bottom da viewport do frame</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-blue-500/20 text-blue-400 text-xl font-bold flex items-center justify-center flex-shrink-0">5</div><div><h2 class="text-2xl font-bold mb-2">👆 44px hit targets, safe-area insets</h2><p class="text-neutral-400">Acessibilidade mecânica — mensurável.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Apple HIG diz: <strong>todo elemento clicável tem ≥ 44×44pt</strong>. Material Design diz: <strong>≥ 48×48dp</strong>. O OD usa o mais conservador (44pt = ~44px). Safe-area insets respeitam Dynamic Island (top), home indicator (bottom) e curvas das bordas.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Esses são P0 mecânicos: o checklist verifica via grep. <em>Botões &lt; 44px = warning automático</em>. <em>Sem padding-top: env(safe-area-inset-top) = warning</em>. <strong class="text-neutral-100">Acessibilidade não é "boa intenção"; é ASCII verificável.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-blue-400">44pt min:</strong> Apple HIG hit target</li>
+            <li><strong class="text-blue-400">env(safe-area-inset-top/bottom):</strong> CSS API nativa</li>
+            <li><strong class="text-blue-400">P0 verification:</strong> grep mecânico no template</li>
+            <li><strong class="text-blue-400">Padding 16px lateral:</strong> contexto de safe-area-inset-left/right</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-blue-500/20 text-blue-400 text-xl font-bold flex items-center justify-center flex-shrink-0">6</div><div><h2 class="text-2xl font-bold mb-2">⚠️ Por que NÃO redesenhar um celular do zero</h2><p class="text-neutral-400">A regra de "use frame existente, sempre".</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Recriar um iPhone 15 Pro frame em CSS leva ~80 linhas de código + 6 SVGs + clip-path + safe-areas. <strong>Sempre dá erro: clip-path mal calculado, status bar fora de lugar, home indicator com largura errada</strong>. A regra do OD: agente NUNCA redesenha frame; SEMPRE carrega de <code>frames/</code>.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">É um caso onde "deixa o agente fazer" sai pior que "obriga reuso". Frame existe pra evitar erro recorrente. <strong class="text-neutral-100">Não é falta de criatividade; é escolha de onde aplicá-la.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-blue-400">Reuso forçado:</strong> P0 do checklist</li>
+            <li><strong class="text-blue-400">Frame está versionado:</strong> Apple atualiza; equipe atualiza repo</li>
+            <li><strong class="text-blue-400">Customização:</strong> via CSS variables no frame, não redesign</li>
+            <li><strong class="text-blue-400">Frames customizados:</strong> aceitos em <code>./frames/local/</code></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-blue-500/20 text-blue-400 text-xl font-bold flex items-center justify-center flex-shrink-0">7</div><div><h2 class="text-2xl font-bold mb-2">🎬 Animações entre telas</h2><p class="text-neutral-400">CSS keyframes ou Framer-style.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Multi-tela merece micro-animações que sugerem transição: <strong>slide horizontal</strong> (next/prev), <strong>fade + scale</strong> (modal), <strong>spring</strong> (sheet bottom), <strong>parallax</strong> (header). Tudo CSS keyframes; Framer Motion-style sem importar a lib.</p>
+          <pre class="code-block mt-3">@keyframes slide-in { from { transform: translateX(100%); } to { transform: translateX(0); } }
+.screen { animation: slide-in 280ms cubic-bezier(0.32, 0.72, 0, 1); }</pre>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Protótipo estático vs protótipo animado é diferença de "ideia" vs "experiência". Stakeholder olha animado, sente o produto. Estático vira "vou imaginar". <strong class="text-neutral-100">Animação básica é low-effort, high-signal.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-blue-400">280ms cubic-bezier:</strong> default sentir natural</li>
+            <li><strong class="text-blue-400">Slide horizontal:</strong> page transition padrão iOS</li>
+            <li><strong class="text-blue-400">Spring (Apple):</strong> aproximação CSS com easing nonlinear</li>
+            <li><strong class="text-blue-400">prefers-reduced-motion:</strong> respeitar acessibilidade</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-blue-500/10 border-2 border-blue-500/30 rounded-xl p-6 sm:p-8">
+      <h2 class="text-2xl font-bold mb-4 flex items-center"><span class="text-3xl mr-3">🛠️</span> Hands-on</h2>
+      <p class="text-neutral-300 mb-4"><strong>Brief:</strong> App mobile de meditação — splash, onboarding (3 slides), home com cards de práticas, player de áudio.</p>
+      <p class="text-neutral-300 mb-4"><strong>Output esperado:</strong> 5 telas embed em iPhone frame, índice gallery.</p>
+      <div class="bg-dark-700/50 rounded-lg p-4 mt-3">
+        <p class="text-sm text-blue-400 font-semibold mb-2">Estrutura sugerida:</p>
+        <ul class="text-neutral-300 space-y-1 text-sm list-disc ml-5">
+          <li><strong>splash.html:</strong> logo centered + 1 tagline; auto-skip em 1.5s</li>
+          <li><strong>onboarding-1/2/3.html:</strong> ilustração + headline + 1 bullet, "Próximo"</li>
+          <li><strong>home.html:</strong> tab bar bottom + scroll com cards (Sleep, Anxiety, Focus)</li>
+          <li><strong>player.html:</strong> play/pause grande, waveform sutil, timer count-up</li>
+          <li><strong>index.html:</strong> 5 thumbs em grid, label, click abre fullscreen</li>
+        </ul>
+      </div>
+      <div class="bg-dark-800 border border-blue-500/30 rounded-lg p-4 mt-4">
+        <p class="text-xs text-blue-400 font-semibold mb-2">Comando</p>
+        <pre class="code-block">/skill mobile-app
+/design-system soft-warm   # bege + amber, mais humano
+
+# Brief
+App de meditação. 5 telas:
+- splash, onboarding (3), home, player.
+- Tom: calmo, monocromia bege/amber.
+- Frame: iPhone 15 Pro, dark mode.
+- Animação slide entre onboarding.
+- Gallery index na raiz.</pre>
+      </div>
+    </section>
+
+    <section class="bg-dark-800 border border-dark-600 rounded-xl p-6 sm:p-8">
+      <h2 class="text-2xl font-bold mb-4 flex items-center"><span class="text-3xl mr-3">📚</span> Fontes</h2>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div><h3 class="text-blue-400 font-semibold mb-2 text-sm">No repositório</h3><ul class="text-neutral-300 space-y-1 text-sm">
+          <li><code class="text-blue-400">skills/mobile-app/</code></li>
+          <li><code class="text-blue-400">skills/mobile-onboarding/</code></li>
+          <li><code class="text-blue-400">apps/web/public/frames/iphone-15-pro.html</code></li>
+          <li><code class="text-blue-400">assets/frames/*.html</code></li>
+        </ul></div>
+        <div><h3 class="text-blue-400 font-semibold mb-2 text-sm">Externas</h3><ul class="text-neutral-300 space-y-1 text-sm">
+          <li>Apple HIG (44pt hit target, safe areas)</li>
+          <li>Material Design 3 (alternativas Android)</li>
+          <li>iOS 18 Dynamic Island specs</li>
+        </ul></div>
+      </div>
+    </section>
+
+    <section class="bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 border border-blue-500/30 rounded-xl p-6 sm:p-8">
+      <h2 class="text-2xl font-bold mb-4 flex items-center"><span class="text-3xl mr-3">📌</span> Resumo do Módulo</h2>
+      <div class="space-y-3 text-neutral-300">
+        <p><strong class="text-blue-400">1.</strong> 3 skills mobile: mobile-app (genérica), mobile-onboarding (first-time), gamified-app (streaks/XP).</p>
+        <p><strong class="text-blue-400">2.</strong> 5 frames pré-fabricados em <code>frames/</code> — nunca redesenhe.</p>
+        <p><strong class="text-blue-400">3.</strong> Multi-tela: <code>screens/</code> + <code>index.html</code> gallery + <code>?screen=</code> deep-link.</p>
+        <p><strong class="text-blue-400">4.</strong> Status bar SVG, Dynamic Island clip-path, home indicator — vêm do frame.</p>
+        <p><strong class="text-blue-400">5.</strong> Hit targets ≥ 44px e safe-area-inset CSS são P0 verificáveis.</p>
+        <p><strong class="text-blue-400">6.</strong> Não redesenha celular: regra de reuso forçado.</p>
+        <p><strong class="text-blue-400">7.</strong> Animações: 280ms cubic-bezier, slide horizontal padrão; <code>prefers-reduced-motion</code> sempre.</p>
+      </div>
+      <div class="mt-6 pt-6 border-t border-blue-500/30"><p class="text-sm text-neutral-400 mb-2">Próximo módulo:</p><a href="modulo-2-4.html" class="inline-flex items-center text-blue-400 hover:text-blue-300 font-semibold">Módulo 2.4 · Carrossel Social →</a></div>
+    </section>
+
+    <div class="flex flex-col sm:flex-row gap-4 mt-12">
+      <a href="modulo-2-2.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Módulo 2.2</a>
+      <a href="modulo-2-4.html" class="flex-1 text-center px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-500 transition-colors">Módulo 2.4 →</a>
+    </div>
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-16"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm"><p>Curso Open Design · Trilha 2 · Módulo 2.3 · 2026 · <a href="https://inema.club" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p></div></footer>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) { themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark'); } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => { themeToggleDarkIcon.classList.toggle('hidden'); themeToggleLightIcon.classList.toggle('hidden'); html.classList.toggle('dark'); localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light'); });
+  </script>
+</body>
+</html>
