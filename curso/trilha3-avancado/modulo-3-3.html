@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 3.3 · Brand-Spec Extraction Avançada | Curso Open Design</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }</script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; } .dark body { background-color: #111827; }
+    html:not(.dark) body { background-color: #f8fafc; } html:not(.dark) .bg-dark-900 { background-color: #fff; } html:not(.dark) .bg-dark-800 { background-color: #f9fafb; } html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; } html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; } html:not(.dark) .text-neutral-300 { color: #4b5563; } html:not(.dark) .text-neutral-400 { color: #6b7280; } html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; } html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-purple-400 { color: #7c3aed; } html:not(.dark) .bg-purple-500\/20 { background-color: rgba(124,58,237,.12); } html:not(.dark) .bg-purple-500\/10 { background-color: rgba(124,58,237,.08); } html:not(.dark) .border-purple-500\/30 { border-color: rgba(124,58,237,.25); }
+    html:not(.dark) .text-emerald-400 { color: #059669; } html:not(.dark) .text-blue-400 { color: #2563eb; } html:not(.dark) .text-amber-400 { color: #b45309; } html:not(.dark) .text-red-400 { color: #dc2626; }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; } html:not(.dark) .text-sky-400 { color: #0369a1; } html:not(.dark) .text-yellow-400 { color: #a16207; } html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; } html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,.95); }
+    .topic-num { width: 3rem; height: 3rem; }
+    pre.code-block { background: #0b1220; color: #e5e7eb; padding: 1rem; border-radius: .5rem; overflow-x: auto; font-family: 'Menlo', monospace; font-size: .85rem; line-height: 1.5; }
+    html:not(.dark) pre.code-block { background: #111827; color: #f3f4f6; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"><div class="flex justify-between items-center h-14"><div class="flex items-center space-x-4"><a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300"><span class="text-2xl">🎨</span><span class="font-bold text-lg hidden sm:inline">Curso Open Design</span></a><span class="text-neutral-600">|</span><a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a></div><div class="flex items-center space-x-1 sm:space-x-2"><a href="../trilha1-fundamentos/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a><a href="../trilha2-exemplos/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Exemplos</span></a><a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 bg-purple-500/10"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span></a><button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2"><svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg><svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg></button></div></div></div></nav>
+
+  <div class="border-b border-dark-700"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 text-sm text-neutral-400"><a href="../../index.html" class="hover:text-purple-400">Início</a><span class="mx-2 text-neutral-600">/</span><a href="index.html" class="hover:text-purple-400">Trilha 3 · Técnicas Avançadas</a><span class="mx-2 text-neutral-600">/</span><span class="text-neutral-300">Módulo 3.3</span></div></div>
+
+  <header class="bg-gradient-to-br from-purple-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <span class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-semibold rounded-full mb-4">MÓDULO 3.3</span>
+    <h1 class="text-2xl font-bold mb-3">🎨 Brand-Spec Extraction Avançada</h1>
+    <p class="text-lg text-neutral-400 max-w-3xl">Extrair sistema visual de URL/screenshot do cliente, sem inventar cores. Protocolo de 5 passos: Locate → Download → grep hex → Codify → Vocalise.</p>
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 max-w-2xl">
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">8</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">~50 min</div><div class="text-xs text-neutral-400">Duração</div></div>
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">Avançado</div><div class="text-xs text-neutral-400">Nível</div></div>
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">5 passos</div><div class="text-xs text-neutral-400">Protocolo</div></div>
+    </div>
+    <div class="mt-6 bg-purple-500/10 border border-purple-500/30 rounded-lg p-4 max-w-3xl"><p class="text-sm text-neutral-300"><strong class="text-purple-400">🏁 Resultado:</strong> Você extrai um sistema visual de URL/screenshot do cliente sem inventar cores, dominando o protocolo Locate → Download → grep → Codify → Vocalise.</p></div>
+  </div></header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-purple-500/20 text-purple-400 text-xl font-bold flex items-center justify-center flex-shrink-0">1</div><div><h2 class="text-2xl font-bold mb-2">⚠️ O problema: agente alucinando hex codes</h2><p class="text-neutral-400">Por que esse protocolo existe.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Sem protocolo, você diz "use a marca da Stripe" e o modelo <strong>inventa</strong> cores plausíveis: <code>#635BFF</code> em vez de <code>#0570DE</code>; tipografia "Inter" em vez de "SF Pro". O output parece Stripe-like mas <strong>está errado</strong>. Designer experiente percebe; cliente sente que não é a marca dele. Brand-spec extraction <strong>elimina</strong> esse modo de falha.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">É a diferença entre "AI freestyle" e "trabalho de designer sério". Cliente fornece marca? Você extrai mecanicamente; modelo nunca improvisa. <strong class="text-neutral-100">Trust mecânico &gt; trust em LLM "lembrar bem".</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-purple-400">Hallucination de cor:</strong> modo de falha #1 sem protocolo</li>
+            <li><strong class="text-purple-400">Hallucination de tipografia:</strong> modo de falha #2</li>
+            <li><strong class="text-purple-400">Branch B do discovery:</strong> ativa quando usuário fornece URL/spec</li>
+            <li><strong class="text-purple-400">Mecânico, não criativo:</strong> nada inventado, tudo derivado</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-purple-500/20 text-purple-400 text-xl font-bold flex items-center justify-center flex-shrink-0">2</div><div><h2 class="text-2xl font-bold mb-2">📝 Os 5 passos do protocolo</h2><p class="text-neutral-400">Locate · Download · grep hex · Codify · Vocalise.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Sequência fixa, executada pelo agente em background:</p>
+          <ol class="text-neutral-300 mt-3 space-y-1 text-sm list-decimal ml-5">
+            <li><strong class="text-purple-400">Locate:</strong> achar onde a marca está documentada (/brand, /press, /about)</li>
+            <li><strong class="text-purple-400">Download:</strong> puxar CSS/PDF/screenshots</li>
+            <li><strong class="text-purple-400">grep hex:</strong> extrair cores mecanicamente</li>
+            <li><strong class="text-purple-400">Codify:</strong> escrever brand-spec.md em OKLch + tipografia + posture</li>
+            <li><strong class="text-purple-400">Vocalise:</strong> declarar o sistema em uma frase ao usuário</li>
+          </ol>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Cada passo elimina um modo de falha específico. Pular passo = voltar a alucinar. Sequência é validada — funciona em 90% dos sites públicos. <strong class="text-neutral-100">Não invente sequência própria; siga.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-purple-400">Sequência rígida:</strong> não reordenar</li>
+            <li><strong class="text-purple-400">Estado intermediário visível:</strong> usuário vê o que foi achado</li>
+            <li><strong class="text-purple-400">Falha graceful:</strong> sem brand book? cai pra Branch C</li>
+            <li><strong class="text-purple-400">Tempo:</strong> ~60-120s no total para sites públicos</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-purple-500/20 text-purple-400 text-xl font-bold flex items-center justify-center flex-shrink-0">3</div><div><h2 class="text-2xl font-bold mb-2">🔍 Locate: WebFetch em <code>/brand</code>, <code>/press</code>, <code>/about</code></h2><p class="text-neutral-400">Onde marcas costumam documentar identidade.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Empresas com brand book público costumam expor em paths conhecidos: <code>/brand</code>, <code>/press</code>, <code>/press-kit</code>, <code>/about/brand</code>, <code>/about/press</code>, <code>/media</code>. Agente usa <code>WebFetch</code> em ordem; primeiro hit ganha. Se nada, cai em scraping da homepage CSS.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Saber esses paths é "design intelligence" — economiza 80% das tentativas. Se cliente é Stripe-tier, brand book está documentado. Se é early-stage, vai ser scraping. <strong>Saber escolher caminho = não retrabalhar.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-purple-400">/brand, /press, /press-kit:</strong> caminhos canônicos</li>
+            <li><strong class="text-purple-400">WebFetch tool:</strong> Claude Code nativo</li>
+            <li><strong class="text-purple-400">Fallback scraping:</strong> homepage CSS quando não há brand</li>
+            <li><strong class="text-purple-400">Sem brand:</strong> cair pra Branch C (improvisar)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-purple-500/20 text-purple-400 text-xl font-bold flex items-center justify-center flex-shrink-0">4</div><div><h2 class="text-2xl font-bold mb-2">⬇️ Download: CSS, brand-guide PDF, screenshots</h2><p class="text-neutral-400">Qualquer artefato que codifique a marca.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Após Locate, baixe os arquivos:</p>
+          <ul class="text-neutral-300 mt-3 space-y-1 text-sm list-disc ml-5">
+            <li><strong>CSS files:</strong> são fonte de verdade (design tokens)</li>
+            <li><strong>Brand guide PDF:</strong> tem paleta + tipografia explicitada</li>
+            <li><strong>Screenshots / SVG logos:</strong> para extrair cor visual</li>
+            <li><strong>Webfont declarations:</strong> que tipografia o site carrega</li>
+          </ul>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">CSS é "fonte canônica" — todas as outras representações derivam dele. Ler CSS &gt; ler brand book em 90% dos casos: brand book pode estar desatualizado, CSS é o que está rodando agora.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-purple-400">curl + WebFetch:</strong> ferramentas básicas</li>
+            <li><strong class="text-purple-400">CSS minificado:</strong> ainda contém HEX</li>
+            <li><strong class="text-purple-400">PDF parsing:</strong> via pdftotext (cli) quando preciso</li>
+            <li><strong class="text-purple-400">Screenshot color:</strong> só fallback de último caso</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-purple-500/20 text-purple-400 text-xl font-bold flex items-center justify-center flex-shrink-0">5</div><div><h2 class="text-2xl font-bold mb-2">🔎 grep hex: extração mecânica</h2><p class="text-neutral-400"><code>grep -E '#[0-9a-fA-F]{3,8}'</code></p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Regex pega TODOS os hex codes do CSS:</p>
+          <pre class="code-block mt-3">grep -E '#[0-9a-fA-F]{3,8}' style.css | sort -u
+# Output:
+# #0570DE  (Stripe purple-blue principal)
+# #1A1F36  (texto)
+# #F6F8FA  (cinza claro fundo)
+# #635BFF  (accent CTA)
+# #F1F3F5
+# ...</pre>
+          <p class="text-neutral-300 mt-3">Top 5-10 mais frequentes &gt; "ruído" único. Agente aplica heurística: cores que aparecem 10+ vezes = tokens canônicos.</p>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">É a única extração 100% determinística. Modelo lendo CSS lentamente erra; <code>grep + sort</code> não erra. <strong class="text-neutral-100">Mecânico vence inteligente quando há regex.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-purple-400">Regex hex:</strong> 3, 4, 6 ou 8 dígitos</li>
+            <li><strong class="text-purple-400">Frequência:</strong> top 5-10 são tokens canônicos</li>
+            <li><strong class="text-purple-400">Cluster por similaridade:</strong> #0570DE e #035FCC podem ser variações</li>
+            <li><strong class="text-purple-400">RGB/HSL ignored:</strong> raros em CSS de produto</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-purple-500/20 text-purple-400 text-xl font-bold flex items-center justify-center flex-shrink-0">6</div><div><h2 class="text-2xl font-bold mb-2">📄 Codify: brand-spec.md em OKLch + 3 fonts + 3-5 posture rules</h2><p class="text-neutral-400">O artefato final do protocolo.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Brand-spec.md gerado pelo agente:</p>
+          <pre class="code-block mt-3"># brand-spec: Stripe
+
+## color (em OKLch)
+- --bg: oklch(98% 0.005 250)        # de #F6F8FA
+- --fg: oklch(15% 0.02 270)         # de #1A1F36
+- --accent: oklch(48% 0.18 263)     # de #0570DE
+- --accent-2: oklch(57% 0.20 270)   # de #635BFF
+
+## typography
+- display: "Söhne", "SF Pro Display"
+- body: "Söhne", -apple-system, "Helvetica Neue"
+- mono: "Söhne Mono", monospace
+
+## posture
+- Cards com border 1px hairline; rounded 12px
+- Shadows são raros — só em modais
+- Accent reservado para CTAs primários</pre>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">brand-spec.md é <strong>plug-and-play</strong> em qualquer skill. Coloca em <code>./brand-spec.md</code> do projeto, agente lê e aplica em qualquer artefato. <strong>Reuso forte.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-purple-400">6 tokens canônicos:</strong> bg, fg, accent + variações</li>
+            <li><strong class="text-purple-400">3 font stacks:</strong> display, body, mono</li>
+            <li><strong class="text-purple-400">3-5 posture rules:</strong> cards, shadows, motion, copy</li>
+            <li><strong class="text-purple-400">OKLch mandatory:</strong> não usar HEX no spec</li>
+            <li><strong class="text-purple-400">Path:</strong> <code>./brand-spec.md</code> no root do projeto</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-purple-500/20 text-purple-400 text-xl font-bold flex items-center justify-center flex-shrink-0">7</div><div><h2 class="text-2xl font-bold mb-2">🗣️ Vocalise: declarar o sistema em uma frase</h2><p class="text-neutral-400">"Warm cream background, single rust accent at oklch(58% 0.15 35)…"</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Após codify, agente declara em <strong>uma frase</strong> o que extraiu:</p>
+          <pre class="code-block mt-3">"Stripe é fundo branco-claro com accent azul-violeta vivo
+em oklch(48% 0.18 263), tipografia Söhne com humor sóbrio
+e posture mínima — cards com hairline, shadows raros."</pre>
+          <p class="text-neutral-300 mt-3">Usuário valida ou corrige <em>antes</em> de gerar artefato.</p>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">É o "checkpoint" antes de ir adiante. Se vocalise está errado, é mais barato corrigir aqui que depois do CSS pronto. <strong class="text-neutral-100">Resume de 1 frase é a hipótese; usuário aceita ou refuta.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-purple-400">1 frase:</strong> síntese do que foi extraído</li>
+            <li><strong class="text-purple-400">Cita OKLch:</strong> referência exata, não nome aproximado</li>
+            <li><strong class="text-purple-400">Postura inclusa:</strong> "cards com hairline" &gt; só cores</li>
+            <li><strong class="text-purple-400">Validation gate:</strong> usuário precisa confirmar</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-purple-500/20 text-purple-400 text-xl font-bold flex items-center justify-center flex-shrink-0">8</div><div><h2 class="text-2xl font-bold mb-2">🔄 Quando converter HEX para OKLch</h2><p class="text-neutral-400">Preservar L perceptual.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Converter HEX → OKLch não é trivial: você precisa preservar o L "que parece o mesmo brilho" perceptualmente. <code>oklch.com</code> faz isso bem; conversores genéricos podem dar valores numericamente corretos mas visualmente diferentes. <strong>Use sempre a conversão perceptual.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Conversão errada produz cores que parecem "deslocadas" do original. Cliente sente sutil mas certeiro: "não é a nossa cor". <strong class="text-neutral-100">Detalhe técnico que protege identidade visual.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-purple-400">oklch.com:</strong> conversor canônico</li>
+            <li><strong class="text-purple-400">Display P3:</strong> alguns hex saem do sRGB; OKLch lida</li>
+            <li><strong class="text-purple-400">Round-trip test:</strong> OKLch → HEX → OKLch deve estar próximo</li>
+            <li><strong class="text-purple-400">Não converter cinzas absolutos:</strong> oklch(0% 0 0) e oklch(100% 0 0) só</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-purple-500/10 border-2 border-purple-500/30 rounded-xl p-6 sm:p-8">
+      <h2 class="text-2xl font-bold mb-4 flex items-center"><span class="text-3xl mr-3">🛠️</span> Hands-on</h2>
+      <p class="text-neutral-300 mb-4"><strong>Brief:</strong> Extrair brand-spec de uma URL (ex: stripe.com, vercel.com) usando o protocolo. Comparar com <code>design-systems/stripe/DESIGN.md</code> do repo.</p>
+      <ol class="text-neutral-300 space-y-3 list-decimal ml-5 mb-5">
+        <li><strong class="text-purple-400">Locate:</strong> abra <code>stripe.com/brand</code>. Confirma se existe brand book.</li>
+        <li><strong class="text-purple-400">Download:</strong> <code>curl -O https://stripe.com/css/main.css</code> (ou similar; pode precisar inspect)</li>
+        <li><strong class="text-purple-400">grep hex:</strong> <code>grep -Eo '#[0-9a-fA-F]{3,8}' main.css | sort | uniq -c | sort -rn | head -20</code></li>
+        <li><strong class="text-purple-400">Codify:</strong> escreva brand-spec.md com top 5-6 cores em OKLch (use oklch.com para converter)</li>
+        <li><strong class="text-purple-400">Vocalise:</strong> escreva 1 frase que sintetiza o sistema</li>
+        <li><strong class="text-purple-400">Compare:</strong> abra <code>design-systems/stripe/DESIGN.md</code> e verifique convergência de tokens</li>
+      </ol>
+      <div class="bg-dark-800 border border-purple-500/30 rounded-lg p-4">
+        <p class="text-xs text-purple-400 font-semibold mb-2">Comando macro</p>
+        <pre class="code-block">curl -s https://stripe.com | grep -Eo 'href="[^"]+\.css"' | head -3
+# Pega CSS principal, depois:
+curl -s https://stripe.com/path/style.css | \
+  grep -Eo '#[0-9a-fA-F]{3,8}' | sort | uniq -c | sort -rn | head</pre>
+      </div>
+    </section>
+
+    <section class="bg-dark-800 border border-dark-600 rounded-xl p-6 sm:p-8">
+      <h2 class="text-2xl font-bold mb-4 flex items-center"><span class="text-3xl mr-3">📚</span> Fontes</h2>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div><h3 class="text-purple-400 font-semibold mb-2 text-sm">No repositório</h3><ul class="text-neutral-300 space-y-1 text-sm">
+          <li><code class="text-purple-400">packages/contracts/src/prompts/discovery.ts</code> (Branch B)</li>
+          <li><code class="text-purple-400">design-systems/stripe/DESIGN.md</code></li>
+          <li><code class="text-purple-400">design-systems/vercel/DESIGN.md</code></li>
+        </ul></div>
+        <div><h3 class="text-purple-400 font-semibold mb-2 text-sm">Externas</h3><ul class="text-neutral-300 space-y-1 text-sm">
+          <li>oklch.com (converter HEX → OKLch)</li>
+          <li>stripe.com/brand, vercel.com/brand (exemplos)</li>
+          <li>WebFetch tool (Claude Code)</li>
+        </ul></div>
+      </div>
+    </section>
+
+    <section class="bg-gradient-to-br from-purple-900/30 via-dark-800 to-dark-800 border border-purple-500/30 rounded-xl p-6 sm:p-8">
+      <h2 class="text-2xl font-bold mb-4 flex items-center"><span class="text-3xl mr-3">📌</span> Resumo do Módulo</h2>
+      <div class="space-y-3 text-neutral-300">
+        <p><strong class="text-purple-400">1.</strong> Sem protocolo, modelo alucina cores e tipografia "plausível" mas erradas.</p>
+        <p><strong class="text-purple-400">2.</strong> 5 passos: Locate → Download → grep hex → Codify → Vocalise.</p>
+        <p><strong class="text-purple-400">3.</strong> Locate: <code>/brand</code>, <code>/press</code>, <code>/about/brand</code> são caminhos canônicos.</p>
+        <p><strong class="text-purple-400">4.</strong> Download: CSS &gt; PDF &gt; screenshot (CSS é fonte de verdade).</p>
+        <p><strong class="text-purple-400">5.</strong> grep hex + frequency = top 5-10 cores canônicas mecanicamente.</p>
+        <p><strong class="text-purple-400">6.</strong> Codify em OKLch + 3 font stacks + 3-5 posture rules.</p>
+        <p><strong class="text-purple-400">7.</strong> Vocalise = 1 frase resumo, gate de validação antes de gerar.</p>
+        <p><strong class="text-purple-400">8.</strong> HEX → OKLch via oklch.com para preservar L perceptual.</p>
+      </div>
+      <div class="mt-6 pt-6 border-t border-purple-500/30"><p class="text-sm text-neutral-400 mb-2">Próximo módulo:</p><a href="modulo-3-4.html" class="inline-flex items-center text-purple-400 hover:text-purple-300 font-semibold">Módulo 3.4 · Critique 5-dim como Loop →</a></div>
+    </section>
+
+    <div class="flex flex-col sm:flex-row gap-4 mt-12">
+      <a href="modulo-3-2.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Módulo 3.2</a>
+      <a href="modulo-3-4.html" class="flex-1 text-center px-6 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-500 transition-colors">Módulo 3.4 →</a>
+    </div>
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-16"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm"><p>Curso Open Design · Trilha 3 · Módulo 3.3 · 2026 · <a href="https://inema.club" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p></div></footer>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) { themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark'); } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => { themeToggleDarkIcon.classList.toggle('hidden'); themeToggleLightIcon.classList.toggle('hidden'); html.classList.toggle('dark'); localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light'); });
+  </script>
+</body>
+</html>

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 3.2 · ACP & adapters | Curso Open Design</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }</script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; } .dark body { background-color: #111827; }
+    html:not(.dark) body { background-color: #f8fafc; } html:not(.dark) .bg-dark-900 { background-color: #fff; } html:not(.dark) .bg-dark-800 { background-color: #f9fafb; } html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; } html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; } html:not(.dark) .text-neutral-300 { color: #4b5563; } html:not(.dark) .text-neutral-400 { color: #6b7280; } html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; } html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-purple-400 { color: #7c3aed; } html:not(.dark) .bg-purple-500\/20 { background-color: rgba(124,58,237,.12); } html:not(.dark) .bg-purple-500\/10 { background-color: rgba(124,58,237,.08); } html:not(.dark) .border-purple-500\/30 { border-color: rgba(124,58,237,.25); }
+    html:not(.dark) .text-emerald-400 { color: #059669; } html:not(.dark) .text-blue-400 { color: #2563eb; } html:not(.dark) .text-amber-400 { color: #b45309; }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; } html:not(.dark) .text-sky-400 { color: #0369a1; } html:not(.dark) .text-yellow-400 { color: #a16207; } html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; } html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,.95); }
+    .topic-num { width: 3rem; height: 3rem; }
+    pre.code-block { background: #0b1220; color: #e5e7eb; padding: 1rem; border-radius: .5rem; overflow-x: auto; font-family: 'Menlo', monospace; font-size: .85rem; line-height: 1.5; }
+    html:not(.dark) pre.code-block { background: #111827; color: #f3f4f6; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"><div class="flex justify-between items-center h-14"><div class="flex items-center space-x-4"><a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300"><span class="text-2xl">🎨</span><span class="font-bold text-lg hidden sm:inline">Curso Open Design</span></a><span class="text-neutral-600">|</span><a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a></div><div class="flex items-center space-x-1 sm:space-x-2"><a href="../trilha1-fundamentos/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a><a href="../trilha2-exemplos/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Exemplos</span></a><a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 bg-purple-500/10"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span></a><button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2"><svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg><svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg></button></div></div></div></nav>
+
+  <div class="border-b border-dark-700"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 text-sm text-neutral-400"><a href="../../index.html" class="hover:text-purple-400">Início</a><span class="mx-2 text-neutral-600">/</span><a href="index.html" class="hover:text-purple-400">Trilha 3 · Técnicas Avançadas</a><span class="mx-2 text-neutral-600">/</span><span class="text-neutral-300">Módulo 3.2</span></div></div>
+
+  <header class="bg-gradient-to-br from-purple-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <span class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-semibold rounded-full mb-4">MÓDULO 3.2</span>
+    <h1 class="text-2xl font-bold mb-3">🔗 Agent Client Protocol (ACP) & adapters</h1>
+    <p class="text-lg text-neutral-400 max-w-3xl">JSON-RPC sobre stdio bidirecional — "LSP para coding agents". 6 famílias de stream format e como adicionar um adapter novo.</p>
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 max-w-2xl">
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">7</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">~60 min</div><div class="text-xs text-neutral-400">Duração</div></div>
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">Avançado</div><div class="text-xs text-neutral-400">Nível</div></div>
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">11 CLIs</div><div class="text-xs text-neutral-400">Suportados</div></div>
+    </div>
+    <div class="mt-6 bg-purple-500/10 border border-purple-500/30 rounded-lg p-4 max-w-3xl"><p class="text-sm text-neutral-300"><strong class="text-purple-400">🏁 Resultado:</strong> Você entende o ACP, reconhece as 6 famílias de stream format, e adiciona um adapter novo ao OD.</p></div>
+  </div></header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-purple-500/20 text-purple-400 text-xl font-bold flex items-center justify-center flex-shrink-0">1</div><div><h2 class="text-2xl font-bold mb-2">📡 O que é ACP — JSON-RPC 2.0 sobre stdio</h2><p class="text-neutral-400">Bidirecional, simétrico, language-agnostic.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Agent Client Protocol é um protocolo proposto em <a href="https://agentclientprotocol.com" target="_blank" class="text-sky-400 hover:text-sky-300">agentclientprotocol.com</a> para padronizar comunicação entre IDE/orchestrator e agente de coding. <strong>JSON-RPC 2.0</strong> sobre <strong>stdio</strong> (stdin/stdout do processo do agente), <strong>bidirecional</strong> (cliente→agente e agente→cliente), <strong>simétrico</strong> (cada lado pode iniciar request).</p>
+          <pre class="code-block mt-3">// cliente envia
+{"jsonrpc":"2.0","id":1,"method":"agent/run","params":{"prompt":"..."}}
+
+// agente streams
+{"jsonrpc":"2.0","method":"output/append","params":{"chunk":"Hello"}}
+{"jsonrpc":"2.0","method":"todo/update","params":{"items":[...]}}</pre>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">É a aposta da indústria para <strong>"LSP do mundo de agentes"</strong>. Hoje, cada IDE inventa protocolo (Cursor, Continue, Cline, Aider…). ACP padroniza. Saber ACP = entender futuro próximo da integração agente-IDE.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-purple-400">JSON-RPC 2.0:</strong> mesmo protocolo de LSP</li>
+            <li><strong class="text-purple-400">stdio transport:</strong> stdin/stdout, sem porta</li>
+            <li><strong class="text-purple-400">Bidirecional:</strong> agente pode pedir input ao cliente</li>
+            <li><strong class="text-purple-400">Simétrico:</strong> mesmo schema nos dois sentidos</li>
+            <li><strong class="text-purple-400">Implementações:</strong> Hermes, Kimi K2, Kiro, e crescendo</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-purple-500/20 text-purple-400 text-xl font-bold flex items-center justify-center flex-shrink-0">2</div><div><h2 class="text-2xl font-bold mb-2">📞 Por que stdio (não HTTP)</h2><p class="text-neutral-400">Process isolation, language independence, sem porta.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">stdio &gt; HTTP para 3 razões:</p>
+          <ul class="text-neutral-300 mt-3 space-y-1 text-sm list-disc ml-5">
+            <li><strong class="text-purple-400">Process isolation:</strong> mata o processo = mata a sessão; sem socket leak</li>
+            <li><strong class="text-purple-400">Language independence:</strong> agente em Rust, Go, Python, Node — mesma interface</li>
+            <li><strong class="text-purple-400">Sem porta:</strong> sem conflito, sem firewall, sem auth</li>
+          </ul>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Mesma decisão do LSP, MCP, Jupyter kernel. <strong>Padrão consagrado para tooling local</strong>: stdio reduz superfície de ataque, simplifica spawn de subprocess. Saber por que stdio = entender por que ACP encaixa naturalmente em IDEs.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-purple-400">child_process.spawn():</strong> Node API canônica</li>
+            <li><strong class="text-purple-400">Newline-delimited JSON:</strong> 1 mensagem por linha</li>
+            <li><strong class="text-purple-400">stderr para logs:</strong> stdout só pro protocolo</li>
+            <li><strong class="text-purple-400">Process group:</strong> kill cascateia para children</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-purple-500/20 text-purple-400 text-xl font-bold flex items-center justify-center flex-shrink-0">3</div><div><h2 class="text-2xl font-bold mb-2">🌳 Os 11 CLIs suportados — por stream format</h2><p class="text-neutral-400">Taxonomia em 6 famílias.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">11 CLIs, 6 famílias:</p>
+          <div class="space-y-2 mt-4 text-sm">
+            <div class="bg-dark-700/50 rounded p-3"><strong class="text-purple-400">claude-stream-json:</strong> Claude Code (Anthropic native)</div>
+            <div class="bg-dark-700/50 rounded p-3"><strong class="text-purple-400">copilot-stream-json:</strong> GitHub Copilot CLI</div>
+            <div class="bg-dark-700/50 rounded p-3"><strong class="text-purple-400">json-event-stream:</strong> Codex, Gemini CLI, OpenCode, Cursor Agent (4 CLIs)</div>
+            <div class="bg-dark-700/50 rounded p-3"><strong class="text-purple-400">acp-json-rpc:</strong> Hermes, Kimi K2, Kiro (3 ACP-compatíveis)</div>
+            <div class="bg-dark-700/50 rounded p-3"><strong class="text-purple-400">pi-rpc:</strong> Aider, Continue (1 família, 2 CLIs com small variations)</div>
+            <div class="bg-dark-700/50 rounded p-3"><strong class="text-purple-400">plain:</strong> Qwen CLI (texto livre, OD parseia)</div>
+          </div>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Cada família tem semântica de eventos diferente. Saber a taxonomia = saber por que adicionar um CLI novo cabe em uma das 6 (e não 7). <strong>Reduz superfície de adapter para tamanho conhecido.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-purple-400">claude-stream-json:</strong> evento por chunk, tool_use blocks</li>
+            <li><strong class="text-purple-400">json-event-stream:</strong> eventos tipados (output, tool_call, finish)</li>
+            <li><strong class="text-purple-400">acp-json-rpc:</strong> RPC bi-direcional</li>
+            <li><strong class="text-purple-400">plain:</strong> texto livre + sentinel string</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-purple-500/20 text-purple-400 text-xl font-bold flex items-center justify-center flex-shrink-0">4</div><div><h2 class="text-2xl font-bold mb-2">🔍 Detecção automática no boot — PATH scan</h2><p class="text-neutral-400">O daemon descobre CLIs no startup.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">No boot, o daemon escaneia <code>$PATH</code> procurando por executáveis conhecidos. Para cada match, registra a CLI no <code>availableAgents</code>:</p>
+          <pre class="code-block mt-3">async function detectAgents() {
+  const found = [];
+  for (const def of AGENT_DEFS) {
+    const path = await which(def.executable);
+    if (path) found.push({ ...def, path });
+  }
+  return found;
+}</pre>
+          <p class="text-neutral-300 mt-3">UI exibe lista; usuário escolhe.</p>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">É a UX-chave do "BYOK em todas camadas": <strong>OD não vem com agente; usa o que você já tem</strong>. Saber o mecanismo = saber configurar PATH custom (ex: <code>~/bin/claude</code>), debugar "agente não aparece", e adicionar CLI nova.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-purple-400">which() / npm which:</strong> resolução cross-platform</li>
+            <li><strong class="text-purple-400">PATH override:</strong> <code>OD_PATH=/custom/bin:$PATH</code></li>
+            <li><strong class="text-purple-400">Re-scan:</strong> botão "Refresh agents" na UI</li>
+            <li><strong class="text-purple-400">Health check:</strong> <code>cli --version</code> antes de listar</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-purple-500/20 text-purple-400 text-xl font-bold flex items-center justify-center flex-shrink-0">5</div><div><h2 class="text-2xl font-bold mb-2">🪟 Argv builders &amp; promptViaStdin</h2><p class="text-neutral-400">Windows-friendly fallbacks.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Cada CLI espera prompt de jeito diferente:</p>
+          <ul class="text-neutral-300 mt-3 space-y-1 text-sm list-disc ml-5">
+            <li><strong>Argv:</strong> <code>claude "prompt aqui"</code> — string como argumento</li>
+            <li><strong>Stdin:</strong> <code>echo "prompt" | aider</code> — pipe via stdin</li>
+            <li><strong>File:</strong> <code>codex --input-file prompt.txt</code> — referência a arquivo</li>
+          </ul>
+          <p class="text-neutral-300 mt-3">Em Windows, argv tem limites de tamanho e quoting fora do padrão; <strong>fallback para stdin</strong> resolve.</p>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">"Funciona no meu Mac" não basta. Adapter sério lida com Windows. Saber qual CLI usa qual transport = não falhar em deploy multi-OS.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-purple-400">argvBuilder(prompt) → string[]:</strong> função no AGENT_DEFS</li>
+            <li><strong class="text-purple-400">promptViaStdin: true:</strong> flag que ativa pipe</li>
+            <li><strong class="text-purple-400">Windows quoting:</strong> escape diferente de POSIX</li>
+            <li><strong class="text-purple-400">Tempfile fallback:</strong> prompt &gt; 8k chars</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-purple-500/20 text-purple-400 text-xl font-bold flex items-center justify-center flex-shrink-0">6</div><div><h2 class="text-2xl font-bold mb-2">📚 <code>AGENT_DEFS</code> — anatomia</h2><p class="text-neutral-400">A tabela canônica de CLIs em <code>apps/daemon/src/agents.ts</code>.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Cada entrada em <code>AGENT_DEFS</code>:</p>
+          <pre class="code-block mt-3">{
+  id: 'claude-code',
+  label: 'Claude Code',
+  executable: 'claude',
+  family: 'claude-stream-json',
+  argvBuilder: (prompt) => ['--no-color', '--stream-json', prompt],
+  promptViaStdin: false,
+  eventParser: parseClaudeStreamJson,
+  envVars: ['ANTHROPIC_API_KEY'],
+}</pre>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">É <strong>onde se adiciona um agente novo</strong>. Sem editar código fora dessa tabela, novo CLI fica disponível. <strong class="text-neutral-100">Se você precisa entender uma coisa só sobre adapters, é AGENT_DEFS.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-purple-400">id:</strong> chave única (kebab-case)</li>
+            <li><strong class="text-purple-400">family:</strong> qual dos 6 stream formats</li>
+            <li><strong class="text-purple-400">eventParser:</strong> referência a função em <code>apps/daemon/src/&lt;family&gt;-stream.ts</code></li>
+            <li><strong class="text-purple-400">envVars:</strong> chaves API que precisam estar no env</li>
+            <li><strong class="text-purple-400">timeout, maxTokens:</strong> overrides opcionais</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-purple-500/20 text-purple-400 text-xl font-bold flex items-center justify-center flex-shrink-0">7</div><div><h2 class="text-2xl font-bold mb-2">➕ Como adicionar um novo CLI</h2><p class="text-neutral-400">Uma entrada em AGENT_DEFS + um eventParser.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Receita em 4 passos:</p>
+          <ol class="text-neutral-300 mt-3 space-y-1 text-sm list-decimal ml-5">
+            <li><strong>Identifique a família:</strong> CLI emite stream-json? json-event-stream? acp? plain?</li>
+            <li><strong>Reusa parser:</strong> se família existe, importe o parser correspondente</li>
+            <li><strong>Cria parser novo:</strong> se família nova, escreva <code>parseFooStream()</code> em <code>apps/daemon/src/foo-stream.ts</code></li>
+            <li><strong>Adiciona em AGENT_DEFS:</strong> 1 entrada com id, executable, family, argvBuilder, eventParser</li>
+          </ol>
+          <p class="text-neutral-300 mt-3">Reinicia daemon → CLI aparece no picker.</p>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">A maioria dos times tem CLI custom (interna, fork, build próprio). Saber adicionar = não esperar PR no upstream. <strong>15 minutos por CLI nova.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-purple-400">eventParser signature:</strong> <code>(line: string) → AgentEvent | null</code></li>
+            <li><strong class="text-purple-400">AgentEvent types:</strong> output, tool_call, todo_update, finish, error</li>
+            <li><strong class="text-purple-400">Tests:</strong> golden file de stream + assert events</li>
+            <li><strong class="text-purple-400">PR upstream:</strong> CLIs públicos vão pro repo OD oficial</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-purple-500/10 border-2 border-purple-500/30 rounded-xl p-6 sm:p-8">
+      <h2 class="text-2xl font-bold mb-4 flex items-center"><span class="text-3xl mr-3">🛠️</span> Hands-on</h2>
+      <p class="text-neutral-300 mb-4"><strong>Brief:</strong> Adicionar um adapter "fake" (mock CLI que responde com texto fixo) ao <code>AGENT_DEFS</code> e ver aparecer no picker.</p>
+      <ol class="text-neutral-300 space-y-3 list-decimal ml-5 mb-5">
+        <li><strong class="text-purple-400">Crie executável fake:</strong> shell script <code>~/bin/fake-agent</code> que faz <code>echo "Olá! Sou o fake."</code> e sai.</li>
+        <li><strong class="text-purple-400">Registre em AGENT_DEFS:</strong> id <code>fake</code>, family <code>plain</code>, eventParser <code>parsePlainStream</code>.</li>
+        <li><strong class="text-purple-400">Reinicie daemon:</strong> <code>pnpm tools-dev restart</code></li>
+        <li><strong class="text-purple-400">Verifique picker:</strong> "Fake Agent" aparece. Inicie sessão e digite qualquer brief.</li>
+        <li><strong class="text-purple-400">Output esperado:</strong> "Olá! Sou o fake." aparece na resposta — confirma que pipeline está funcionando até o end.</li>
+      </ol>
+      <div class="bg-dark-800 border border-purple-500/30 rounded-lg p-4">
+        <p class="text-xs text-purple-400 font-semibold mb-2">Snippet de adapter</p>
+        <pre class="code-block">// apps/daemon/src/agents.ts
+export const AGENT_DEFS = [
+  // ...existentes
+  {
+    id: 'fake',
+    label: 'Fake Agent',
+    executable: 'fake-agent',
+    family: 'plain',
+    argvBuilder: () => [],
+    promptViaStdin: true,
+    eventParser: parsePlainStream,
+  },
+]</pre>
+      </div>
+    </section>
+
+    <section class="bg-dark-800 border border-dark-600 rounded-xl p-6 sm:p-8">
+      <h2 class="text-2xl font-bold mb-4 flex items-center"><span class="text-3xl mr-3">📚</span> Fontes</h2>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div><h3 class="text-purple-400 font-semibold mb-2 text-sm">No repositório</h3><ul class="text-neutral-300 space-y-1 text-sm">
+          <li><code class="text-purple-400">apps/daemon/src/agents.ts</code></li>
+          <li><code class="text-purple-400">docs/agent-adapters.md</code> (279L)</li>
+          <li><code class="text-purple-400">apps/daemon/src/claude-stream.ts</code></li>
+        </ul></div>
+        <div><h3 class="text-purple-400 font-semibold mb-2 text-sm">Externas</h3><ul class="text-neutral-300 space-y-1 text-sm">
+          <li><a class="text-sky-400 hover:text-sky-300" href="https://agentclientprotocol.com" target="_blank">agentclientprotocol.com</a></li>
+          <li><a class="text-sky-400 hover:text-sky-300" href="https://github.com/agentclientprotocol/agent-client-protocol" target="_blank">github.com/agentclientprotocol/agent-client-protocol</a></li>
+          <li>Kiro ACP docs (kiro.dev/docs/cli/acp)</li>
+          <li>JSON-RPC 2.0 spec</li>
+        </ul></div>
+      </div>
+    </section>
+
+    <section class="bg-gradient-to-br from-purple-900/30 via-dark-800 to-dark-800 border border-purple-500/30 rounded-xl p-6 sm:p-8">
+      <h2 class="text-2xl font-bold mb-4 flex items-center"><span class="text-3xl mr-3">📌</span> Resumo do Módulo</h2>
+      <div class="space-y-3 text-neutral-300">
+        <p><strong class="text-purple-400">1.</strong> ACP = JSON-RPC 2.0 sobre stdio bidirecional simétrico — "LSP de coding agents".</p>
+        <p><strong class="text-purple-400">2.</strong> stdio &gt; HTTP por process isolation, language independence, sem porta.</p>
+        <p><strong class="text-purple-400">3.</strong> 11 CLIs em 6 famílias: claude-stream-json, copilot, json-event-stream, acp-json-rpc, pi-rpc, plain.</p>
+        <p><strong class="text-purple-400">4.</strong> Boot scan via <code>$PATH</code> detecta CLIs e popula picker.</p>
+        <p><strong class="text-purple-400">5.</strong> argvBuilder + promptViaStdin lidam com Windows quoting e tamanho de prompt.</p>
+        <p><strong class="text-purple-400">6.</strong> AGENT_DEFS é a tabela canônica — single source of truth.</p>
+        <p><strong class="text-purple-400">7.</strong> Adicionar CLI nova = 1 entrada em AGENT_DEFS + reuso ou novo eventParser.</p>
+      </div>
+      <div class="mt-6 pt-6 border-t border-purple-500/30"><p class="text-sm text-neutral-400 mb-2">Próximo módulo:</p><a href="modulo-3-3.html" class="inline-flex items-center text-purple-400 hover:text-purple-300 font-semibold">Módulo 3.3 · Brand-Spec Extraction →</a></div>
+    </section>
+
+    <div class="flex flex-col sm:flex-row gap-4 mt-12">
+      <a href="modulo-3-1.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Módulo 3.1</a>
+      <a href="modulo-3-3.html" class="flex-1 text-center px-6 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-500 transition-colors">Módulo 3.3 →</a>
+    </div>
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-16"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm"><p>Curso Open Design · Trilha 3 · Módulo 3.2 · 2026 · <a href="https://inema.club" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p></div></footer>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) { themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark'); } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => { themeToggleDarkIcon.classList.toggle('hidden'); themeToggleLightIcon.classList.toggle('hidden'); html.classList.toggle('dark'); localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light'); });
+  </script>
+</body>
+</html>
