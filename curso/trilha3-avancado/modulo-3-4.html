@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 3.4 · Critique 5-dim como Loop | Curso Open Design</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }</script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; } .dark body { background-color: #111827; }
+    html:not(.dark) body { background-color: #f8fafc; } html:not(.dark) .bg-dark-900 { background-color: #fff; } html:not(.dark) .bg-dark-800 { background-color: #f9fafb; } html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; } html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; } html:not(.dark) .text-neutral-300 { color: #4b5563; } html:not(.dark) .text-neutral-400 { color: #6b7280; } html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; } html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-purple-400 { color: #7c3aed; } html:not(.dark) .bg-purple-500\/20 { background-color: rgba(124,58,237,.12); } html:not(.dark) .bg-purple-500\/10 { background-color: rgba(124,58,237,.08); } html:not(.dark) .border-purple-500\/30 { border-color: rgba(124,58,237,.25); }
+    html:not(.dark) .text-emerald-400 { color: #059669; } html:not(.dark) .text-blue-400 { color: #2563eb; } html:not(.dark) .text-amber-400 { color: #b45309; }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; } html:not(.dark) .text-sky-400 { color: #0369a1; } html:not(.dark) .text-yellow-400 { color: #a16207; } html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; } html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,.95); }
+    .topic-num { width: 3rem; height: 3rem; }
+    pre.code-block { background: #0b1220; color: #e5e7eb; padding: 1rem; border-radius: .5rem; overflow-x: auto; font-family: 'Menlo', monospace; font-size: .85rem; line-height: 1.5; }
+    html:not(.dark) pre.code-block { background: #111827; color: #f3f4f6; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"><div class="flex justify-between items-center h-14"><div class="flex items-center space-x-4"><a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300"><span class="text-2xl">🎨</span><span class="font-bold text-lg hidden sm:inline">Curso Open Design</span></a><span class="text-neutral-600">|</span><a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a></div><div class="flex items-center space-x-1 sm:space-x-2"><a href="../trilha1-fundamentos/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a><a href="../trilha2-exemplos/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Exemplos</span></a><a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 bg-purple-500/10"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span></a><button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2"><svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg><svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg></button></div></div></div></nav>
+
+  <div class="border-b border-dark-700"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 text-sm text-neutral-400"><a href="../../index.html" class="hover:text-purple-400">Início</a><span class="mx-2 text-neutral-600">/</span><a href="index.html" class="hover:text-purple-400">Trilha 3 · Técnicas Avançadas</a><span class="mx-2 text-neutral-600">/</span><span class="text-neutral-300">Módulo 3.4</span></div></div>
+
+  <header class="bg-gradient-to-br from-purple-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <span class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-semibold rounded-full mb-4">MÓDULO 3.4</span>
+    <h1 class="text-2xl font-bold mb-3">⭐ Critique 5-dim como Loop — auto-crítica integrada</h1>
+    <p class="text-lg text-neutral-400 max-w-3xl">Crítica não como ferramenta avulsa — como <strong>gate pre-emit</strong> rodado pelo agente em todo turn.</p>
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 max-w-2xl">
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">8</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">~50 min</div><div class="text-xs text-neutral-400">Duração</div></div>
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">Avançado</div><div class="text-xs text-neutral-400">Nível</div></div>
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">Gate</div><div class="text-xs text-neutral-400">Foco</div></div>
+    </div>
+    <div class="mt-6 bg-purple-500/10 border border-purple-500/30 rounded-lg p-4 max-w-3xl"><p class="text-sm text-neutral-300"><strong class="text-purple-400">🏁 Resultado:</strong> Você entende a crítica como gate pre-emit automático e configura skill custom com critique mais agressivo.</p></div>
+  </div></header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-purple-500/20 text-purple-400 text-xl font-bold flex items-center justify-center flex-shrink-0">1</div><div><h2 class="text-2xl font-bold mb-2">🆚 <code>skills/critique/</code> manual vs crítica embutida em <code>discovery.ts</code></h2><p class="text-neutral-400">Duas modalidades, dois usos.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Há <strong>duas críticas</strong> no OD:</p>
+          <div class="grid sm:grid-cols-2 gap-3 mt-4 text-sm">
+            <div class="bg-dark-700/50 rounded p-3"><strong class="text-purple-400">Embutida (auto)</strong><p class="text-neutral-300 mt-1">Step 8 do <code>discovery.ts</code> — agente roda em todo turn automaticamente; usuário não invoca</p></div>
+            <div class="bg-dark-700/50 rounded p-3"><strong class="text-purple-400">Manual (skill)</strong><p class="text-neutral-300 mt-1">Skill <code>critique</code> — usuário invoca explicitamente; relatório mais profundo, com radar chart</p></div>
+          </div>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">A embutida é o <strong>primeiro filtro</strong> — pega problemas óbvios, força re-roll antes de chegar ao usuário. Manual é o <strong>segundo filtro</strong> — mais profundo, opcional. Saber as duas = saber quando pular pra crítica manual ou ajustar a embutida.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-purple-400">Embutida:</strong> sempre roda, scoring rápido</li>
+            <li><strong class="text-purple-400">Manual:</strong> on-demand, scoring profundo</li>
+            <li><strong class="text-purple-400">Configurável:</strong> embutida pode ser desligada por skill</li>
+            <li><strong class="text-purple-400">Threshold customizável:</strong> default 7, pode subir para 8</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-purple-500/20 text-purple-400 text-xl font-bold flex items-center justify-center flex-shrink-0">2</div><div><h2 class="text-2xl font-bold mb-2">📐 As 5 dimensões — definição operacional</h2><p class="text-neutral-400">Philosophy, Hierarchy, Execution, Specificity, Restraint.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Cinco dimensões com <strong>definição operacional precisa</strong> (não vague):</p>
+          <ul class="text-neutral-300 mt-3 space-y-2 text-sm list-disc ml-5">
+            <li><strong class="text-purple-400">Philosophy:</strong> coerência entre direção/marca e execução. <em>"Editorial Monocle, mas accent neon? -2."</em></li>
+            <li><strong class="text-purple-400">Hierarchy:</strong> ordem de leitura. <em>"H1 menor que H2 = -3."</em></li>
+            <li><strong class="text-purple-400">Execution:</strong> microcopy, micro-spacing, polish. <em>"Lorem ipsum em produção = -2."</em></li>
+            <li><strong class="text-purple-400">Specificity:</strong> não-slop. <em>"Métrica inventada visível = -3."</em></li>
+            <li><strong class="text-purple-400">Restraint:</strong> ausência de decoração desnecessária. <em>"Gradiente de fundo + 5 ícones emoji = -2."</em></li>
+          </ul>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Sem definição operacional, "Hierarchy ruim" é inútil. Com <em>"H1 menor que H2 = -3"</em>, modelo sabe exatamente o que verificar e penalizar. <strong class="text-neutral-100">Operacionalização &gt; nomes bonitos.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-purple-400">Philosophy = coerência ↔ marca</strong></li>
+            <li><strong class="text-purple-400">Hierarchy = ordem mecânica</strong></li>
+            <li><strong class="text-purple-400">Execution = polish</strong></li>
+            <li><strong class="text-purple-400">Specificity = anti-slop</strong></li>
+            <li><strong class="text-purple-400">Restraint = subtração</strong></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-purple-500/20 text-purple-400 text-xl font-bold flex items-center justify-center flex-shrink-0">3</div><div><h2 class="text-2xl font-bold mb-2">📊 Score 0-10 vs 1-5 — quando usar qual</h2><p class="text-neutral-400">Resolução vs ruído.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Duas escalas:</p>
+          <ul class="text-neutral-300 mt-3 space-y-1 text-sm list-disc ml-5">
+            <li><strong>0-10 (default):</strong> resolução fina, deltas pequenos visíveis. Usar quando a barra é alta (ex: cliente pago).</li>
+            <li><strong>1-5 (coarse):</strong> resolução grossa, decisão binária ("ok" ou "não"). Usar quando o context é exploração rápida.</li>
+          </ul>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">0-10 dá poder mas vira ruído (a diferença entre 7 e 8 é confiável?). 1-5 perde nuance mas é robusto. Para decisão rápida (sprint, exploração), 1-5. Para fine-tuning (entrega cliente, refinamento), 0-10.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-purple-400">0-10 default:</strong> quando há tempo para iteração</li>
+            <li><strong class="text-purple-400">1-5 fast:</strong> quando o gate é binário</li>
+            <li><strong class="text-purple-400">Threshold 7/10 ≈ 4/5:</strong> equivalência prática</li>
+            <li><strong class="text-purple-400">Skill define:</strong> escala em <code>references/dimensions.md</code></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-purple-500/20 text-purple-400 text-xl font-bold flex items-center justify-center flex-shrink-0">4</div><div><h2 class="text-2xl font-bold mb-2">🚧 O gate "anything &lt; 3/5 é regressão"</h2><p class="text-neutral-400">A regra dura.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Em escala 1-5: qualquer dimensão &lt; 3 é <strong>regressão</strong> — agente NÃO emite o artefato; força re-roll com instrução específica do que falhou. Em 0-10, equivalente a &lt; 6. <strong>Não é warning; é hard gate.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Sem hard gate, modelo emite "OK enough" mesmo com problemas óbvios — e cliente percebe. Hard gate força modelo a corrigir antes de você ver. <strong class="text-neutral-100">Pipeline mais lento, output melhor.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-purple-400">&lt; 3/5 = block:</strong> não chega ao usuário</li>
+            <li><strong class="text-purple-400">3-4/5 = ship com warnings:</strong> entrega + relatório</li>
+            <li><strong class="text-purple-400">5/5 raro:</strong> reservado para excelência</li>
+            <li><strong class="text-purple-400">Customizável:</strong> P0 da skill pode subir gate para 4</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-purple-500/20 text-purple-400 text-xl font-bold flex items-center justify-center flex-shrink-0">5</div><div><h2 class="text-2xl font-bold mb-2">🔁 Loop de 2 passes como norma</h2><p class="text-neutral-400">Por que 2 e não mais nem menos.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Pipeline esperado: <strong>draft (pass 1) → critique embutida → quick-wins (pass 2) → emit</strong>. 2 passes é norma porque pass 1 captura macro estrutura; pass 2 refina detalhes. <strong>3+ passes</strong> indica brief vago — sem âncora estável, modelo nunca converge.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Saber que 3+ passes é sintoma evita armadilha comum: "só mais um ajuste". Pare, refaça brief. <strong class="text-neutral-100">Convergência é exponencial: ou ela acontece em 2 passes ou nunca.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-purple-400">Pass 1:</strong> macro draft</li>
+            <li><strong class="text-purple-400">Pass 2:</strong> critique-driven quick-wins</li>
+            <li><strong class="text-purple-400">Pass 3+:</strong> red flag</li>
+            <li><strong class="text-purple-400">Token budget:</strong> 2 passes ≈ 30k tokens</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-purple-500/20 text-purple-400 text-xl font-bold flex items-center justify-center flex-shrink-0">6</div><div><h2 class="text-2xl font-bold mb-2">🔧 Integração com <code>POST /api/artifacts/lint</code></h2><p class="text-neutral-400">Findings reais alimentam a próxima rodada.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Após emit, daemon roda <code>/api/artifacts/lint</code> automaticamente. Findings (ex: "missing safe-area-inset", "&lt;artifact&gt; tag não fechada") são <strong>injetados</strong> no contexto do agente para a próxima ação. Crítica subjetiva + lint mecânico = feedback loop completo.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Lint pega o que crítica não pega: erros estruturais determinísticos. Combinados, cobrem ~95% dos modos de falha. <strong>Lint sem crítica = bonito errado; crítica sem lint = subjetivo dócil.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-purple-400">Auto-run após emit:</strong> daemon dispara</li>
+            <li><strong class="text-purple-400">Findings injetadas:</strong> agente lê na próxima ação</li>
+            <li><strong class="text-purple-400">Severity:</strong> error / warning / info</li>
+            <li><strong class="text-purple-400">UI feedback:</strong> toast notif quando há findings</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-purple-500/20 text-purple-400 text-xl font-bold flex items-center justify-center flex-shrink-0">7</div><div><h2 class="text-2xl font-bold mb-2">🎚️ Aumentar/reduzir a barra por skill</h2><p class="text-neutral-400">P0 hard gate por skill via <code>references/checklist.md</code>.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Em <code>references/checklist.md</code> da skill, você declara P0 específicos:</p>
+          <pre class="code-block mt-3"># P0 (hard gate — bloqueia emit)
+- text-size mínimo 72px em headlines de carrossel social
+- contraste WCAG AA (verificável em OKLch)
+- 1 cor de marca apenas, não 2
+
+# P1 (warning — emite com toast)
+- pricing tier "popular" highlighted
+- mobile breakpoints sm/md/lg presentes</pre>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Cada tipo de artefato tem regras diferentes. Carrossel exige texto grande; dashboard não. Skill custom = barra customizada. Saber editar P0 = adaptar OD para seu padrão de cliente.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-purple-400">P0 = bloqueio:</strong> agente não emite</li>
+            <li><strong class="text-purple-400">P1 = warning:</strong> emite + reporta</li>
+            <li><strong class="text-purple-400">P2 = nice-to-have:</strong> opcional</li>
+            <li><strong class="text-purple-400">5-8 P0 por skill:</strong> sweet spot</li>
+            <li><strong class="text-purple-400">Mensurável:</strong> P0 deve ser verificável (grep ou regex)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-purple-500/20 text-purple-400 text-xl font-bold flex items-center justify-center flex-shrink-0">8</div><div><h2 class="text-2xl font-bold mb-2">🚫 Anti-AI-slop blacklist como Specificity check</h2><p class="text-neutral-400">A blacklist é a operacionalização de "Specificity".</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">A dimensão "Specificity" da crítica é avaliada <strong>cruzando o output com a blacklist anti-slop</strong>. Cada item da blacklist (gradient roxo, métricas inventadas, Inter como display, glass buttons) é uma penalidade -1 a -2 em Specificity.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Specificity vira mecânico, não opinião. Modelo grep o output pelos itens da blacklist e penaliza. <strong class="text-neutral-100">Subjetividade reduzida ao mínimo.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-purple-400">Blacklist = -2 to -1 cada:</strong> escala de penalidade</li>
+            <li><strong class="text-purple-400">Verificável:</strong> grep mecânico</li>
+            <li><strong class="text-purple-400">Customizável:</strong> skill estende blacklist</li>
+            <li><strong class="text-purple-400">Override:</strong> usuário pode permitir item se justificar</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-purple-500/10 border-2 border-purple-500/30 rounded-xl p-6 sm:p-8">
+      <h2 class="text-2xl font-bold mb-4 flex items-center"><span class="text-3xl mr-3">🛠️</span> Hands-on</h2>
+      <p class="text-neutral-300 mb-4"><strong>Brief:</strong> Configurar uma skill custom com critique mais agressivo (P0 inclui "no rounded cards"). Rodar e ver o agente refazer.</p>
+      <ol class="text-neutral-300 space-y-3 list-decimal ml-5 mb-5">
+        <li><strong class="text-purple-400">Copie skill base:</strong> <code>cp -r ~/.claude/skills/saas-landing ~/.claude/skills/landing-no-rounded</code></li>
+        <li><strong class="text-purple-400">Edite checklist.md:</strong> adicione P0 "border-radius máximo 4px em cards e botões"</li>
+        <li><strong class="text-purple-400">Reinicie daemon:</strong> <code>pnpm tools-dev restart</code></li>
+        <li><strong class="text-purple-400">Brief:</strong> "Faça uma landing pra um app de finanças. Use a skill landing-no-rounded."</li>
+        <li><strong class="text-purple-400">Observe:</strong> primeira tentativa do agente terá rounded grandes; critique vai bloquear; agente refaz com rounded ≤ 4px.</li>
+      </ol>
+      <div class="bg-dark-800 border border-purple-500/30 rounded-lg p-4">
+        <p class="text-xs text-purple-400 font-semibold mb-2">Snippet de checklist.md customizado</p>
+        <pre class="code-block"># P0 (hard gate)
+- border-radius máximo 4px (NUNCA 8, 12 ou 16)
+- box-shadow ZERO em cards
+- 1 cor de marca apenas
+- mobile breakpoint sm: presente
+- contraste WCAG AA verificado em OKLch</pre>
+      </div>
+    </section>
+
+    <section class="bg-dark-800 border border-dark-600 rounded-xl p-6 sm:p-8">
+      <h2 class="text-2xl font-bold mb-4 flex items-center"><span class="text-3xl mr-3">📚</span> Fontes</h2>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div><h3 class="text-purple-400 font-semibold mb-2 text-sm">No repositório</h3><ul class="text-neutral-300 space-y-1 text-sm">
+          <li><code class="text-purple-400">packages/contracts/src/prompts/discovery.ts</code> (RULE 3, Step 8)</li>
+          <li><code class="text-purple-400">skills/critique/SKILL.md</code></li>
+          <li><code class="text-purple-400">skills/critique/references/dimensions.md</code></li>
+        </ul></div>
+        <div><h3 class="text-purple-400 font-semibold mb-2 text-sm">Externas</h3><ul class="text-neutral-300 space-y-1 text-sm">
+          <li>Code review patterns — gate pre-merge analogia</li>
+          <li>WCAG 2.2 — contraste verificável</li>
+        </ul></div>
+      </div>
+    </section>
+
+    <section class="bg-gradient-to-br from-purple-900/30 via-dark-800 to-dark-800 border border-purple-500/30 rounded-xl p-6 sm:p-8">
+      <h2 class="text-2xl font-bold mb-4 flex items-center"><span class="text-3xl mr-3">📌</span> Resumo do Módulo</h2>
+      <div class="space-y-3 text-neutral-300">
+        <p><strong class="text-purple-400">1.</strong> Crítica embutida (auto, em todo turn) ≠ skill <code>critique</code> manual (on-demand).</p>
+        <p><strong class="text-purple-400">2.</strong> 5 dimensões com definição operacional precisa: Philosophy, Hierarchy, Execution, Specificity, Restraint.</p>
+        <p><strong class="text-purple-400">3.</strong> 0-10 para fine-tuning; 1-5 para decisão rápida.</p>
+        <p><strong class="text-purple-400">4.</strong> &lt; 3/5 é regressão = hard gate; agente não emite, refaz.</p>
+        <p><strong class="text-purple-400">5.</strong> 2 passes é norma; 3+ = brief errado.</p>
+        <p><strong class="text-purple-400">6.</strong> Lint mecânico complementa crítica — findings injetadas no próximo turn.</p>
+        <p><strong class="text-purple-400">7.</strong> Skill com checklist.md custom muda barra (P0 endurecidos por contexto).</p>
+        <p><strong class="text-purple-400">8.</strong> Anti-slop blacklist é operacionalização de "Specificity" — verificável.</p>
+      </div>
+      <div class="mt-6 pt-6 border-t border-purple-500/30"><p class="text-sm text-neutral-400 mb-2">Próximo módulo:</p><a href="modulo-3-5.html" class="inline-flex items-center text-purple-400 hover:text-purple-300 font-semibold">Módulo 3.5 · Criando uma Skill Própria →</a></div>
+    </section>
+
+    <div class="flex flex-col sm:flex-row gap-4 mt-12">
+      <a href="modulo-3-3.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Módulo 3.3</a>
+      <a href="modulo-3-5.html" class="flex-1 text-center px-6 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-500 transition-colors">Módulo 3.5 →</a>
+    </div>
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-16"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm"><p>Curso Open Design · Trilha 3 · Módulo 3.4 · 2026 · <a href="https://inema.club" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p></div></footer>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) { themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark'); } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => { themeToggleDarkIcon.classList.toggle('hidden'); themeToggleLightIcon.classList.toggle('hidden'); html.classList.toggle('dark'); localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light'); });
+  </script>
+</body>
+</html>

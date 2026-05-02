@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 3.6 · Daemon, Sidecar IPC & Multi-namespace | Curso Open Design</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }</script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; } .dark body { background-color: #111827; }
+    html:not(.dark) body { background-color: #f8fafc; } html:not(.dark) .bg-dark-900 { background-color: #fff; } html:not(.dark) .bg-dark-800 { background-color: #f9fafb; } html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; } html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; } html:not(.dark) .text-neutral-300 { color: #4b5563; } html:not(.dark) .text-neutral-400 { color: #6b7280; } html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; } html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-purple-400 { color: #7c3aed; } html:not(.dark) .bg-purple-500\/20 { background-color: rgba(124,58,237,.12); } html:not(.dark) .bg-purple-500\/10 { background-color: rgba(124,58,237,.08); } html:not(.dark) .border-purple-500\/30 { border-color: rgba(124,58,237,.25); }
+    html:not(.dark) .text-emerald-400 { color: #059669; } html:not(.dark) .text-blue-400 { color: #2563eb; } html:not(.dark) .text-amber-400 { color: #b45309; }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; } html:not(.dark) .text-sky-400 { color: #0369a1; } html:not(.dark) .text-yellow-400 { color: #a16207; } html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; } html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,.95); }
+    .topic-num { width: 3rem; height: 3rem; }
+    pre.code-block { background: #0b1220; color: #e5e7eb; padding: 1rem; border-radius: .5rem; overflow-x: auto; font-family: 'Menlo', monospace; font-size: .85rem; line-height: 1.5; }
+    html:not(.dark) pre.code-block { background: #111827; color: #f3f4f6; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"><div class="flex justify-between items-center h-14"><div class="flex items-center space-x-4"><a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300"><span class="text-2xl">🎨</span><span class="font-bold text-lg hidden sm:inline">Curso Open Design</span></a><span class="text-neutral-600">|</span><a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a></div><div class="flex items-center space-x-1 sm:space-x-2"><a href="../trilha1-fundamentos/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a><a href="../trilha2-exemplos/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Exemplos</span></a><a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 bg-purple-500/10"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span></a><button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2"><svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg><svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg></button></div></div></div></nav>
+
+  <div class="border-b border-dark-700"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 text-sm text-neutral-400"><a href="../../index.html" class="hover:text-purple-400">Início</a><span class="mx-2 text-neutral-600">/</span><a href="index.html" class="hover:text-purple-400">Trilha 3 · Técnicas Avançadas</a><span class="mx-2 text-neutral-600">/</span><span class="text-neutral-300">Módulo 3.6</span></div></div>
+
+  <header class="bg-gradient-to-br from-purple-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <span class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-semibold rounded-full mb-4">MÓDULO 3.6</span>
+    <h1 class="text-2xl font-bold mb-3">⚙️ Daemon, Sidecar IPC & Multi-namespace</h1>
+    <p class="text-lg text-neutral-400 max-w-3xl">A engenharia do daemon. Multi-namespace em paralelo, sidecar IPC, debug via inspect tools.</p>
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 max-w-2xl">
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">9</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">~70 min</div><div class="text-xs text-neutral-400">Duração</div></div>
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">Avançado</div><div class="text-xs text-neutral-400">Nível</div></div>
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">Eng</div><div class="text-xs text-neutral-400">Foco</div></div>
+    </div>
+    <div class="mt-6 bg-purple-500/10 border border-purple-500/30 rounded-lg p-4 max-w-3xl"><p class="text-sm text-neutral-300"><strong class="text-purple-400">🏁 Resultado:</strong> Você opera múltiplos namespaces em paralelo (Playwright + dev + projetos reais), debuga via inspect tools e entende a arquitetura interna do daemon.</p></div>
+  </div></header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-purple-500/20 text-purple-400 text-xl font-bold flex items-center justify-center flex-shrink-0">1</div><div><h2 class="text-2xl font-bold mb-2">🎛️ <code>pnpm tools-dev</code> — único entrypoint de lifecycle</h2><p class="text-neutral-400">start/stop/run/status/logs/inspect/check.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Um único comando padrão para gerenciar tudo:</p>
+          <pre class="code-block mt-3">pnpm tools-dev start --namespace default
+pnpm tools-dev stop --namespace experiments
+pnpm tools-dev status              # lista todos
+pnpm tools-dev logs --namespace default --json
+pnpm tools-dev inspect desktop screenshot
+pnpm tools-dev check                # health check global</pre>
+          <p class="text-neutral-300 mt-3">Subcomandos cobrem todo o lifecycle. Não há "outros scripts shell mágicos" — uma porta de entrada.</p>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Sem entrypoint único, time inventa scripts paralelos, README desatualiza, dev novo perde dia 1 entendendo "qual comando usar". Com um ponto, onboarding é trivial. <strong class="text-neutral-100">Convergência operacional.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-purple-400">tools/dev/:</strong> source code do CLI</li>
+            <li><strong class="text-purple-400">Subcomandos:</strong> start, stop, restart, status, logs, inspect, check</li>
+            <li><strong class="text-purple-400">--namespace flag:</strong> isolamento por namespace</li>
+            <li><strong class="text-purple-400">--json output:</strong> machine-readable para scripts</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-purple-500/20 text-purple-400 text-xl font-bold flex items-center justify-center flex-shrink-0">2</div><div><h2 class="text-2xl font-bold mb-2">📛 Stamps tipados de 5 campos</h2><p class="text-neutral-400"><code>app · mode · namespace · ipc · source</code>.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Cada processo do OD tem um "stamp" tipado:</p>
+          <pre class="code-block mt-3">{
+  app: "daemon" | "web" | "desktop" | "playwright",
+  mode: "dev" | "prod" | "test",
+  namespace: "default" | "experiments" | "playwright",
+  ipc: "/tmp/open-design/ipc/&lt;ns&gt;/&lt;app&gt;.sock",
+  source: "tools-dev" | "manual" | "ci"
+}</pre>
+          <p class="text-neutral-300 mt-3">Stamp é serializado em logs, environment vars, e display. Você sempre sabe <em>qual processo</em> emitiu uma mensagem.</p>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Multi-namespace = múltiplos processos paralelos. Sem stamp, logs viram "qual daemon escreveu isso?". Com stamp, debug é trivial: <code>grep "namespace=experiments"</code>.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-purple-400">5 fields:</strong> app, mode, namespace, ipc, source</li>
+            <li><strong class="text-purple-400">Tipado:</strong> TypeScript valida no boot</li>
+            <li><strong class="text-purple-400">JSON line in logs:</strong> grep-friendly</li>
+            <li><strong class="text-purple-400">UI badge:</strong> stamp aparece na top-bar do web</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-purple-500/20 text-purple-400 text-xl font-bold flex items-center justify-center flex-shrink-0">3</div><div><h2 class="text-2xl font-bold mb-2">🔌 Sidecar IPC em <code>/tmp/open-design/ipc/&lt;ns&gt;/&lt;app&gt;.sock</code></h2><p class="text-neutral-400">STATUS, EVAL, SCREENSHOT, CONSOLE, CLICK, SHUTDOWN.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Cada processo expõe um Unix socket em <code>/tmp/open-design/ipc/&lt;namespace&gt;/&lt;app&gt;.sock</code>. Outro processo (ou tools-dev) pode mandar comandos:</p>
+          <ul class="text-neutral-300 mt-3 space-y-1 text-sm list-disc ml-5">
+            <li><strong>STATUS</strong> — devolve estado atual</li>
+            <li><strong>EVAL</strong> — executa JS no contexto do app web</li>
+            <li><strong>SCREENSHOT</strong> — devolve PNG</li>
+            <li><strong>CONSOLE</strong> — captura logs do console.log</li>
+            <li><strong>CLICK</strong> — automação básica</li>
+            <li><strong>SHUTDOWN</strong> — graceful termination</li>
+          </ul>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Sidecar IPC é a ponte que torna o desktop "inspetável" sem dev tools manuais. <strong>tools-dev pode pedir screenshot</strong>, capturar console, automatizar click — sem testing harness próprio.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-purple-400">Unix domain socket:</strong> /tmp path por namespace</li>
+            <li><strong class="text-purple-400">Comando JSON:</strong> {type: "STATUS"} → resposta JSON</li>
+            <li><strong class="text-purple-400">packages/sidecar-proto:</strong> tipos compartilhados</li>
+            <li><strong class="text-purple-400">packages/sidecar:</strong> implementação cliente/server</li>
+            <li><strong class="text-purple-400">Reload-safe:</strong> socket recriado em cada start</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-purple-500/20 text-purple-400 text-xl font-bold flex items-center justify-center flex-shrink-0">4</div><div><h2 class="text-2xl font-bold mb-2">🌳 <code>OD_DATA_DIR</code> e <code>--namespace</code></h2><p class="text-neutral-400">Isolamento de árvore <code>.od/</code>.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Variável <code>OD_DATA_DIR</code> aponta pra raiz do estado. Combinada com <code>--namespace foo</code>, vira <code>$OD_DATA_DIR/.od-foo/</code>:</p>
+          <pre class="code-block mt-3">$OD_DATA_DIR/
+├── .od/                    # namespace 'default'
+│   └── app.sqlite
+├── .od-experiments/        # namespace 'experiments'
+│   └── app.sqlite
+└── .od-playwright/         # namespace 'playwright' (CI/test)
+    └── app.sqlite</pre>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Sem isolamento, Playwright sobrescreve seus dados reais. Com isolamento, CI roda em paralelo sem conflito. <strong>Multi-namespace = multi-projeto sem fricção.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-purple-400">OD_DATA_DIR:</strong> root path (default: cwd)</li>
+            <li><strong class="text-purple-400">--namespace flag:</strong> sufixo da árvore</li>
+            <li><strong class="text-purple-400">.od-&lt;ns&gt;/ pattern:</strong> visível no fs</li>
+            <li><strong class="text-purple-400">SQLite separado por ns:</strong> sem race condition</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-purple-500/20 text-purple-400 text-xl font-bold flex items-center justify-center flex-shrink-0">5</div><div><h2 class="text-2xl font-bold mb-2">🧬 Por que namespaces</h2><p class="text-neutral-400">Playwright, beta, projetos reais sem colisão.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">3 namespaces canônicos:</p>
+          <div class="grid sm:grid-cols-3 gap-3 mt-4 text-sm">
+            <div class="bg-dark-700/50 rounded p-3"><strong class="text-purple-400">default</strong><p class="text-neutral-300 mt-1">Seu trabalho real</p></div>
+            <div class="bg-dark-700/50 rounded p-3"><strong class="text-purple-400">playwright</strong><p class="text-neutral-300 mt-1">Tests E2E sem colisão</p></div>
+            <div class="bg-dark-700/50 rounded p-3"><strong class="text-purple-400">experiments</strong><p class="text-neutral-300 mt-1">Tente algo arriscado sem afetar real</p></div>
+          </div>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Cada uma tem propósito. Playwright em namespace separado = test não polui SQLite. Experiments separado = você pode ir agressivo sem perder trabalho. <strong>Convenção de namespaces salva pesadelos.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-purple-400">Naming convention:</strong> snake_case ou kebab-case</li>
+            <li><strong class="text-purple-400">Sem limite:</strong> crie quantos quiser</li>
+            <li><strong class="text-purple-400">Cleanup manual:</strong> <code>rm -rf .od-foo/</code></li>
+            <li><strong class="text-purple-400">Cross-ns reference:</strong> impossível por design</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-purple-500/20 text-purple-400 text-xl font-bold flex items-center justify-center flex-shrink-0">6</div><div><h2 class="text-2xl font-bold mb-2">📸 <code>tools-dev inspect desktop screenshot</code></h2><p class="text-neutral-400">E2E sem harness próprio.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">tools-dev tem subcomandos <code>inspect</code> que falam com sidecar IPC para automação:</p>
+          <pre class="code-block mt-3">pnpm tools-dev inspect desktop screenshot --output ss.png
+pnpm tools-dev inspect web eval "document.title"
+pnpm tools-dev inspect web console --since 5m
+pnpm tools-dev inspect daemon health</pre>
+          <p class="text-neutral-300 mt-3">Sem Playwright, sem Cypress, sem dev tools manuais — tudo via CLI.</p>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">É como o sidecar IPC vira útil de fato. Inspect = "eu quero saber o que está rolando, sem abrir DevTools manualmente". Útil em debug, CI, demo automatizada.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-purple-400">screenshot:</strong> PNG do desktop atual</li>
+            <li><strong class="text-purple-400">eval &lt;js&gt;:</strong> executa JS no contexto, retorna resultado</li>
+            <li><strong class="text-purple-400">console:</strong> captura logs recentes</li>
+            <li><strong class="text-purple-400">health:</strong> daemon vivo? quantos clients conectados?</li>
+            <li><strong class="text-purple-400">scriptable:</strong> use em bash, node scripts, CI</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-purple-500/20 text-purple-400 text-xl font-bold flex items-center justify-center flex-shrink-0">7</div><div><h2 class="text-2xl font-bold mb-2">🖥️ <code>apps/desktop</code> Electron shell</h2><p class="text-neutral-400">Discovery de URL via IPC, sem adivinhar porta.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">App desktop é Electron <strong>fininho</strong>: não roda Web internamente, mas descobre a URL do Web via sidecar IPC. Quando o daemon sobe, ele anuncia <code>web_url: http://localhost:3000</code> via socket. Desktop conecta, abre webview na URL.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Discovery via IPC &gt; hardcoded port: Web pode estar em 3000 ou 3001 ou random. Desktop não precisa adivinhar. <strong>Robustez por design.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-purple-400">apps/desktop/src/main/:</strong> processo principal Electron</li>
+            <li><strong class="text-purple-400">IPC discovery:</strong> daemon publica web_url</li>
+            <li><strong class="text-purple-400">Webview wrapper:</strong> não &lt;BrowserWindow&gt; com http remoto</li>
+            <li><strong class="text-purple-400">Native menu:</strong> File, Edit, Window — convenção macOS</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-purple-500/20 text-purple-400 text-xl font-bold flex items-center justify-center flex-shrink-0">8</div><div><h2 class="text-2xl font-bold mb-2">📦 <code>sidecar-proto</code> vs <code>sidecar</code> vs <code>platform</code></h2><p class="text-neutral-400">Separação genérico/específico.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Três pacotes em <code>packages/</code>:</p>
+          <ul class="text-neutral-300 mt-3 space-y-1 text-sm list-disc ml-5">
+            <li><strong class="text-purple-400">sidecar-proto:</strong> tipos TS compartilhados (Stamp, Command, Response) — zero dependências</li>
+            <li><strong class="text-purple-400">sidecar:</strong> implementação cliente/server reutilizável (qualquer projeto pode usar)</li>
+            <li><strong class="text-purple-400">platform:</strong> abstração OS (paths /tmp em mac/linux vs %TEMP% em windows)</li>
+          </ul>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Separação genérico/específico = packages reutilizáveis. <strong>sidecar-proto e sidecar não são OD-específicos</strong>; podem virar lib pública. Saber a separação = saber onde contribuir, onde fazer fork.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-purple-400">sidecar-proto:</strong> contracts puros (TS types)</li>
+            <li><strong class="text-purple-400">sidecar:</strong> implementation reusable</li>
+            <li><strong class="text-purple-400">platform:</strong> OS-specific glue</li>
+            <li><strong class="text-purple-400">No circular deps:</strong> proto → sidecar → platform → daemon</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-purple-500/20 text-purple-400 text-xl font-bold flex items-center justify-center flex-shrink-0">9</div><div><h2 class="text-2xl font-bold mb-2">📜 Logs estruturados em <code>.tmp/tools-dev/&lt;ns&gt;/logs/</code></h2><p class="text-neutral-400">Debug: <code>pnpm tools-dev logs --namespace &lt;name&gt; --json</code>.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Logs em formato <strong>NDJSON</strong> (newline-delimited JSON):</p>
+          <pre class="code-block mt-3">{"ts":"2026-05-02T15:30:01Z","level":"info","app":"daemon","ns":"default","msg":"agent spawn","cli":"claude"}
+{"ts":"2026-05-02T15:30:02Z","level":"warn","app":"web","ns":"default","msg":"slow render","duration_ms":820}
+...</pre>
+          <p class="text-neutral-300 mt-3">grep, jq e tools-dev logs entendem o formato.</p>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">NDJSON &gt; texto livre quando há muitos eventos. Filtragem mecânica é trivial: <code>jq 'select(.level == "warn")'</code>. Multi-namespace = filtragem por ns.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-purple-400">NDJSON:</strong> 1 evento por linha</li>
+            <li><strong class="text-purple-400">Padrão de campos:</strong> ts, level, app, ns, msg + dados</li>
+            <li><strong class="text-purple-400">Rotation:</strong> arquivo &gt; 50 MB rotaciona</li>
+            <li><strong class="text-purple-400">tools-dev logs --grep:</strong> filtragem rápida</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-purple-500/10 border-2 border-purple-500/30 rounded-xl p-6 sm:p-8">
+      <h2 class="text-2xl font-bold mb-4 flex items-center"><span class="text-3xl mr-3">🛠️</span> Hands-on</h2>
+      <p class="text-neutral-300 mb-4"><strong>Brief:</strong> Rodar 2 namespaces em paralelo (<code>default</code> + <code>experiments</code>), com SQLite isolada cada um. Tirar screenshot do desktop em cada um.</p>
+      <ol class="text-neutral-300 space-y-3 list-decimal ml-5 mb-5">
+        <li><strong class="text-purple-400">Inicia default:</strong> <code>pnpm tools-dev start --namespace default</code></li>
+        <li><strong class="text-purple-400">Inicia experiments em paralelo:</strong> <code>pnpm tools-dev start --namespace experiments</code></li>
+        <li><strong class="text-purple-400">Verifique status:</strong> <code>pnpm tools-dev status</code> mostra ambos rodando</li>
+        <li><strong class="text-purple-400">Veja árvores .od separadas:</strong> <code>ls -la .od/ .od-experiments/</code></li>
+        <li><strong class="text-purple-400">Inspect desktop default:</strong> <code>pnpm tools-dev inspect desktop screenshot --namespace default --output default.png</code></li>
+        <li><strong class="text-purple-400">Inspect desktop experiments:</strong> idem com <code>--namespace experiments</code></li>
+        <li><strong class="text-purple-400">Verifique:</strong> ambos PNGs salvos; cada um tem badge no top mostrando seu namespace.</li>
+        <li><strong class="text-purple-400">Cleanup experiments:</strong> <code>pnpm tools-dev stop --namespace experiments && rm -rf .od-experiments/</code></li>
+      </ol>
+      <div class="bg-dark-800 border border-purple-500/30 rounded-lg p-4">
+        <p class="text-xs text-purple-400 font-semibold mb-2">Comando</p>
+        <pre class="code-block">pnpm tools-dev status --json | jq
+pnpm tools-dev logs --namespace experiments --json | jq 'select(.level == "warn")'</pre>
+      </div>
+    </section>
+
+    <section class="bg-dark-800 border border-dark-600 rounded-xl p-6 sm:p-8">
+      <h2 class="text-2xl font-bold mb-4 flex items-center"><span class="text-3xl mr-3">📚</span> Fontes</h2>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div><h3 class="text-purple-400 font-semibold mb-2 text-sm">No repositório</h3><ul class="text-neutral-300 space-y-1 text-sm">
+          <li><code class="text-purple-400">tools/dev/</code></li>
+          <li><code class="text-purple-400">apps/desktop/src/main/</code></li>
+          <li><code class="text-purple-400">packages/sidecar-proto/</code></li>
+          <li><code class="text-purple-400">packages/sidecar/</code></li>
+          <li><code class="text-purple-400">apps/AGENTS.md</code></li>
+          <li><code class="text-purple-400">tools/AGENTS.md</code></li>
+        </ul></div>
+        <div><h3 class="text-purple-400 font-semibold mb-2 text-sm">Externas</h3><ul class="text-neutral-300 space-y-1 text-sm">
+          <li>Unix domain sockets — Linux/macOS docs</li>
+          <li>Electron BrowserWindow / webview docs</li>
+          <li>NDJSON spec (ndjson.org)</li>
+        </ul></div>
+      </div>
+    </section>
+
+    <section class="bg-gradient-to-br from-purple-900/30 via-dark-800 to-dark-800 border border-purple-500/30 rounded-xl p-6 sm:p-8">
+      <h2 class="text-2xl font-bold mb-4 flex items-center"><span class="text-3xl mr-3">📌</span> Resumo do Módulo</h2>
+      <div class="space-y-3 text-neutral-300">
+        <p><strong class="text-purple-400">1.</strong> <code>pnpm tools-dev</code> é o entrypoint único: start, stop, status, logs, inspect, check.</p>
+        <p><strong class="text-purple-400">2.</strong> Stamps tipados (app, mode, namespace, ipc, source) tornam debug grep-able.</p>
+        <p><strong class="text-purple-400">3.</strong> Sidecar IPC em /tmp/open-design/ipc/&lt;ns&gt;/&lt;app&gt;.sock — STATUS, EVAL, SCREENSHOT, etc.</p>
+        <p><strong class="text-purple-400">4.</strong> OD_DATA_DIR + --namespace = árvores .od-&lt;ns&gt;/ isoladas.</p>
+        <p><strong class="text-purple-400">5.</strong> Namespaces canônicos: default (real), playwright (CI), experiments (arriscar).</p>
+        <p><strong class="text-purple-400">6.</strong> tools-dev inspect = E2E sem harness; screenshot, eval, console direct.</p>
+        <p><strong class="text-purple-400">7.</strong> apps/desktop é Electron fino; descobre web URL via IPC.</p>
+        <p><strong class="text-purple-400">8.</strong> Separação sidecar-proto / sidecar / platform = packages reutilizáveis.</p>
+        <p><strong class="text-purple-400">9.</strong> NDJSON logs em .tmp/tools-dev/&lt;ns&gt;/logs/ — filtrável por jq/grep.</p>
+      </div>
+      <div class="mt-6 pt-6 border-t border-purple-500/30"><p class="text-sm text-neutral-400 mb-2">Você completou o curso! Volte ao início:</p><a href="../../index.html" class="inline-flex items-center text-yellow-400 hover:text-yellow-300 font-semibold">🎨 Voltar à Landing →</a></div>
+    </section>
+
+    <div class="flex flex-col sm:flex-row gap-4 mt-12">
+      <a href="modulo-3-5.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Módulo 3.5</a>
+      <a href="../../index.html" class="flex-1 text-center px-6 py-3 bg-yellow-500 text-dark-900 rounded-lg font-semibold hover:bg-yellow-400 transition-colors">Início do Curso 🎨</a>
+    </div>
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-16"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm"><p>Curso Open Design · Trilha 3 · Módulo 3.6 · 2026 · <a href="https://inema.club" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p></div></footer>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) { themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark'); } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => { themeToggleDarkIcon.classList.toggle('hidden'); themeToggleLightIcon.classList.toggle('hidden'); html.classList.toggle('dark'); localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light'); });
+  </script>
+</body>
+</html>

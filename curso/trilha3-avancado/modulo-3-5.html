@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 3.5 · Criando uma Skill Própria | Curso Open Design</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }</script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; } .dark body { background-color: #111827; }
+    html:not(.dark) body { background-color: #f8fafc; } html:not(.dark) .bg-dark-900 { background-color: #fff; } html:not(.dark) .bg-dark-800 { background-color: #f9fafb; } html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; } html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; } html:not(.dark) .text-neutral-300 { color: #4b5563; } html:not(.dark) .text-neutral-400 { color: #6b7280; } html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; } html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-purple-400 { color: #7c3aed; } html:not(.dark) .bg-purple-500\/20 { background-color: rgba(124,58,237,.12); } html:not(.dark) .bg-purple-500\/10 { background-color: rgba(124,58,237,.08); } html:not(.dark) .border-purple-500\/30 { border-color: rgba(124,58,237,.25); }
+    html:not(.dark) .text-emerald-400 { color: #059669; } html:not(.dark) .text-blue-400 { color: #2563eb; } html:not(.dark) .text-amber-400 { color: #b45309; }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; } html:not(.dark) .text-sky-400 { color: #0369a1; } html:not(.dark) .text-yellow-400 { color: #a16207; } html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; } html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,.95); }
+    .topic-num { width: 3rem; height: 3rem; }
+    pre.code-block { background: #0b1220; color: #e5e7eb; padding: 1rem; border-radius: .5rem; overflow-x: auto; font-family: 'Menlo', monospace; font-size: .85rem; line-height: 1.5; }
+    html:not(.dark) pre.code-block { background: #111827; color: #f3f4f6; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"><div class="flex justify-between items-center h-14"><div class="flex items-center space-x-4"><a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300"><span class="text-2xl">🎨</span><span class="font-bold text-lg hidden sm:inline">Curso Open Design</span></a><span class="text-neutral-600">|</span><a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a></div><div class="flex items-center space-x-1 sm:space-x-2"><a href="../trilha1-fundamentos/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a><a href="../trilha2-exemplos/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Exemplos</span></a><a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 bg-purple-500/10"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span></a><button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2"><svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg><svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg></button></div></div></div></nav>
+
+  <div class="border-b border-dark-700"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 text-sm text-neutral-400"><a href="../../index.html" class="hover:text-purple-400">Início</a><span class="mx-2 text-neutral-600">/</span><a href="index.html" class="hover:text-purple-400">Trilha 3 · Técnicas Avançadas</a><span class="mx-2 text-neutral-600">/</span><span class="text-neutral-300">Módulo 3.5</span></div></div>
+
+  <header class="bg-gradient-to-br from-purple-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <span class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-semibold rounded-full mb-4">MÓDULO 3.5</span>
+    <h1 class="text-2xl font-bold mb-3">🛠️ Criando uma Skill Própria</h1>
+    <p class="text-lg text-neutral-400 max-w-3xl">Skill end-to-end (SKILL.md + assets/template.html + references/{layouts,checklist}.md). Instala, agente usa, contribui upstream.</p>
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 max-w-2xl">
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">10</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">~75 min</div><div class="text-xs text-neutral-400">Duração</div></div>
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">Avançado</div><div class="text-xs text-neutral-400">Nível</div></div>
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">End-to-end</div><div class="text-xs text-neutral-400">Foco</div></div>
+    </div>
+    <div class="mt-6 bg-purple-500/10 border border-purple-500/30 rounded-lg p-4 max-w-3xl"><p class="text-sm text-neutral-300"><strong class="text-purple-400">🏁 Resultado:</strong> Você escreve uma skill end-to-end, instala, e o agente a usa. Pronta para PR upstream.</p></div>
+  </div></header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-purple-500/20 text-purple-400 text-xl font-bold flex items-center justify-center flex-shrink-0">1</div><div><h2 class="text-2xl font-bold mb-2">🎯 Quando criar uma skill nova vs. estender</h2><p class="text-neutral-400">Decisão antes do código.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Heurística:</p>
+          <ul class="text-neutral-300 mt-3 space-y-1 text-sm list-disc ml-5">
+            <li><strong class="text-emerald-400">Estende:</strong> se a skill existente cobre 70%+ do que você precisa, customize via DESIGN.md ou checklist.md</li>
+            <li><strong class="text-amber-400">Cria nova:</strong> se &lt; 70% — workflow é genuinamente diferente, anti-patterns próprios, side-files distintos</li>
+          </ul>
+          <p class="text-neutral-300 mt-3">Exemplo: "landing pra cursos online" — <code>saas-landing</code> serve com customização (estende). "Newsletter email" — workflow diferente (HTML inline, table-based) → cria nova.</p>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Skill nova = ~4 horas pra fazer bem. Estender = 30 minutos. Erre essa decisão = perde tempo. <strong class="text-neutral-100">Default: estende. Exception: cria.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-purple-400">70% rule:</strong> threshold de cobertura</li>
+            <li><strong class="text-purple-400">Estender =</strong> custom checklist.md + custom DESIGN.md</li>
+            <li><strong class="text-purple-400">Criar =</strong> nova SKILL.md + side-files</li>
+            <li><strong class="text-purple-400">Sinal "criar":</strong> workflow começa com algo que skill base não faz (ex: importar CSV)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-purple-500/20 text-purple-400 text-xl font-bold flex items-center justify-center flex-shrink-0">2</div><div><h2 class="text-2xl font-bold mb-2">📁 O template de pasta</h2><p class="text-neutral-400"><code>&lt;skill-name&gt;/{SKILL.md, assets/, references/}</code>.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">O que é</h3>
+          <pre class="code-block">landing-curso/
+├── SKILL.md                  # frontmatter + workflow Markdown
+├── assets/
+│   └── template.html         # HTML seed para o agente
+└── references/
+    ├── layouts.md            # 5-8 layouts paste-ready (hero edu, modules grid, instructor)
+    └── checklist.md          # P0 (CTAs especificos pra curso, pricing claro)</pre>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Padrão de pasta é o que torna skill <strong>portátil</strong>. Outro dev clona seu repo, copia pasta inteira pra <code>~/.claude/skills/</code>, funciona imediatamente. Sem padrão, ninguém reusa.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-purple-400">name = pasta name:</strong> kebab-case</li>
+            <li><strong class="text-purple-400">SKILL.md obrigatório</strong></li>
+            <li><strong class="text-purple-400">assets/ opcional:</strong> só se há template HTML</li>
+            <li><strong class="text-purple-400">references/ opcional:</strong> só se há vocabulário extra</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-purple-500/20 text-purple-400 text-xl font-bold flex items-center justify-center flex-shrink-0">3</div><div><h2 class="text-2xl font-bold mb-2">📝 Frontmatter passo a passo</h2><p class="text-neutral-400">name, description, triggers (multi-idioma), <code>od:</code> extensions.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">O que é</h3>
+          <pre class="code-block">---
+name: landing-curso
+description: Landing page para cursos online educacionais
+triggers:
+  - "landing curso"
+  - "página de curso"
+  - "course landing"
+  - "online course page"
+od:
+  mode: prototype
+  platform: web
+  scenario: education
+  preview: { aspect: "16:9" }
+  design_system: editorial-monocle
+  default_for: ["education", "online-course"]
+  example_prompt: "Faça uma landing pra um curso de cybersegurança"
+---</pre>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Triggers em multi-idioma é crucial pra adoção global. Um time brasileiro + um time americano usam o mesmo skill. <code>example_prompt</code> aparece no picker — ajuda usuário a entender o que esperar.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-purple-400">name:</strong> kebab-case, único por escopo</li>
+            <li><strong class="text-purple-400">description:</strong> 1 linha, voz ativa</li>
+            <li><strong class="text-purple-400">triggers:</strong> 3-7 frases, idiomas-alvo</li>
+            <li><strong class="text-purple-400">od.mode:</strong> prototype | deck | scenario</li>
+            <li><strong class="text-purple-400">od.example_prompt:</strong> mostra no picker</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-purple-500/20 text-purple-400 text-xl font-bold flex items-center justify-center flex-shrink-0">4</div><div><h2 class="text-2xl font-bold mb-2">🌱 <code>assets/template.html</code> — boas práticas de seed</h2><p class="text-neutral-400">Tokens em <code>:root</code>, comentários por seção.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Template é o "esqueleto" que o agente abre primeiro. Inclui:</p>
+          <ul class="text-neutral-300 mt-3 space-y-1 text-sm list-disc ml-5">
+            <li><strong>Tokens em :root</strong> — agente troca, não inventa de novo</li>
+            <li><strong>Comentários &lt;!-- HERO --&gt;</strong> — marcam seções editáveis</li>
+            <li><strong>Layout esqueleto</strong> — divs vazios com classes que indicam estrutura</li>
+            <li><strong>Placeholders honestos</strong> — &lt;span&gt;[Nome do curso]&lt;/span&gt;</li>
+          </ul>
+          <pre class="code-block mt-3">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;style&gt;
+:root { --bg: oklch(98% 0.01 90); --fg: oklch(15% 0 0); --accent: oklch(58% 0.15 35); }
+&lt;/style&gt;
+&lt;body&gt;
+&lt;!-- HERO: nome do curso + tagline + CTA --&gt;
+&lt;section class="hero"&gt;[content]&lt;/section&gt;
+
+&lt;!-- MODULES GRID: 4-8 módulos --&gt;
+&lt;section class="modules"&gt;...&lt;/section&gt;
+&lt;/body&gt;&lt;/html&gt;</pre>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Template sem :root tokens = agente inventa cores em cada geração. Template sem comentários = agente bagunça ordem de seções. <strong class="text-neutral-100">Bom template economiza 50% dos retrabalhos.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-purple-400">:root tokens:</strong> --bg, --fg, --accent (mínimo)</li>
+            <li><strong class="text-purple-400">Section comments:</strong> guiam onde editar</li>
+            <li><strong class="text-purple-400">Skeleton, não final:</strong> agente preenche, não só copia</li>
+            <li><strong class="text-purple-400">Honest placeholders:</strong> [content] &gt; lorem ipsum</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-purple-500/20 text-purple-400 text-xl font-bold flex items-center justify-center flex-shrink-0">5</div><div><h2 class="text-2xl font-bold mb-2">📋 <code>references/layouts.md</code> — paste-ready</h2><p class="text-neutral-400">Por que paste-ready importa.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Layouts em <code>references/layouts.md</code> são <strong>HTML paste-ready</strong> — o agente copia o snippet, ajusta tokens/conteúdo, injeta. Não é descrição em prosa; é HTML real.</p>
+          <pre class="code-block mt-3"># layouts.md
+
+## Hero — Curso edu
+
+```html
+&lt;section class="hero" style="padding: 96px 24px;"&gt;
+  &lt;h1 style="font-size: 64px; line-height: 1.05;"&gt;[Nome do curso]&lt;/h1&gt;
+  &lt;p style="font-size: 22px; color: var(--muted);"&gt;[Tagline em 1 frase]&lt;/p&gt;
+  &lt;a href="#enroll" class="cta"&gt;Matricular →&lt;/a&gt;
+&lt;/section&gt;
+```
+
+## Modules Grid — 4 to 8 módulos
+
+```html
+&lt;section class="modules grid"&gt;
+  &lt;article&gt;...&lt;/article&gt;  &lt;!-- repete --&gt;
+&lt;/section&gt;
+```</pre>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Modelos LLM são bons em adaptar HTML existente, ruins em produzir do zero. <strong>Paste-ready &gt; descrição.</strong> "Cole isso, ajuste content" funciona; "faça uma seção hero com X" produz variação.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-purple-400">5-8 layouts:</strong> sweet spot</li>
+            <li><strong class="text-purple-400">HTML real, não markdown:</strong> direto no template</li>
+            <li><strong class="text-purple-400">Style inline:</strong> não dependa de CSS externo</li>
+            <li><strong class="text-purple-400">Comments dentro:</strong> guiar onde adapt</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-purple-500/20 text-purple-400 text-xl font-bold flex items-center justify-center flex-shrink-0">6</div><div><h2 class="text-2xl font-bold mb-2">✅ <code>references/checklist.md</code> — escrevendo P0 que vale</h2><p class="text-neutral-400">Mensurabilidade vs intenção.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">P0 que vale a pena tem <strong>verificabilidade</strong>:</p>
+          <ul class="text-neutral-300 mt-3 space-y-2 text-sm">
+            <li><strong class="text-emerald-400">✅ Bom P0:</strong> "border-radius máximo 4px" (verificável: regex no CSS)</li>
+            <li><strong class="text-emerald-400">✅ Bom P0:</strong> "CTA &gt;= 44px hit target" (verificável: width/height computed)</li>
+            <li><strong class="text-red-400">❌ P0 ruim:</strong> "design ousado" (não-verificável)</li>
+            <li><strong class="text-red-400">❌ P0 ruim:</strong> "boa hierarquia" (subjetivo)</li>
+          </ul>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">P0 não-verificável é teatro de qualidade. Modelo "diz que verificou" mas não tem como. P0 verificável = grep ou regex passa ou não. <strong class="text-neutral-100">Mensurabilidade =&gt; mecanismo.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-purple-400">Verificável = grep/regex:</strong> teste mecânico</li>
+            <li><strong class="text-purple-400">5-8 P0 por skill:</strong> dose certa</li>
+            <li><strong class="text-purple-400">Sintático preferido:</strong> "no &lt;img src&gt; sem alt"</li>
+            <li><strong class="text-purple-400">Visual checks:</strong> com Playwright via MCP, viáveis também</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-purple-500/20 text-purple-400 text-xl font-bold flex items-center justify-center flex-shrink-0">7</div><div><h2 class="text-2xl font-bold mb-2">🎬 <code>example_prompt</code> no frontmatter</h2><p class="text-neutral-400">UX do picker.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Frontmatter <code>od.example_prompt</code> aparece como tooltip/preview no picker do OD. Usuário hover na skill e vê: <em>"Faça uma landing pra um curso de cybersegurança"</em>. Ajuda decidir se a skill se aplica antes de invocar.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">UX do picker é o que faz skill ser usada ou ignorada. Sem example_prompt, usuário precisa imaginar uso. Com, ele <em>vê</em>. <strong class="text-neutral-100">Marketing micro da sua skill.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-purple-400">1 prompt curto:</strong> 1 frase</li>
+            <li><strong class="text-purple-400">Específico:</strong> "para X" &gt; "para qualquer site"</li>
+            <li><strong class="text-purple-400">Idiomas múltiplos:</strong> array de strings</li>
+            <li><strong class="text-purple-400">Atualiza com uso:</strong> revise quando o uso evolui</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-purple-500/20 text-purple-400 text-xl font-bold flex items-center justify-center flex-shrink-0">8</div><div><h2 class="text-2xl font-bold mb-2">📂 Onde instalar para testar</h2><p class="text-neutral-400"><code>~/.claude/skills/&lt;nome&gt;/</code>.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Para teste local, instale em <code>~/.claude/skills/landing-curso/</code> (caminho global). Para distribuir num projeto específico, em <code>./skills/landing-curso/</code> do repo. Em ambos, daemon escaneia no boot.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Path errado = skill invisível, parece quebrada. Saber path certo = não perder horas debugando.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-purple-400">~/.claude/skills/:</strong> global</li>
+            <li><strong class="text-purple-400">./skills/:</strong> projeto local</li>
+            <li><strong class="text-purple-400">./.claude/skills/:</strong> escopo Claude Code</li>
+            <li><strong class="text-purple-400">Resolve:</strong> projeto &gt; usuário se há conflito</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-purple-500/20 text-purple-400 text-xl font-bold flex items-center justify-center flex-shrink-0">9</div><div><h2 class="text-2xl font-bold mb-2">🔄 Restart do daemon e aparição no picker</h2><p class="text-neutral-400">Hot-reload e cache.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Skills são escaneadas no boot do daemon. Após adicionar pasta nova:</p>
+          <pre class="code-block">pnpm tools-dev restart
+# ou
+pkill -f "od-daemon"
+pnpm tools-dev start</pre>
+          <p class="text-neutral-300 mt-3">Skill aparece no picker após restart. Para hot-reload sem restart: chame <code>POST /api/skills/refresh</code> manualmente.</p>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Sem restart, mudanças não aparecem. Tempo de feedback alto = ciclo de design lento. Com hot-reload, edição → veja resultado em segundos.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-purple-400">restart cmd:</strong> <code>pnpm tools-dev restart</code></li>
+            <li><strong class="text-purple-400">Hot-reload:</strong> <code>POST /api/skills/refresh</code></li>
+            <li><strong class="text-purple-400">Cache invalidation:</strong> mudou template? cache cai</li>
+            <li><strong class="text-purple-400">Logs:</strong> <code>pnpm tools-dev logs</code> mostra skills carregadas</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-purple-500/20 text-purple-400 text-xl font-bold flex items-center justify-center flex-shrink-0">10</div><div><h2 class="text-2xl font-bold mb-2">🚀 Submeter ao upstream open-design</h2><p class="text-neutral-400">PR pattern.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Skill genérica e útil pra outros = pattern de PR pro repo OD upstream:</p>
+          <ol class="text-neutral-300 mt-3 space-y-1 text-sm list-decimal ml-5">
+            <li>Fork <code>open-design</code> repo</li>
+            <li>Adicione pasta em <code>skills/&lt;sua-skill&gt;/</code></li>
+            <li>Atualize <code>skills/README.md</code> índice</li>
+            <li>Adicione 1-2 screenshots de output em <code>docs/screenshots/&lt;sua-skill&gt;/</code></li>
+            <li>PR com título "skill: add &lt;name&gt;" e descrição (use case + 1 example output)</li>
+            <li>Mantainer revisa: P0 são verificáveis? side-files coerentes? compatível com Claude Code puro?</li>
+          </ol>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Skill no upstream = audiência global, atualizações automáticas (outros melhoram), reputação no ecossistema. <strong>Caminho de longo prazo.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-purple-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-purple-400">Fork:</strong> use github.com/&lt;your&gt;/open-design</li>
+            <li><strong class="text-purple-400">PR template:</strong> seguir convenção do repo</li>
+            <li><strong class="text-purple-400">Tests opcionais:</strong> golden file de output esperado</li>
+            <li><strong class="text-purple-400">License:</strong> Apache-2.0 = aceita contributions sem CLA</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-purple-500/10 border-2 border-purple-500/30 rounded-xl p-6 sm:p-8">
+      <h2 class="text-2xl font-bold mb-4 flex items-center"><span class="text-3xl mr-3">🛠️</span> Hands-on</h2>
+      <p class="text-neutral-300 mb-4"><strong>Brief:</strong> Criar uma skill <code>landing-curso</code> específica para landings de cursos online no estilo INEMA. Tornar default para cenário "education". Testar.</p>
+      <ol class="text-neutral-300 space-y-3 list-decimal ml-5 mb-5">
+        <li><strong class="text-purple-400">Mkdir:</strong> <code>mkdir -p ~/.claude/skills/landing-curso/{assets,references}</code></li>
+        <li><strong class="text-purple-400">SKILL.md:</strong> frontmatter completo (name, description, triggers em PT/EN, od.scenario=education, od.default_for=["education"], example_prompt). Body Markdown com workflow em 6 passos.</li>
+        <li><strong class="text-purple-400">assets/template.html:</strong> :root tokens + comentários de seção (HERO / WHY / CURRICULUM / INSTRUCTOR / PRICING / FAQ / CTA)</li>
+        <li><strong class="text-purple-400">references/layouts.md:</strong> 5 layouts paste-ready (hero curso, módulos grid, instrutor, pricing edu, FAQ)</li>
+        <li><strong class="text-purple-400">references/checklist.md:</strong> 6 P0 (CTA "Matricular", price em BRL, mention nível, FAQ acordeão, mobile responsive, no-rounded-buttons)</li>
+        <li><strong class="text-purple-400">Restart:</strong> <code>pnpm tools-dev restart</code></li>
+        <li><strong class="text-purple-400">Test:</strong> brief "landing pra curso de Open Design para devs". Verifique que landing-curso aparece como default no picker.</li>
+      </ol>
+      <div class="bg-dark-800 border border-purple-500/30 rounded-lg p-4">
+        <p class="text-xs text-purple-400 font-semibold mb-2">Verificação rápida</p>
+        <pre class="code-block">ls ~/.claude/skills/landing-curso/
+cat ~/.claude/skills/landing-curso/SKILL.md | head -20
+pnpm tools-dev logs --grep "skill loaded"</pre>
+      </div>
+    </section>
+
+    <section class="bg-dark-800 border border-dark-600 rounded-xl p-6 sm:p-8">
+      <h2 class="text-2xl font-bold mb-4 flex items-center"><span class="text-3xl mr-3">📚</span> Fontes</h2>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div><h3 class="text-purple-400 font-semibold mb-2 text-sm">No repositório</h3><ul class="text-neutral-300 space-y-1 text-sm">
+          <li><code class="text-purple-400">docs/skills-protocol.md</code> (322L)</li>
+          <li><code class="text-purple-400">skills/web-prototype/</code> (referência canônica)</li>
+          <li><code class="text-purple-400">skills/dating-web/</code> (case complexo)</li>
+          <li><code class="text-purple-400">skills/README.md</code> (índice)</li>
+        </ul></div>
+        <div><h3 class="text-purple-400 font-semibold mb-2 text-sm">Externas</h3><ul class="text-neutral-300 space-y-1 text-sm">
+          <li><a class="text-sky-400 hover:text-sky-300" href="https://docs.anthropic.com/en/docs/claude-code/skills" target="_blank">docs.anthropic.com — Claude Code Skills</a></li>
+          <li>github.com/anthropics/awesome-claude-skills</li>
+        </ul></div>
+      </div>
+    </section>
+
+    <section class="bg-gradient-to-br from-purple-900/30 via-dark-800 to-dark-800 border border-purple-500/30 rounded-xl p-6 sm:p-8">
+      <h2 class="text-2xl font-bold mb-4 flex items-center"><span class="text-3xl mr-3">📌</span> Resumo do Módulo</h2>
+      <div class="space-y-3 text-neutral-300">
+        <p><strong class="text-purple-400">1.</strong> 70% rule: estende quando skill base cobre &gt; 70%; cria nova quando &lt;.</p>
+        <p><strong class="text-purple-400">2.</strong> Pasta padrão: SKILL.md + assets/template.html + references/{layouts,checklist}.md.</p>
+        <p><strong class="text-purple-400">3.</strong> Frontmatter: name, description, triggers (multi-idioma), bloco od:.</p>
+        <p><strong class="text-purple-400">4.</strong> Template HTML com :root tokens + section comments + honest placeholders.</p>
+        <p><strong class="text-purple-400">5.</strong> layouts.md em paste-ready HTML &gt; descrição em prosa.</p>
+        <p><strong class="text-purple-400">6.</strong> P0 verificáveis (grep/regex) &gt; subjetivos. 5-8 P0 ideais.</p>
+        <p><strong class="text-purple-400">7.</strong> example_prompt no frontmatter = tooltip do picker — UX micro.</p>
+        <p><strong class="text-purple-400">8.</strong> ~/.claude/skills/ global; ./skills/ projeto.</p>
+        <p><strong class="text-purple-400">9.</strong> Restart daemon ou /api/skills/refresh para hot-reload.</p>
+        <p><strong class="text-purple-400">10.</strong> PR upstream: fork + skills/&lt;name&gt;/ + screenshot + descrição.</p>
+      </div>
+      <div class="mt-6 pt-6 border-t border-purple-500/30"><p class="text-sm text-neutral-400 mb-2">Próximo módulo:</p><a href="modulo-3-6.html" class="inline-flex items-center text-purple-400 hover:text-purple-300 font-semibold">Módulo 3.6 · Daemon, Sidecar IPC →</a></div>
+    </section>
+
+    <div class="flex flex-col sm:flex-row gap-4 mt-12">
+      <a href="modulo-3-4.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Módulo 3.4</a>
+      <a href="modulo-3-6.html" class="flex-1 text-center px-6 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-500 transition-colors">Módulo 3.6 →</a>
+    </div>
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-16"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm"><p>Curso Open Design · Trilha 3 · Módulo 3.5 · 2026 · <a href="https://inema.club" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p></div></footer>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) { themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark'); } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => { themeToggleDarkIcon.classList.toggle('hidden'); themeToggleLightIcon.classList.toggle('hidden'); html.classList.toggle('dark'); localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light'); });
+  </script>
+</body>
+</html>
