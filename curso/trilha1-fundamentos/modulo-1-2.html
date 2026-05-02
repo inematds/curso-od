@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 1.2 · Arquitetura mental do OD | Curso Open Design</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .bg-emerald-500\/20 { background-color: rgba(5,150,105,.12); }
+    html:not(.dark) .bg-emerald-500\/10 { background-color: rgba(5,150,105,.08); }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5,150,105,.25); }
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .text-purple-400 { color: #7c3aed; }
+    html:not(.dark) .text-amber-400 { color: #b45309; }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,.95); }
+    .topic-num { width: 3rem; height: 3rem; }
+    pre.code-block { background: #0b1220; color: #e5e7eb; padding: 1rem; border-radius: .5rem; overflow-x: auto; font-family: 'Menlo', monospace; font-size: .85rem; line-height: 1.5; }
+    html:not(.dark) pre.code-block { background: #111827; color: #f3f4f6; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300"><span class="text-2xl">🎨</span><span class="font-bold text-lg hidden sm:inline">Curso Open Design</span></a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="../trilha2-exemplos/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Exemplos</span></a>
+          <a href="../trilha3-avancado/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span></a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2"><svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg><svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg></button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="border-b border-dark-700"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 text-sm text-neutral-400"><a href="../../index.html" class="hover:text-emerald-400">Início</a><span class="mx-2 text-neutral-600">/</span><a href="index.html" class="hover:text-emerald-400">Trilha 1 · Fundamentos</a><span class="mx-2 text-neutral-600">/</span><span class="text-neutral-300">Módulo 1.2</span></div></div>
+
+  <header class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4">MÓDULO 1.2</span>
+      <h1 class="text-2xl font-bold mb-3">🏗️ Arquitetura mental do OD</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">Desenhar de cabeça o data-flow: chat → skill picker → design-system picker → daemon → CLI → <code>&lt;artifact&gt;</code> → iframe preview, e saber onde cada peça é editável.</p>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">6</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">~50 min</div><div class="text-xs text-neutral-400">Duração</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">Básico</div><div class="text-xs text-neutral-400">Nível</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">Mapa</div><div class="text-xs text-neutral-400">Foco</div></div>
+      </div>
+      <div class="mt-6 bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4 max-w-3xl"><p class="text-sm text-neutral-300"><strong class="text-emerald-400">🏁 Resultado de aprendizagem:</strong> Você desenha o data-flow do OD em um guardanapo, identifica em qual peça cada problema vive, e sabe onde editar para mudar comportamento sem quebrar as outras.</p></div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+
+    <section>
+      <div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">1</div><div><h2 class="text-2xl font-bold mb-2">🧩 As 5 peças que se combinam</h2><p class="text-neutral-400">Chat, skill, design system, agent CLI, iframe preview.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">O OD não é um modelo nem uma UI — é a <strong class="text-neutral-100">composição de 5 peças desacopladas</strong>. <strong>Chat</strong> coleta o brief e mantém estado. <strong>Skill (SKILL.md)</strong> define o workflow do tipo de artefato (deck, landing, mobile). <strong>Design System (DESIGN.md)</strong> define o vocabulário visual. <strong>Agent CLI</strong> é o motor que executa. <strong>Iframe preview</strong> é o sandbox onde o resultado roda em segurança.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Quando algo dá errado, você precisa saber qual peça atacar. <strong class="text-neutral-100">Output incoerente?</strong> Skill ou Design System. <strong class="text-neutral-100">Agente lento ou mal-comportado?</strong> CLI. <strong class="text-neutral-100">Render quebrado?</strong> parser/iframe. Sem esse mapa, todo bug vira "mexer no chat".</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Conceitos-chave</h3>
+          <div class="grid sm:grid-cols-2 gap-3 text-sm">
+            <div class="bg-dark-700/50 rounded p-3"><strong class="text-emerald-400">Chat (Web/Next.js)</strong><p class="text-neutral-300 mt-1">Estado, histórico, picker de skill+sistema</p></div>
+            <div class="bg-dark-700/50 rounded p-3"><strong class="text-emerald-400">Skill</strong><p class="text-neutral-300 mt-1">SKILL.md + assets + references</p></div>
+            <div class="bg-dark-700/50 rounded p-3"><strong class="text-emerald-400">Design System</strong><p class="text-neutral-300 mt-1">DESIGN.md em OKLch (9 seções)</p></div>
+            <div class="bg-dark-700/50 rounded p-3"><strong class="text-emerald-400">Agent CLI</strong><p class="text-neutral-300 mt-1">Claude Code, Codex, Gemini, etc.</p></div>
+            <div class="bg-dark-700/50 rounded p-3 sm:col-span-2"><strong class="text-emerald-400">Iframe preview (srcdoc)</strong><p class="text-neutral-300 mt-1">Sandbox isolado para renderizar &lt;artifact&gt;</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">2</div><div><h2 class="text-2xl font-bold mb-2">🌐 As 3 topologias de deploy</h2><p class="text-neutral-400">A: tudo local. B: Vercel + tunnel. C: browser-only (degradado).</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">O OD não é "uma" arquitetura — são 3, dependendo de onde a UI roda e onde o daemon está. <strong class="text-neutral-100">A:</strong> UI Web em <code>localhost:3000</code> + daemon em <code>localhost:7331</code> (mesma máquina). <strong class="text-neutral-100">B:</strong> UI hospedada em Vercel + tunnel (cloudflared) que expõe o daemon do laptop pra UI cloud. <strong class="text-neutral-100">C:</strong> só browser, chamando API direto via BYOK proxy — sem skills, sem persistência local de SQLite (usa IndexedDB).</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Cada topologia atende um cenário. <strong class="text-neutral-100">A para dev solo</strong> (laptop sempre ligado, tudo offline-capable). <strong class="text-neutral-100">B para time</strong> (UI compartilhada, mas cada um tem seu daemon). <strong class="text-neutral-100">C para demos rápidas</strong> (compartilhar uma URL, sem setup). Saber qual escolher = poupar horas de configuração.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-emerald-400">Topologia A:</strong> 100% local, sem internet obrigatória, full skills + SQLite</li>
+            <li><strong class="text-emerald-400">Topologia B:</strong> Web em Vercel, daemon local exposto via <code>cloudflared tunnel</code></li>
+            <li><strong class="text-emerald-400">Topologia C:</strong> browser-only, IndexedDB fallback, sem skills/agentes locais</li>
+            <li><strong class="text-emerald-400">Trade-off A:</strong> melhor experiência, exige Node + dependências</li>
+            <li><strong class="text-emerald-400">Trade-off B:</strong> compartilhamento, exige tunnel sempre ativo</li>
+            <li><strong class="text-emerald-400">Trade-off C:</strong> zero setup, perde 70% das features</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">3</div><div><h2 class="text-2xl font-bold mb-2">📦 Daemon vs Web vs Desktop</h2><p class="text-neutral-400">Quem é responsável por o quê.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Três processos com responsabilidade única. <strong class="text-neutral-100">Daemon (apps/daemon):</strong> Node de longa duração, fala com a CLI/proxy, dona do SQLite e do filesystem. <strong class="text-neutral-100">Web (apps/web):</strong> Next.js que renderiza UI, faz fetch ao daemon. <strong class="text-neutral-100">Desktop (apps/desktop):</strong> Electron shell que descobre o Web via IPC e mostra como app nativo.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Você nunca quer "mexer no daemon" pra trocar uma cor da UI, nem editar o Web pra adicionar suporte a uma CLI nova. Cada bug e cada feature têm <strong class="text-neutral-100">um único endereço correto</strong>. Saber esse endereço evita PRs gigantes e regressões.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-emerald-400">apps/daemon:</strong> server.ts, agents.ts, skills.ts — autoridade sobre estado e CLIs</li>
+            <li><strong class="text-emerald-400">apps/web:</strong> Next.js + React, UI e UX, sem acesso direto ao filesystem</li>
+            <li><strong class="text-emerald-400">apps/desktop:</strong> Electron shell, faz IPC com daemon para descobrir URL</li>
+            <li><strong class="text-emerald-400">Sidecar IPC:</strong> sockets em <code>/tmp/open-design/ipc/&lt;namespace&gt;/</code></li>
+            <li><strong class="text-emerald-400">Boundary clara:</strong> Web nunca toca SQLite direto; Desktop nunca chama API; Daemon não renderiza nada</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">4</div><div><h2 class="text-2xl font-bold mb-2">🖼️ &lt;artifact&gt; parser e srcdoc iframe</h2><p class="text-neutral-400">O ciclo de render seguro.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">O agente é instruído a emitir um <strong>único bloco</strong> <code>&lt;artifact&gt;...HTML completo...&lt;/artifact&gt;</code> em vez de prosa solta. Um parser do OD (em <code>apps/web/src/artifacts/parser.ts</code>) extrai o conteúdo em streaming, e injeta em um <strong>iframe sandboxed via <code>srcdoc</code></strong> — sem acesso a cookies, sem origin compartilhada, sem postMessage. É a <strong>fronteira de segurança</strong> entre o agente e a sua UI.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Você está executando código que um modelo escreveu. <strong class="text-neutral-100">Sandbox é a única coisa que separa "preview" de "comprometeu o navegador"</strong>. Saber como o parser funciona ajuda a debugar artefatos travados (parsing errado), e a entender por que React+Babel são vendorizados (não há network no sandbox).</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-emerald-400">srcdoc iframe:</strong> conteúdo passa como string, isolation total</li>
+            <li><strong class="text-emerald-400">sandbox attr:</strong> bloqueia top-navigation, form-submission, etc.</li>
+            <li><strong class="text-emerald-400">Streaming parse:</strong> tag aberta? começa o iframe vazio; chunks vão em append</li>
+            <li><strong class="text-emerald-400">React 18 + Babel vendorizados:</strong> sem CDN externa dentro do iframe</li>
+            <li><strong class="text-emerald-400">1 artifact por mensagem:</strong> regra dura — agentes que emitem 2 levam refactor no prompt</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">5</div><div><h2 class="text-2xl font-bold mb-2">🗄️ SQLite local — <code>.od/app.sqlite</code></h2><p class="text-neutral-400">Projetos, conversas, mensagens, abas, templates.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Todo o estado do OD vive em um único arquivo SQLite no diretório do projeto: <code>.od/app.sqlite</code>. Cinco tabelas: <strong>projects, conversations, messages, tabs, templates</strong>. Você abre o repo amanhã, o daemon lê o arquivo e <strong class="text-neutral-100">restaura tudo</strong> — projetos abertos, abas, histórico de chat, templates customizados.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Two reasons. <strong>1)</strong> Você consegue inspecionar/editar o estado direto com <code>sqlite3</code> — útil para debug e migração. <strong>2)</strong> O arquivo é a "verdade". Se sumir do <code>.gitignore</code> por engano, você commita o histórico inteiro do cliente. <strong class="text-neutral-100">Saber onde o estado mora = saber o que proteger.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-emerald-400">better-sqlite3:</strong> driver síncrono usado pelo daemon</li>
+            <li><strong class="text-emerald-400">5 tabelas:</strong> projects, conversations, messages, tabs, templates</li>
+            <li><strong class="text-emerald-400">OD_DATA_DIR:</strong> override do diretório padrão (útil em CI/Playwright)</li>
+            <li><strong class="text-emerald-400">.od/ é gitignored por default:</strong> nunca commita por acidente</li>
+            <li><strong class="text-emerald-400">Multi-namespace:</strong> <code>--namespace experiments</code> usa <code>.od-experiments/</code></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">6</div><div><h2 class="text-2xl font-bold mb-2">📥 Importação de ZIP do Claude Design</h2><p class="text-neutral-400">Migração sem dor — continuar onde a Anthropic parou.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">O daemon expõe <code>POST /api/import/claude-design</code> que aceita um ZIP exportado do Claude Design. Ele descompacta, parseia o histórico de mensagens, cria um projeto OD novo e injeta um "prompt de continuidade" — assim o agente OD entende que ele está <strong>retomando uma conversa em andamento</strong>, não começando do zero.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Converte usuários do Claude Design (cloud) sem fricção. <strong class="text-neutral-100">"Trouxe seu trabalho? Joga o ZIP, segue editando."</strong> Esse import é o caminho mais comum de adoção corporativa: gente experimenta no cloud, decide escalar local, traz o histórico junto.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-emerald-400">ZIP parsing:</strong> extrai messages.json + artifacts/* do export</li>
+            <li><strong class="text-emerald-400">Auto-create project:</strong> nome derivado do ZIP</li>
+            <li><strong class="text-emerald-400">Continuity prompt:</strong> prefacio inserido na conversa para o agente OD</li>
+            <li><strong class="text-emerald-400">Mapping de artifacts:</strong> cada artifact vira tab</li>
+            <li><strong class="text-emerald-400">Sem upload pra cloud:</strong> tudo local, ZIP fica no <code>.od/imports/</code></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-emerald-500/10 border-2 border-emerald-500/30 rounded-xl p-6 sm:p-8">
+      <h2 class="text-2xl font-bold mb-4 flex items-center"><span class="text-3xl mr-3">🛠️</span> Hands-on</h2>
+      <p class="text-neutral-300 mb-4">Desenhe o data-flow no papel ou no Excalidraw — sem olhar a documentação. Inclua todas as 5 peças e mostre as setas de fluxo:</p>
+      <ol class="text-neutral-300 space-y-3 list-decimal ml-5 mb-5">
+        <li><strong class="text-emerald-400">Caixa 1:</strong> Chat (Web). <strong>Caixa 2:</strong> Skill. <strong>Caixa 3:</strong> Design System. <strong>Caixa 4:</strong> Daemon. <strong>Caixa 5:</strong> CLI. <strong>Caixa 6:</strong> Iframe.</li>
+        <li><strong class="text-emerald-400">Setas:</strong> usuário escreve → chat compõe prompt (skill+design system) → fetch para daemon → daemon spawna CLI → CLI streama tokens → daemon repassa → chat injeta no iframe.</li>
+        <li><strong class="text-emerald-400">Marque os 3 pontos editáveis:</strong> SKILL.md (workflow), DESIGN.md (visual), system.ts (identidade).</li>
+      </ol>
+      <div class="bg-dark-800 border border-emerald-500/30 rounded-lg p-4">
+        <p class="text-xs text-emerald-400 font-semibold mb-2">Verificação rápida do daemon (se já tiver OD instalado)</p>
+        <pre class="code-block">curl -s http://localhost:7331/api/health | jq
+sqlite3 .od/app.sqlite ".tables"
+ls -la .od/</pre>
+      </div>
+    </section>
+
+    <section class="bg-dark-800 border border-dark-600 rounded-xl p-6 sm:p-8">
+      <h2 class="text-2xl font-bold mb-4 flex items-center"><span class="text-3xl mr-3">📚</span> Fontes</h2>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div><h3 class="text-emerald-400 font-semibold mb-2 text-sm">No repositório <code>open-design/</code></h3>
+          <ul class="text-neutral-300 space-y-1 text-sm">
+            <li><code class="text-emerald-400">docs/architecture.md</code> §1-§3</li>
+            <li><code class="text-emerald-400">apps/daemon/src/server.ts</code></li>
+            <li><code class="text-emerald-400">apps/web/src/artifacts/parser.ts</code></li>
+            <li><code class="text-emerald-400">apps/desktop/src/main/</code></li>
+          </ul>
+        </div>
+        <div><h3 class="text-emerald-400 font-semibold mb-2 text-sm">Externas</h3>
+          <ul class="text-neutral-300 space-y-1 text-sm">
+            <li>MDN: srcdoc iframe + sandbox attribute</li>
+            <li>better-sqlite3 docs</li>
+            <li>Cloudflared tunnel docs (Topologia B)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 border border-emerald-500/30 rounded-xl p-6 sm:p-8">
+      <h2 class="text-2xl font-bold mb-4 flex items-center"><span class="text-3xl mr-3">📌</span> Resumo do Módulo</h2>
+      <div class="space-y-3 text-neutral-300">
+        <p><strong class="text-emerald-400">1.</strong> 5 peças desacopladas: Chat, Skill, Design System, Agent CLI, Iframe — cada bug tem um endereço único.</p>
+        <p><strong class="text-emerald-400">2.</strong> 3 topologias de deploy: A (local), B (Vercel + tunnel), C (browser-only) — escolher por cenário.</p>
+        <p><strong class="text-emerald-400">3.</strong> Daemon, Web e Desktop têm responsabilidades isoladas; nunca misture.</p>
+        <p><strong class="text-emerald-400">4.</strong> &lt;artifact&gt; é parseado em streaming e renderizado em iframe srcdoc sandboxed — fronteira de segurança.</p>
+        <p><strong class="text-emerald-400">5.</strong> SQLite em <code>.od/app.sqlite</code> com 5 tabelas é o estado canônico — proteja, gitignore.</p>
+        <p><strong class="text-emerald-400">6.</strong> Import de ZIP do Claude Design via <code>POST /api/import/claude-design</code> = caminho de adoção mais comum.</p>
+      </div>
+      <div class="mt-6 pt-6 border-t border-emerald-500/30">
+        <p class="text-sm text-neutral-400 mb-2">Próximo módulo:</p>
+        <a href="modulo-1-3.html" class="inline-flex items-center text-emerald-400 hover:text-emerald-300 font-semibold">Módulo 1.3 · O Stack de Prompts é o Produto →</a>
+      </div>
+    </section>
+
+    <div class="flex flex-col sm:flex-row gap-4 mt-12">
+      <a href="modulo-1-1.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Módulo 1.1</a>
+      <a href="modulo-1-3.html" class="flex-1 text-center px-6 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-500 transition-colors">Módulo 1.3 →</a>
+    </div>
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-16"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm"><p>Curso Open Design · Trilha 1 · Módulo 1.2 · 2026 · <a href="https://inema.club" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p></div></footer>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) { themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark'); } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => { themeToggleDarkIcon.classList.toggle('hidden'); themeToggleLightIcon.classList.toggle('hidden'); html.classList.toggle('dark'); localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light'); });
+  </script>
+</body>
+</html>

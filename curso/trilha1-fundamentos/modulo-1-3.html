@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 1.3 · O Stack de Prompts é o Produto | Curso Open Design</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }</script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; } .dark body { background-color: #111827; }
+    html:not(.dark) body { background-color: #f8fafc; } html:not(.dark) .bg-dark-900 { background-color: #fff; } html:not(.dark) .bg-dark-800 { background-color: #f9fafb; } html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; } html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; } html:not(.dark) .text-neutral-300 { color: #4b5563; } html:not(.dark) .text-neutral-400 { color: #6b7280; } html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; } html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-emerald-400 { color: #059669; } html:not(.dark) .bg-emerald-500\/20 { background-color: rgba(5,150,105,.12); } html:not(.dark) .bg-emerald-500\/10 { background-color: rgba(5,150,105,.08); } html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5,150,105,.25); }
+    html:not(.dark) .text-blue-400 { color: #2563eb; } html:not(.dark) .text-purple-400 { color: #7c3aed; } html:not(.dark) .text-amber-400 { color: #b45309; }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; } html:not(.dark) .text-sky-400 { color: #0369a1; } html:not(.dark) .text-yellow-400 { color: #a16207; } html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; } html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,.95); }
+    .topic-num { width: 3rem; height: 3rem; }
+    pre.code-block { background: #0b1220; color: #e5e7eb; padding: 1rem; border-radius: .5rem; overflow-x: auto; font-family: 'Menlo', monospace; font-size: .85rem; line-height: 1.5; }
+    html:not(.dark) pre.code-block { background: #111827; color: #f3f4f6; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"><div class="flex justify-between items-center h-14"><div class="flex items-center space-x-4"><a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300"><span class="text-2xl">🎨</span><span class="font-bold text-lg hidden sm:inline">Curso Open Design</span></a><span class="text-neutral-600">|</span><a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a></div><div class="flex items-center space-x-1 sm:space-x-2"><a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a><a href="../trilha2-exemplos/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Exemplos</span></a><a href="../trilha3-avancado/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span></a><button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2"><svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg><svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg></button></div></div></div></nav>
+
+  <div class="border-b border-dark-700"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 text-sm text-neutral-400"><a href="../../index.html" class="hover:text-emerald-400">Início</a><span class="mx-2 text-neutral-600">/</span><a href="index.html" class="hover:text-emerald-400">Trilha 1 · Fundamentos</a><span class="mx-2 text-neutral-600">/</span><span class="text-neutral-300">Módulo 1.3</span></div></div>
+
+  <header class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4">MÓDULO 1.3</span>
+    <h1 class="text-2xl font-bold mb-3">📚 O Stack de Prompts é o Produto</h1>
+    <p class="text-lg text-neutral-400 max-w-3xl">A UI não é o produto — o produto é a stack de prompts componível em 6 camadas.</p>
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 max-w-2xl">
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">6</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">~60 min</div><div class="text-xs text-neutral-400">Duração</div></div>
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">Básico</div><div class="text-xs text-neutral-400">Nível</div></div>
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">Stack</div><div class="text-xs text-neutral-400">Foco</div></div>
+    </div>
+    <div class="mt-6 bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4 max-w-3xl"><p class="text-sm text-neutral-300"><strong class="text-emerald-400">🏁 Resultado:</strong> Você lê <code>system.ts</code>, <code>discovery.ts</code> e <code>directions.ts</code> entendendo qual camada faz o quê — e modifica uma camada sem quebrar as outras.</p></div>
+  </div></header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">1</div><div><h2 class="text-2xl font-bold mb-2">🍰 As 6 camadas da stack</h2><p class="text-neutral-400">Discovery + identity + DESIGN + SKILL + metadata + side-files.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">O system prompt enviado ao agente é construído por <code>composeSystemPrompt()</code> empilhando 6 camadas em ordem fixa:</p>
+          <ol class="text-neutral-300 mt-3 space-y-1 text-sm list-decimal ml-5">
+            <li><strong class="text-emerald-400">Discovery directives</strong> — workflow do turn 1 (perguntas) e turn 2 (direção)</li>
+            <li><strong class="text-emerald-400">Identity charter</strong> — quem o agente é, anti-slop, junior-mode</li>
+            <li><strong class="text-emerald-400">DESIGN.md ativo</strong> — vocabulário visual escolhido pelo usuário</li>
+            <li><strong class="text-emerald-400">SKILL.md ativo</strong> — workflow do tipo de artefato</li>
+            <li><strong class="text-emerald-400">Project metadata</strong> — nome do projeto, plataforma, tom</li>
+            <li><strong class="text-emerald-400">Skill side-files</strong> — <code>assets/template.html</code> + <code>references/*.md</code> auto-injetados</li>
+          </ol>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Cada camada tem um <strong>autor diferente</strong>: discovery vem do core do OD; identity é fixo da Anthropic huashu; DESIGN é da comunidade; SKILL pode ser sua. Quando você muda uma camada, <strong class="text-neutral-100">precisa saber se as outras assumem comportamento ou se vão entrar em conflito</strong>.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-emerald-400">composeSystemPrompt():</strong> função em <code>packages/contracts/src/prompts/system.ts</code></li>
+            <li><strong class="text-emerald-400">Ordem é prioridade:</strong> camadas anteriores ganham se houver conflito</li>
+            <li><strong class="text-emerald-400">Injeção dinâmica:</strong> conteúdo de DESIGN/SKILL é lido por sessão</li>
+            <li><strong class="text-emerald-400">Deck framework:</strong> 7ª camada opcional, só quando skill = guizang-ppt</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">2</div><div><h2 class="text-2xl font-bold mb-2">🔧 Por que componível</h2><p class="text-neutral-400">Cada camada é um arquivo, cada arquivo é editável.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">"Componível" = você pode trocar uma camada <strong>sem reescrever as outras</strong>. Quer mudar só o vocabulário visual? Trocar DESIGN.md. Quer mudar só o tipo de artefato? Trocar SKILL.md. Quer afrouxar o anti-slop? Editar identity. Cada arquivo tem responsabilidade única e <strong class="text-neutral-100">contrato estável</strong> com as outras camadas.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">No Claude Design tudo é interno e fechado. No OD, o produto <em>é</em> a composição. Saber componibilidade = saber <strong class="text-neutral-100">customizar o agente para seu contexto sem fork</strong>: brand do cliente vira DESIGN.md específico, formato de deck do investidor vira SKILL.md específico, sem mudar uma linha do core.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-emerald-400">Single responsibility:</strong> SKILL define workflow, DESIGN define visual, identity define caráter</li>
+            <li><strong class="text-emerald-400">Hot-swap:</strong> trocar camada não exige restart do daemon</li>
+            <li><strong class="text-emerald-400">Read-only para o agente:</strong> agente lê camadas, não as edita</li>
+            <li><strong class="text-emerald-400">Contrato implícito:</strong> nomes de tokens (<code>--bg</code>, <code>--accent</code>) são compartilhados</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">3</div><div><h2 class="text-2xl font-bold mb-2">📋 DISCOVERY directives — RULES 1, 2, 3</h2><p class="text-neutral-400">Turn 1 form → Turn 2 brand branch → TodoWrite.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">A camada <code>discovery.ts</code> (263 linhas) define um <strong>protocolo conversacional obrigatório</strong>:</p>
+          <div class="grid md:grid-cols-3 gap-3 mt-4 text-sm">
+            <div class="bg-dark-700/50 rounded p-3"><strong class="text-emerald-400">RULE 1 (Turn 1)</strong><p class="text-neutral-300 mt-1">Antes de qualquer pixel, mande um <em>question form</em>: superfície, audiência, tom, contexto de marca, escala</p></div>
+            <div class="bg-dark-700/50 rounded p-3"><strong class="text-emerald-400">RULE 2 (Turn 2)</strong><p class="text-neutral-300 mt-1">Branch de marca: A=escolher direção, B=extrair brand-spec, C=improvisar</p></div>
+            <div class="bg-dark-700/50 rounded p-3"><strong class="text-emerald-400">RULE 3 (Turn 3+)</strong><p class="text-neutral-300 mt-1">TodoWrite plano visível, live updates, redirecionável</p></div>
+          </div>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Sem discovery, o agente <strong>simula trabalho</strong> em vez de fazer trabalho. RULE 1 trava decisões antes do CSS; RULE 2 evita inventar paleta quando o cliente já tem marca; RULE 3 deixa o usuário <strong class="text-neutral-100">redirecionar antes de gastar tokens</strong>. É a parte do prompt que mais economiza retrabalho.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-emerald-400">Question form:</strong> 5-7 perguntas fechadas, formato consistente</li>
+            <li><strong class="text-emerald-400">Branch A/B/C:</strong> caminhos diferentes para "tem marca" vs "não tem"</li>
+            <li><strong class="text-emerald-400">TodoWrite:</strong> ferramenta de plano live (Claude Code-compatível)</li>
+            <li><strong class="text-emerald-400">Direções visuais:</strong> 5 templates (Editorial Monocle, Modern Minimal, Tech Utility, Brutalist, Soft Warm) — detalhe no Módulo 1.6</li>
+            <li><strong class="text-emerald-400">Override por usuário:</strong> "pula direto pro deck" desativa RULE 1</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">4</div><div><h2 class="text-2xl font-bold mb-2">⚖️ Identity charter (OFFICIAL_DESIGNER_PROMPT)</h2><p class="text-neutral-400">Anti-slop fixo, junior-pass.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">A camada de identidade (<code>official-system.ts</code>, ~118 linhas) define <strong>quem o agente é</strong>: um designer-engineer sênior, junior-pass mode (faz perguntas como júnior simulando sênior), com <strong>blacklist anti-slop</strong> hardcoded. Não é editado por usuário — é o caráter do produto.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">A maioria das "alucinações estéticas" vêm da ausência dessa camada em outros produtos. <strong>Quando o agente "decide sozinho" usar Inter como display ou gradient roxo, não é o modelo errando — é falta de identity charter.</strong> Saber que esse arquivo existe e o que ele contém = saber por que o OD não cai nessas armadilhas.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-emerald-400">OFFICIAL_DESIGNER_PROMPT:</strong> string exportada em <code>official-system.ts</code></li>
+            <li><strong class="text-emerald-400">Junior-pass:</strong> agente faz perguntas em vez de assumir</li>
+            <li><strong class="text-emerald-400">Anti-slop blacklist:</strong> ~15 regras curtas inline</li>
+            <li><strong class="text-emerald-400">Não-customizável por padrão:</strong> exigiria editar o pacote contracts</li>
+            <li><strong class="text-emerald-400">Tom imperativo:</strong> "Never do X. Always do Y."</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">5</div><div><h2 class="text-2xl font-bold mb-2">📎 Pre-flight de side-files</h2><p class="text-neutral-400">Auto-injeção de <code>assets/template.html</code> + <code>references/*.md</code>.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Antes do agente começar a escrever, o daemon faz "pre-flight": lê <strong>todos os side-files</strong> da skill ativa (<code>assets/template.html</code>, <code>references/layouts.md</code>, <code>references/checklist.md</code>) e injeta no prompt. O agente nunca "esquece" de seguir o template ou checar o checklist — porque <strong>já tá no contexto</strong>.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Esse é o mecanismo que faz a diferença prática entre "OD tem skills" e "skills funcionam de verdade". <strong class="text-neutral-100">Sem pre-flight, o agente teria que "lembrar" de abrir o template — coisa que LLMs falham 30% do tempo.</strong> Pre-flight = checklist mecânico, não confiando em memória.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-emerald-400">Side-files:</strong> arquivos auxiliares ao SKILL.md em <code>assets/</code> e <code>references/</code></li>
+            <li><strong class="text-emerald-400">Auto-injeção:</strong> daemon faz fs.readFile e concat no system prompt</li>
+            <li><strong class="text-emerald-400">Token budget:</strong> hard cap em ~8k tokens por skill (cuidado com side-files gigantes)</li>
+            <li><strong class="text-emerald-400">Cache:</strong> arquivos lidos uma vez por skill ativa em sessão</li>
+            <li><strong class="text-emerald-400">Diff hygiene:</strong> mudou template? cache invalida e injeta nova versão</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">6</div><div><h2 class="text-2xl font-bold mb-2">🪜 Override hierarchy</h2><p class="text-neutral-400">Discovery domina sobre identity; metadata adapta.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Quando duas camadas dão instruções conflitantes, há uma <strong>hierarquia explícita</strong> de override: <em>Discovery &gt; Identity &gt; SKILL &gt; DESIGN &gt; Metadata &gt; Side-files</em>. Discovery pode pausar a regra "no roxo" se o usuário explicitamente pedir — porque RULE de discovery está mais alta. Identity é next; só pula se discovery overridou.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Sem hierarquia, conflitos viram comportamento aleatório. <strong class="text-neutral-100">Saber a ordem permite prever o que ganha.</strong> Quando o cliente diz "aqui usa roxo", você confia que discovery vai aceitar (porque tem prioridade) e a identity charter não vai brigar — mesmo com a blacklist.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-emerald-400">Discovery wins:</strong> intent do usuário tem mais peso que blacklist genérica</li>
+            <li><strong class="text-emerald-400">Identity wins sobre SKILL:</strong> blacklist anti-slop não é apagada por skill nova</li>
+            <li><strong class="text-emerald-400">Metadata adapta:</strong> "platform: mobile" muda hit-targets, não cores</li>
+            <li><strong class="text-emerald-400">Side-files são autoritativos no escopo:</strong> template.html dita estrutura</li>
+            <li><strong class="text-emerald-400">Conflitos = escalar:</strong> agente reporta conflito ao usuário antes de decidir</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-emerald-500/10 border-2 border-emerald-500/30 rounded-xl p-6 sm:p-8">
+      <h2 class="text-2xl font-bold mb-4 flex items-center"><span class="text-3xl mr-3">🛠️</span> Hands-on</h2>
+      <p class="text-neutral-300 mb-4">Mesmo sem o OD instalado, você pode <em>ler o produto</em>. Esse é o exercício mais útil deste módulo:</p>
+      <ol class="text-neutral-300 space-y-3 list-decimal ml-5 mb-5">
+        <li><strong class="text-emerald-400">Abra os 3 prompts:</strong> <code>system.ts</code>, <code>discovery.ts</code>, <code>directions.ts</code> em <code>packages/contracts/src/prompts/</code> do repo open-design.</li>
+        <li><strong class="text-emerald-400">Identifique cada camada:</strong> sublinhe ou anote onde começam discovery directives, identity charter, instruções de DESIGN/SKILL.</li>
+        <li><strong class="text-emerald-400">Encontre RULE 1, 2, 3:</strong> em <code>discovery.ts</code>, marque exatamente as 3 RULEs e o que cada uma exige.</li>
+        <li><strong class="text-emerald-400">Bonus:</strong> escreva um pequeno DESIGN.md do seu site favorito e veja se ele <em>obedeceria</em> à hierarquia (cores ganham? tipografia ganha?).</li>
+      </ol>
+      <div class="bg-dark-800 border border-emerald-500/30 rounded-lg p-4">
+        <p class="text-xs text-emerald-400 font-semibold mb-2">Listagem de prompts no repo</p>
+        <pre class="code-block">cd /caminho/para/open-design
+ls -la packages/contracts/src/prompts/
+wc -l packages/contracts/src/prompts/*.ts</pre>
+      </div>
+    </section>
+
+    <section class="bg-dark-800 border border-dark-600 rounded-xl p-6 sm:p-8">
+      <h2 class="text-2xl font-bold mb-4 flex items-center"><span class="text-3xl mr-3">📚</span> Fontes</h2>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div><h3 class="text-emerald-400 font-semibold mb-2 text-sm">No repositório</h3><ul class="text-neutral-300 space-y-1 text-sm">
+          <li><code class="text-emerald-400">packages/contracts/src/prompts/system.ts</code> (334L)</li>
+          <li><code class="text-emerald-400">packages/contracts/src/prompts/discovery.ts</code> (263L)</li>
+          <li><code class="text-emerald-400">packages/contracts/src/prompts/official-system.ts</code> (118L)</li>
+          <li><code class="text-emerald-400">packages/contracts/src/prompts/directions.ts</code> (284L)</li>
+        </ul></div>
+        <div><h3 class="text-emerald-400 font-semibold mb-2 text-sm">Externas</h3><ul class="text-neutral-300 space-y-1 text-sm">
+          <li>Anthropic prompt-engineering guide</li>
+          <li>OpenAI: stable system prompts</li>
+          <li>huashu-design (origem do junior-pass)</li>
+        </ul></div>
+      </div>
+    </section>
+
+    <section class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 border border-emerald-500/30 rounded-xl p-6 sm:p-8">
+      <h2 class="text-2xl font-bold mb-4 flex items-center"><span class="text-3xl mr-3">📌</span> Resumo do Módulo</h2>
+      <div class="space-y-3 text-neutral-300">
+        <p><strong class="text-emerald-400">1.</strong> System prompt = 6 camadas empilhadas: discovery + identity + DESIGN + SKILL + metadata + side-files.</p>
+        <p><strong class="text-emerald-400">2.</strong> Componibilidade significa que cada camada é editável sem fork — esse é o "produto" do OD.</p>
+        <p><strong class="text-emerald-400">3.</strong> Discovery RULES 1/2/3 estruturam o turn 1 (form), turn 2 (branch), turn 3+ (TodoWrite).</p>
+        <p><strong class="text-emerald-400">4.</strong> Identity charter (OFFICIAL_DESIGNER_PROMPT) injeta caráter, junior-pass e blacklist anti-slop.</p>
+        <p><strong class="text-emerald-400">5.</strong> Pre-flight injeta side-files (template + checklist) antes do agente escrever — checklist mecânico.</p>
+        <p><strong class="text-emerald-400">6.</strong> Override hierarchy: Discovery &gt; Identity &gt; SKILL &gt; DESIGN &gt; Metadata &gt; Side-files.</p>
+      </div>
+      <div class="mt-6 pt-6 border-t border-emerald-500/30">
+        <p class="text-sm text-neutral-400 mb-2">Próximo módulo:</p>
+        <a href="modulo-1-4.html" class="inline-flex items-center text-emerald-400 hover:text-emerald-300 font-semibold">Módulo 1.4 · Skills (SKILL.md) →</a>
+      </div>
+    </section>
+
+    <div class="flex flex-col sm:flex-row gap-4 mt-12">
+      <a href="modulo-1-2.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Módulo 1.2</a>
+      <a href="modulo-1-4.html" class="flex-1 text-center px-6 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-500 transition-colors">Módulo 1.4 →</a>
+    </div>
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-16"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm"><p>Curso Open Design · Trilha 1 · Módulo 1.3 · 2026 · <a href="https://inema.club" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p></div></footer>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) { themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark'); } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => { themeToggleDarkIcon.classList.toggle('hidden'); themeToggleLightIcon.classList.toggle('hidden'); html.classList.toggle('dark'); localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light'); });
+  </script>
+</body>
+</html>
