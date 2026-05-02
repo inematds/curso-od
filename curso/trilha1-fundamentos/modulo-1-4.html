@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 1.4 · Skills (SKILL.md) | Curso Open Design</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }</script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; } .dark body { background-color: #111827; }
+    html:not(.dark) body { background-color: #f8fafc; } html:not(.dark) .bg-dark-900 { background-color: #fff; } html:not(.dark) .bg-dark-800 { background-color: #f9fafb; } html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; } html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; } html:not(.dark) .text-neutral-300 { color: #4b5563; } html:not(.dark) .text-neutral-400 { color: #6b7280; } html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; } html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-emerald-400 { color: #059669; } html:not(.dark) .bg-emerald-500\/20 { background-color: rgba(5,150,105,.12); } html:not(.dark) .bg-emerald-500\/10 { background-color: rgba(5,150,105,.08); } html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5,150,105,.25); }
+    html:not(.dark) .text-blue-400 { color: #2563eb; } html:not(.dark) .text-purple-400 { color: #7c3aed; } html:not(.dark) .text-amber-400 { color: #b45309; }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; } html:not(.dark) .text-sky-400 { color: #0369a1; } html:not(.dark) .text-yellow-400 { color: #a16207; } html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; } html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,.95); }
+    .topic-num { width: 3rem; height: 3rem; }
+    pre.code-block { background: #0b1220; color: #e5e7eb; padding: 1rem; border-radius: .5rem; overflow-x: auto; font-family: 'Menlo', monospace; font-size: .85rem; line-height: 1.5; }
+    html:not(.dark) pre.code-block { background: #111827; color: #f3f4f6; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"><div class="flex justify-between items-center h-14"><div class="flex items-center space-x-4"><a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300"><span class="text-2xl">🎨</span><span class="font-bold text-lg hidden sm:inline">Curso Open Design</span></a><span class="text-neutral-600">|</span><a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a></div><div class="flex items-center space-x-1 sm:space-x-2"><a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a><a href="../trilha2-exemplos/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Exemplos</span></a><a href="../trilha3-avancado/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span></a><button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2"><svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg><svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg></button></div></div></div></nav>
+
+  <div class="border-b border-dark-700"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 text-sm text-neutral-400"><a href="../../index.html" class="hover:text-emerald-400">Início</a><span class="mx-2 text-neutral-600">/</span><a href="index.html" class="hover:text-emerald-400">Trilha 1 · Fundamentos</a><span class="mx-2 text-neutral-600">/</span><span class="text-neutral-300">Módulo 1.4</span></div></div>
+
+  <header class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4">MÓDULO 1.4</span>
+    <h1 class="text-2xl font-bold mb-3">🧰 Skills (SKILL.md) — a unidade atômica</h1>
+    <p class="text-lg text-neutral-400 max-w-3xl">A unidade reutilizável que define <em>como</em> o agente trabalha um tipo de artefato. Compatível com Claude Code; estendida pelo OD.</p>
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 max-w-2xl">
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">7</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">~55 min</div><div class="text-xs text-neutral-400">Duração</div></div>
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">Básico</div><div class="text-xs text-neutral-400">Nível</div></div>
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">31</div><div class="text-xs text-neutral-400">Skills box</div></div>
+    </div>
+    <div class="mt-6 bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4 max-w-3xl"><p class="text-sm text-neutral-300"><strong class="text-emerald-400">🏁 Resultado:</strong> Você lê uma SKILL.md e prevê o comportamento do agente; sabe a diferença entre skill base (Claude Code-compatível) e skill com extensão <code>od:</code>.</p></div>
+  </div></header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">1</div><div><h2 class="text-2xl font-bold mb-2">📜 Convenção SKILL.md do Claude Code</h2><p class="text-neutral-400">O frontmatter mínimo: name, description, triggers.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">SKILL.md é um arquivo Markdown com <strong>frontmatter YAML</strong> mais corpo. O frontmatter mínimo (compatível com Claude Code) tem:</p>
+          <pre class="code-block mt-3">---
+name: web-prototype
+description: Gera um protótipo web rodável (single-file HTML)
+triggers:
+  - "fazer um site"
+  - "landing"
+  - "prototype"
+---
+
+# Workflow
+
+1. Leia template.html primeiro
+2. ...</pre>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Esse formato é a <strong>fronteira de portabilidade</strong>: uma skill bem escrita roda no Claude Code <em>e</em> no OD sem mudança. Esse contrato evita lock-in. Saber escrever um SKILL.md mínimo = poder distribuir suas próprias skills.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-emerald-400">name:</strong> kebab-case, único por escopo</li>
+            <li><strong class="text-emerald-400">description:</strong> 1 linha — usada no picker</li>
+            <li><strong class="text-emerald-400">triggers:</strong> array de palavras/frases que ativam matching</li>
+            <li><strong class="text-emerald-400">Body:</strong> Markdown puro com workflow e diretrizes</li>
+            <li><strong class="text-emerald-400">Sem código executável:</strong> SKILL.md é declarativo, não script</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">2</div><div><h2 class="text-2xl font-bold mb-2">📁 Anatomia: <code>assets/</code> + <code>references/</code></h2><p class="text-neutral-400">O que vai em cada pasta auxiliar.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Uma skill séria não é só SKILL.md — é uma pasta:</p>
+          <pre class="code-block mt-3">skills/saas-landing/
+├── SKILL.md                  # frontmatter + workflow
+├── assets/
+│   └── template.html         # HTML seed que o agente abre primeiro
+└── references/
+    ├── layouts.md            # 8 layouts paste-ready
+    ├── components.md         # botão, card, hero variants
+    └── checklist.md          # P0/P1/P2 gate</pre>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300"><strong>Assets = seed.</strong> O agente sempre abre o template antes de escrever — economiza ~30% de tokens e evita "improviso de estrutura". <strong>References = vocabulário.</strong> Quando o agente precisa de um padrão, ele consulta em vez de inventar. Quem ignora essa separação acaba com SKILL.md de 800 linhas que o modelo não consegue manter coerente.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-emerald-400">assets/:</strong> arquivos "seed" — template HTML, frames, imagens placeholder</li>
+            <li><strong class="text-emerald-400">references/:</strong> Markdown auxiliar — layouts, componentes, checklist</li>
+            <li><strong class="text-emerald-400">Pre-flight reading:</strong> daemon injeta assets no contexto antes do prompt do usuário</li>
+            <li><strong class="text-emerald-400">Tamanho razoável:</strong> SKILL.md ~150 linhas, references ~100 cada</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">3</div><div><h2 class="text-2xl font-bold mb-2">🔌 Extensão <code>od:</code> no frontmatter</h2><p class="text-neutral-400">Mode, platform, scenario, preview, design_system, default_for, featured.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">O OD adiciona um bloco opcional <code>od:</code> ao frontmatter — invisível para o Claude Code (ignorado por desconhecimento), <strong>rico para o picker do OD</strong>:</p>
+          <pre class="code-block mt-3">---
+name: saas-landing
+description: Landing page para SaaS B2B
+triggers: ["landing", "site institucional"]
+od:
+  mode: prototype
+  platform: web
+  scenario: marketing
+  preview: { aspect: "16:9" }
+  design_system: linear-app
+  default_for: ["b2b-saas", "fintech"]
+  featured: true
+---</pre>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">A extensão <code>od:</code> é o que diferencia "uma skill" de "uma skill descobrível e configurada". O picker filtra por <code>scenario</code>, sugere <code>design_system</code> default, exibe <code>featured</code> primeiro. Sem essa metadata, o usuário tem que escolher tudo manualmente toda vez.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-emerald-400">mode:</strong> prototype | deck | scenario</li>
+            <li><strong class="text-emerald-400">platform:</strong> web | mobile | desktop</li>
+            <li><strong class="text-emerald-400">scenario:</strong> marketing | dashboard | onboarding | etc.</li>
+            <li><strong class="text-emerald-400">design_system:</strong> default emparelhado para esse tipo</li>
+            <li><strong class="text-emerald-400">default_for:</strong> categorias onde essa skill é a primeira sugerida</li>
+            <li><strong class="text-emerald-400">featured:</strong> aparece em destaque no picker</li>
+            <li><strong class="text-emerald-400">Compatibilidade:</strong> Claude Code ignora <code>od:</code>, segue funcionando</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">4</div><div><h2 class="text-2xl font-bold mb-2">📦 As 31 skills da box</h2><p class="text-neutral-400">Taxonomia: prototype × deck × scenario.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">O OD vem com 31 skills curadas, agrupadas em três famílias:</p>
+          <div class="grid sm:grid-cols-3 gap-3 mt-4 text-sm">
+            <div class="bg-dark-700/50 rounded p-3"><strong class="text-emerald-400">Prototype</strong><p class="text-neutral-300 mt-1">web-prototype, saas-landing, mobile-app, dashboard, social-carousel...</p></div>
+            <div class="bg-dark-700/50 rounded p-3"><strong class="text-emerald-400">Deck</strong><p class="text-neutral-300 mt-1">guizang-ppt, pitch-deck, keynote, sales-deck...</p></div>
+            <div class="bg-dark-700/50 rounded p-3"><strong class="text-emerald-400">Scenario</strong><p class="text-neutral-300 mt-1">critique, tweaks, brand-extract, onboarding-flow, dating-web...</p></div>
+          </div>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Saber o que existe = não reinventar. Antes de criar uma skill nova, cheque o catálogo: provavelmente já existe uma "70% pronta" que você estende com seu DESIGN.md em vez de fazer SKILL.md do zero.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-emerald-400">Prototype:</strong> output rodável (single-file HTML, multi-tela, gallery)</li>
+            <li><strong class="text-emerald-400">Deck:</strong> output paginado, magazine-style, exportável a PDF</li>
+            <li><strong class="text-emerald-400">Scenario:</strong> cumpre função (audita, refina, extrai) — não gera artefato novo</li>
+            <li><strong class="text-emerald-400">Top 5 mais usadas:</strong> web-prototype, saas-landing, guizang-ppt, mobile-app, critique</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">5</div><div><h2 class="text-2xl font-bold mb-2">📑 Pre-flight reading enforcement</h2><p class="text-neutral-400">Por que o agente lê <code>template.html</code> antes de escrever CSS.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Toda SKILL.md séria tem como primeira instrução: <strong>"Antes de qualquer pixel, leia <code>assets/template.html</code> e <code>references/checklist.md</code>"</strong>. O daemon faz <em>enforcement</em>: injeta o conteúdo desses arquivos no system prompt antes do agente começar. <strong class="text-neutral-100">Não é confiança no modelo — é checklist mecânico.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Modelos LLM falham em "abrir arquivo X" cerca de 30% do tempo. Pre-flight elimina essa fonte de erros: o conteúdo já está no contexto, o modelo não precisa lembrar. Saber isso = saber por que o OD entrega artefatos consistentes onde "AI freestyle" não.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-emerald-400">Daemon-side injection:</strong> daemon lê e injeta antes do agente</li>
+            <li><strong class="text-emerald-400">Token budget:</strong> ~8k tokens por skill (cuidado com side-files gigantes)</li>
+            <li><strong class="text-emerald-400">Cache invalidation:</strong> editou template? cache invalida na próxima sessão</li>
+            <li><strong class="text-emerald-400">Skill mal-escrita:</strong> sem instrução de pre-flight reading, agente improvisa</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">6</div><div><h2 class="text-2xl font-bold mb-2">🤝 Promessa de compatibilidade</h2><p class="text-neutral-400">Skill OD roda em Claude Code puro, e vice-versa.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Uma skill OD <strong>respeita</strong> a convenção Claude Code: frontmatter base + body Markdown. Tudo o que é OD-específico vive em <code>od:</code> (ignorado por outros runtimes). Isso significa que: você baixa uma skill da galeria do Claude Code, joga em <code>~/.claude/skills/</code>, e <strong>o OD reconhece e usa</strong>. E vice-versa: você cria uma skill no OD com <code>od:</code> rica, ela continua funcionando no Claude Code (sem o picker rico).</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">É a aposta-base do OD. <strong class="text-neutral-100">Sem essa compatibilidade, o ecossistema fragmenta.</strong> Time que adota OD pode usar skills da comunidade Claude Code; time que adota Claude Code pode usar skills da comunidade OD. Convergência = ecossistema vivo.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-emerald-400">Frontmatter base:</strong> name + description + triggers — funcionam em ambos</li>
+            <li><strong class="text-emerald-400">od: bloco:</strong> rico no OD, ignorado em outros runtimes</li>
+            <li><strong class="text-emerald-400">Sem dependências runtime:</strong> SKILL.md é texto estático</li>
+            <li><strong class="text-emerald-400">Versionamento:</strong> Git-friendly, fácil de reviewar em PR</li>
+            <li><strong class="text-emerald-400">awesome-claude-skills:</strong> ecossistema convergente</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">7</div><div><h2 class="text-2xl font-bold mb-2">🗂️ Onde skills moram</h2><p class="text-neutral-400">Os 3 escopos escaneados no boot.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">No boot, o daemon escaneia <strong>3 diretórios em ordem</strong>:</p>
+          <ol class="text-neutral-300 space-y-1 text-sm list-decimal ml-5 mt-3">
+            <li><code class="text-emerald-400">~/.claude/skills/</code> — skills globais do usuário (compartilhadas com Claude Code)</li>
+            <li><code class="text-emerald-400">./skills/</code> — skills do projeto atual</li>
+            <li><code class="text-emerald-400">./.claude/skills/</code> — skills do projeto, escopo Claude Code padrão</li>
+          </ol>
+          <p class="text-neutral-300 mt-3">Conflito de nome? <strong>Mais específico ganha</strong> (projeto &gt; usuário).</p>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Saber onde colocar suas skills muda comportamento. <strong>Skill genérica</strong> (deck padrão) → <code>~/.claude/skills/</code>. <strong>Skill específica do cliente</strong> (landing-cliente-X com brand específico) → <code>./skills/</code> do repo do cliente. Sem essa disciplina, vira "tenho 50 skills no global e nunca sei qual é qual".</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-emerald-400">~/.claude/skills/:</strong> globais, persistem entre projetos</li>
+            <li><strong class="text-emerald-400">./skills/:</strong> projeto-específico, commitadas no repo</li>
+            <li><strong class="text-emerald-400">./.claude/skills/:</strong> escopo Claude Code (sinônimo do anterior)</li>
+            <li><strong class="text-emerald-400">Boot scan:</strong> daemon faz <code>fs.readdir</code> nos 3 paths</li>
+            <li><strong class="text-emerald-400">Hot-reload:</strong> editou skill? próxima sessão lê novo conteúdo</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-emerald-500/10 border-2 border-emerald-500/30 rounded-xl p-6 sm:p-8">
+      <h2 class="text-2xl font-bold mb-4 flex items-center"><span class="text-3xl mr-3">🛠️</span> Hands-on</h2>
+      <p class="text-neutral-300 mb-4">Crie sua primeira skill mínima — vale como exercício mesmo sem o OD instalado:</p>
+      <ol class="text-neutral-300 space-y-3 list-decimal ml-5 mb-5">
+        <li><strong class="text-emerald-400">Estrutura:</strong> <code>mkdir -p ~/.claude/skills/post-linkedin/{assets,references}</code></li>
+        <li><strong class="text-emerald-400">SKILL.md:</strong> escreva frontmatter (name, description, triggers, od:) + workflow em 5 passos</li>
+        <li><strong class="text-emerald-400">template.html:</strong> em <code>assets/</code>, escreva o HTML de um card 1080×1080 com tokens em :root</li>
+        <li><strong class="text-emerald-400">checklist.md:</strong> em <code>references/</code>, liste 5 P0 (ex: "fonte display ≠ body", "1 cor de marca")</li>
+        <li><strong class="text-emerald-400">Teste:</strong> reinicie o Claude Code/OD daemon e verifique se aparece no picker</li>
+      </ol>
+      <div class="bg-dark-800 border border-emerald-500/30 rounded-lg p-4">
+        <p class="text-xs text-emerald-400 font-semibold mb-2">Listagem das skills atuais</p>
+        <pre class="code-block">ls ~/.claude/skills/
+ls ./skills/ 2&gt;/dev/null
+find . -name "SKILL.md" -not -path "*/node_modules/*"</pre>
+      </div>
+    </section>
+
+    <section class="bg-dark-800 border border-dark-600 rounded-xl p-6 sm:p-8">
+      <h2 class="text-2xl font-bold mb-4 flex items-center"><span class="text-3xl mr-3">📚</span> Fontes</h2>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div><h3 class="text-emerald-400 font-semibold mb-2 text-sm">No repositório</h3><ul class="text-neutral-300 space-y-1 text-sm">
+          <li><code class="text-emerald-400">docs/skills-protocol.md</code> (322L)</li>
+          <li><code class="text-emerald-400">skills/web-prototype/SKILL.md</code> — referência canônica</li>
+          <li><code class="text-emerald-400">skills/guizang-ppt/SKILL.md</code> — deck framework</li>
+          <li><code class="text-emerald-400">apps/daemon/src/skills.ts</code> — scanner</li>
+        </ul></div>
+        <div><h3 class="text-emerald-400 font-semibold mb-2 text-sm">Externas</h3><ul class="text-neutral-300 space-y-1 text-sm">
+          <li><a class="text-sky-400 hover:text-sky-300" href="https://docs.anthropic.com/en/docs/claude-code/skills" target="_blank">docs.anthropic.com — Claude Code Skills</a></li>
+          <li>github.com/anthropics/awesome-claude-skills</li>
+          <li>guizang-ppt-skill (deck framework)</li>
+        </ul></div>
+      </div>
+    </section>
+
+    <section class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 border border-emerald-500/30 rounded-xl p-6 sm:p-8">
+      <h2 class="text-2xl font-bold mb-4 flex items-center"><span class="text-3xl mr-3">📌</span> Resumo do Módulo</h2>
+      <div class="space-y-3 text-neutral-300">
+        <p><strong class="text-emerald-400">1.</strong> SKILL.md = frontmatter (name, description, triggers) + body Markdown — convenção Claude Code.</p>
+        <p><strong class="text-emerald-400">2.</strong> Pasta com <code>assets/</code> (seed) e <code>references/</code> (vocabulário) é o que faz a skill confiável.</p>
+        <p><strong class="text-emerald-400">3.</strong> Bloco <code>od:</code> adiciona mode, platform, scenario, design_system, default_for, featured.</p>
+        <p><strong class="text-emerald-400">4.</strong> 31 skills box organizadas em prototype × deck × scenario.</p>
+        <p><strong class="text-emerald-400">5.</strong> Pre-flight reading: daemon injeta side-files antes do agente — checklist mecânico.</p>
+        <p><strong class="text-emerald-400">6.</strong> Compatibilidade: skill OD roda em Claude Code, e vice-versa — sem fragmentação.</p>
+        <p><strong class="text-emerald-400">7.</strong> Skills moram em ~/.claude/skills, ./skills, ./.claude/skills — projeto &gt; usuário em conflito.</p>
+      </div>
+      <div class="mt-6 pt-6 border-t border-emerald-500/30"><p class="text-sm text-neutral-400 mb-2">Próximo módulo:</p><a href="modulo-1-5.html" class="inline-flex items-center text-emerald-400 hover:text-emerald-300 font-semibold">Módulo 1.5 · Design Systems (DESIGN.md) →</a></div>
+    </section>
+
+    <div class="flex flex-col sm:flex-row gap-4 mt-12">
+      <a href="modulo-1-3.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Módulo 1.3</a>
+      <a href="modulo-1-5.html" class="flex-1 text-center px-6 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-500 transition-colors">Módulo 1.5 →</a>
+    </div>
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-16"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm"><p>Curso Open Design · Trilha 1 · Módulo 1.4 · 2026 · <a href="https://inema.club" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p></div></footer>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) { themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark'); } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => { themeToggleDarkIcon.classList.toggle('hidden'); themeToggleLightIcon.classList.toggle('hidden'); html.classList.toggle('dark'); localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light'); });
+  </script>
+</body>
+</html>

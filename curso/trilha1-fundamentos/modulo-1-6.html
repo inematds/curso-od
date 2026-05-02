@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 1.6 · Junior-Designer Mode | Curso Open Design</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }</script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; } .dark body { background-color: #111827; }
+    html:not(.dark) body { background-color: #f8fafc; } html:not(.dark) .bg-dark-900 { background-color: #fff; } html:not(.dark) .bg-dark-800 { background-color: #f9fafb; } html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; } html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; } html:not(.dark) .text-neutral-300 { color: #4b5563; } html:not(.dark) .text-neutral-400 { color: #6b7280; } html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; } html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-emerald-400 { color: #059669; } html:not(.dark) .bg-emerald-500\/20 { background-color: rgba(5,150,105,.12); } html:not(.dark) .bg-emerald-500\/10 { background-color: rgba(5,150,105,.08); } html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5,150,105,.25); }
+    html:not(.dark) .text-blue-400 { color: #2563eb; } html:not(.dark) .text-purple-400 { color: #7c3aed; } html:not(.dark) .text-amber-400 { color: #b45309; }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; } html:not(.dark) .text-sky-400 { color: #0369a1; } html:not(.dark) .text-yellow-400 { color: #a16207; } html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; } html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,.95); }
+    .topic-num { width: 3rem; height: 3rem; }
+    pre.code-block { background: #0b1220; color: #e5e7eb; padding: 1rem; border-radius: .5rem; overflow-x: auto; font-family: 'Menlo', monospace; font-size: .85rem; line-height: 1.5; }
+    html:not(.dark) pre.code-block { background: #111827; color: #f3f4f6; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"><div class="flex justify-between items-center h-14"><div class="flex items-center space-x-4"><a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300"><span class="text-2xl">🎨</span><span class="font-bold text-lg hidden sm:inline">Curso Open Design</span></a><span class="text-neutral-600">|</span><a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a></div><div class="flex items-center space-x-1 sm:space-x-2"><a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a><a href="../trilha2-exemplos/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Exemplos</span></a><a href="../trilha3-avancado/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span></a><button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2"><svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg><svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg></button></div></div></div></nav>
+
+  <div class="border-b border-dark-700"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 text-sm text-neutral-400"><a href="../../index.html" class="hover:text-emerald-400">Início</a><span class="mx-2 text-neutral-600">/</span><a href="index.html" class="hover:text-emerald-400">Trilha 1 · Fundamentos</a><span class="mx-2 text-neutral-600">/</span><span class="text-neutral-300">Módulo 1.6</span></div></div>
+
+  <header class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4">MÓDULO 1.6</span>
+    <h1 class="text-2xl font-bold mb-3">🎓 Junior-Designer Mode</h1>
+    <p class="text-lg text-neutral-400 max-w-3xl">A filosofia que evita 80% dos retrabalhos: question form → branch → 5 direções → TodoWrite → P0 checklist → crítica 5-dim.</p>
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 max-w-2xl">
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">8</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">~65 min</div><div class="text-xs text-neutral-400">Duração</div></div>
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">Básico</div><div class="text-xs text-neutral-400">Nível</div></div>
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">Filosofia</div><div class="text-xs text-neutral-400">Foco</div></div>
+    </div>
+    <div class="mt-6 bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4 max-w-3xl"><p class="text-sm text-neutral-300"><strong class="text-emerald-400">🏁 Resultado:</strong> Você aplica o protocolo de descoberta antes de qualquer pixel. Saber as 5 direções, o branch A/B/C, o P0 checklist e a crítica 5-dim — tudo que fecha o ciclo.</p></div>
+  </div></header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">1</div><div><h2 class="text-2xl font-bold mb-2">🎒 A herança do <code>huashu-design</code></h2><p class="text-neutral-400">Designer júnior simula sênior batendo perguntas.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">"Junior-Designer Mode" vem de huashu-design (Alchain Cyf). Tese: <strong>um designer júnior decente faz mais perguntas que um sênior medíocre</strong>. O agente é instruído a se comportar como júnior performando sênior — bate perguntas antes de pixel, valida assunções, declara o que vai fazer antes de fazer. <strong class="text-neutral-100">Humildade ritualizada como protocolo.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">É o filtro que mais economiza retrabalho. Sem ele, modelo "achou que sabia" e retrabalho dispara. Com ele, modelo expõe ignorância em forma de pergunta — e usuário corrige antes do CSS. <strong>Custo de uma pergunta &lt;&lt; custo de refazer landing inteira.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-emerald-400">huashu-design (Alchain Cyf):</strong> origem da filosofia</li>
+            <li><strong class="text-emerald-400">Junior simulando sênior:</strong> faz perguntas em vez de assumir</li>
+            <li><strong class="text-emerald-400">Discovery ritualizada:</strong> RULE 1, 2, 3 codificam o protocolo</li>
+            <li><strong class="text-emerald-400">Customer-aware:</strong> agente sabe quem é o cliente do cliente</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">2</div><div><h2 class="text-2xl font-bold mb-2">📋 RULE 1 — Question form no turn 1</h2><p class="text-neutral-400">Superfície, audiência, tom, contexto de marca, escala.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Antes de qualquer pixel, no <strong>turn 1</strong>, o agente envia um question form fixo:</p>
+          <pre class="code-block mt-3">1. **Superfície**: web · mobile · deck · carrossel?
+2. **Audiência**: B2B SaaS · designer · investidor · público geral?
+3. **Tom**: editorial · técnico · ousado · sóbrio?
+4. **Contexto de marca**: tem marca? (URL, brand-spec, ZIP)
+5. **Escala**: protótipo único · multi-tela · sistema completo?</pre>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Cada pergunta corta uma fonte de erro. <strong>Superfície</strong> determina viewport e frames. <strong>Audiência</strong> molda o copy. <strong>Tom</strong> escolhe direção visual. <strong>Marca</strong> ativa branch B (extração). <strong>Escala</strong> dimensiona o trabalho. Skip = retrabalho garantido.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-emerald-400">5 perguntas, fechadas:</strong> opções claras, sem dissertação</li>
+            <li><strong class="text-emerald-400">Multiple choice quando possível:</strong> reduz tempo de resposta</li>
+            <li><strong class="text-emerald-400">Override:</strong> usuário pode dizer "pula isso, faz X" → pula form</li>
+            <li><strong class="text-emerald-400">Linguagem do usuário:</strong> respeita PT-BR, EN, etc.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">3</div><div><h2 class="text-2xl font-bold mb-2">🌳 RULE 2 — Branch de marca</h2><p class="text-neutral-400">A (escolha direção), B (extração de brand-spec), C (improvisar).</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Após o turn 1, com base na resposta de "contexto de marca", o agente escolhe um de 3 caminhos:</p>
+          <div class="grid sm:grid-cols-3 gap-3 mt-4 text-sm">
+            <div class="bg-dark-700/50 rounded p-3"><strong class="text-emerald-400">Branch A</strong><p class="text-neutral-300 mt-1"><em>Sem marca pronta:</em> oferece 5 direções (ver tópico 4) e usuário escolhe</p></div>
+            <div class="bg-dark-700/50 rounded p-3"><strong class="text-emerald-400">Branch B</strong><p class="text-neutral-300 mt-1"><em>Tem URL/ZIP:</em> extrai brand-spec (5 passos do M 3.3); só depois desenha</p></div>
+            <div class="bg-dark-700/50 rounded p-3"><strong class="text-emerald-400">Branch C</strong><p class="text-neutral-300 mt-1"><em>Usuário pediu "improvisa":</em> assume Modern Minimal e segue</p></div>
+          </div>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Sem branch, o agente pula direto pro design — e <strong>inventa cores aleatórias</strong> mesmo quando a marca já existe. Branch B é o que evita "Stripe com paleta fictícia". Branch A é o que evita "tela em branco infinita". Branch C é raro, só pra esboços rápidos.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-emerald-400">Branch A → 5 direções visuais:</strong> Editorial Monocle, Modern Minimal, Tech Utility, Brutalist, Soft Warm</li>
+            <li><strong class="text-emerald-400">Branch B → brand-spec extraction:</strong> protocolo de 5 passos (Locate, Download, grep, Codify, Vocalise)</li>
+            <li><strong class="text-emerald-400">Branch C → Modern Minimal default:</strong> "improvisar" sem âncora estética</li>
+            <li><strong class="text-emerald-400">Decisão explícita:</strong> agente declara qual branch antes de ir</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">4</div><div><h2 class="text-2xl font-bold mb-2">🎭 As 5 direções visuais</h2><p class="text-neutral-400">Editorial Monocle · Modern Minimal · Tech Utility · Brutalist · Soft Warm.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Cinco templates de "feel" estabelecidos em <code>directions.ts</code> (284 linhas). Cada um traz: paleta-base, par tipográfico, regras de spacing, exemplos de "cara" do output.</p>
+          <div class="grid md:grid-cols-2 gap-3 mt-4 text-sm">
+            <div class="bg-dark-700/50 rounded p-3"><strong class="text-emerald-400">Editorial Monocle</strong><p class="text-neutral-300 mt-1">Cream + ink + 1 accent rust; serif display + grotesk body</p></div>
+            <div class="bg-dark-700/50 rounded p-3"><strong class="text-emerald-400">Modern Minimal</strong><p class="text-neutral-300 mt-1">White/black + 1 vibrant accent; sans-serif neutro</p></div>
+            <div class="bg-dark-700/50 rounded p-3"><strong class="text-emerald-400">Tech Utility</strong><p class="text-neutral-300 mt-1">Dark + neon accent + mono body; numerais tabulares</p></div>
+            <div class="bg-dark-700/50 rounded p-3"><strong class="text-emerald-400">Brutalist</strong><p class="text-neutral-300 mt-1">Saturado + tipografia disforme; bordas grossas</p></div>
+            <div class="bg-dark-700/50 rounded p-3 sm:col-span-2"><strong class="text-emerald-400">Soft Warm</strong><p class="text-neutral-300 mt-1">Bege + amber/terracotta; serifa amigável; aproximação humana</p></div>
+          </div>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Estas 5 direções <strong>cobrem 80% dos cenários comerciais</strong>. Editorial Monocle pra mídia/lifestyle. Modern Minimal pra SaaS B2B. Tech Utility pra dev tools. Brutalist pra creative. Soft Warm pra healthcare/wellness. Sabendo as 5, você nomeia rápido em conversa com cliente.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-emerald-400">directions.ts:</strong> 284 linhas com paleta + tipografia por direção</li>
+            <li><strong class="text-emerald-400">"Variations, not the answer":</strong> agente apresenta 2-3 direções diferenciadas, não 1 só</li>
+            <li><strong class="text-emerald-400">User picks:</strong> escolha vira tag em SKILL+DESIGN</li>
+            <li><strong class="text-emerald-400">Mistura é pecado:</strong> não combinar Brutalist com Soft Warm</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">5</div><div><h2 class="text-2xl font-bold mb-2">📝 RULE 3 — TodoWrite + live updates</h2><p class="text-neutral-400">Plano visível, redirecionável.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Após branch, o agente usa <strong>TodoWrite</strong> (ferramenta nativa Claude Code) para emitir o plano antes de executar:</p>
+          <pre class="code-block mt-3">[ ] Criar template HTML com tokens
+[ ] Hero (h1 + sub + CTA)
+[ ] Features 3 colunas
+[ ] Pricing 3 tiers
+[ ] Footer
+[ ] Critique 5-dim
+[ ] Quick-wins iteration</pre>
+          <p class="text-neutral-300 mt-3">Cada item vira "in progress → done" em tempo real, visível ao usuário. <strong class="text-neutral-100">Você redireciona antes de gastar tokens em parte errada.</strong></p>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">É o que diferencia "modelo trabalhando" de "modelo no escuro". Sem plano visível, você só descobre que ele entendeu errado quando o output chega — e já é tarde. <strong>Plano visível = janela de redireção.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-emerald-400">TodoWrite:</strong> tool padrão do Claude Code, suportada por OD</li>
+            <li><strong class="text-emerald-400">Live updates:</strong> status muda em streaming</li>
+            <li><strong class="text-emerald-400">Redirecionável:</strong> usuário interrompe e edita o plano</li>
+            <li><strong class="text-emerald-400">Audit trail:</strong> histórico de tasks fica no SQLite</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">6</div><div><h2 class="text-2xl font-bold mb-2">✅ P0/P1/P2 checklist</h2><p class="text-neutral-400">Gate pre-emit: o que tem que estar antes do agente entregar.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Cada SKILL.md tem um <code>references/checklist.md</code> com 3 níveis:</p>
+          <div class="space-y-2 mt-3 text-sm">
+            <div class="bg-red-500/10 border border-red-500/30 rounded p-3"><strong class="text-red-400">P0 (hard gate):</strong> agente não emite o artefato se algum P0 falha. Ex: <em>"H1 ≠ display+body iguais"</em>, <em>"acessibilidade WCAG AA mínimo"</em>.</div>
+            <div class="bg-amber-500/10 border border-amber-500/30 rounded p-3"><strong class="text-amber-400">P1 (warning):</strong> emite, mas reporta findings. Ex: <em>"Hero acima da dobra ideal"</em>.</div>
+            <div class="bg-dark-700/50 rounded p-3 border border-dark-600"><strong class="text-neutral-300">P2 (nice-to-have):</strong> emite sem comentar. Ex: <em>"animação de carga sugerida"</em>.</div>
+          </div>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">P0 é a versão mecânica do "controle de qualidade". Em vez de confiar que o modelo "tem bom gosto", o checklist <strong>força</strong> verificações. Skills bem escritas têm 5-8 P0 — 50% do efeito de "não-slop".</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-emerald-400">P0 = hard gate:</strong> bloqueia emit do artefato</li>
+            <li><strong class="text-emerald-400">P1 = warning:</strong> emite + reporta</li>
+            <li><strong class="text-emerald-400">P2 = nice-to-have:</strong> emite silencioso</li>
+            <li><strong class="text-emerald-400">5-8 P0 por skill:</strong> sweet spot</li>
+            <li><strong class="text-emerald-400">Checklist é versionado:</strong> no Git, acompanha mudanças</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">7</div><div><h2 class="text-2xl font-bold mb-2">⭐ Crítica 5-dim</h2><p class="text-neutral-400">Philosophy · Hierarchy · Execution · Specificity · Restraint.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Após emit, o agente roda automaticamente uma <strong>auto-crítica em 5 dimensões</strong> (escala 0-10):</p>
+          <div class="grid md:grid-cols-2 gap-3 mt-4 text-sm">
+            <div class="bg-dark-700/50 rounded p-3"><strong class="text-emerald-400">Philosophy</strong><p class="text-neutral-300 mt-1">Coerência com a tese da marca/direção</p></div>
+            <div class="bg-dark-700/50 rounded p-3"><strong class="text-emerald-400">Hierarchy</strong><p class="text-neutral-300 mt-1">Ordem visual e leitura clara</p></div>
+            <div class="bg-dark-700/50 rounded p-3"><strong class="text-emerald-400">Execution</strong><p class="text-neutral-300 mt-1">Detalhamento (microcopy, micro-spacing)</p></div>
+            <div class="bg-dark-700/50 rounded p-3"><strong class="text-emerald-400">Specificity</strong><p class="text-neutral-300 mt-1">Não-slop (anti-AI freestyle)</p></div>
+            <div class="bg-dark-700/50 rounded p-3 md:col-span-2"><strong class="text-emerald-400">Restraint</strong><p class="text-neutral-300 mt-1">Não-decoração; o que ficou de fora também conta</p></div>
+          </div>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">É feedback loop interno. Score &lt; 7 em qualquer dimensão = re-roll obrigatório com instrução específica. Sem isso, você vê o output ruim e tem que pedir refresh — com isso, modelo já corrigiu antes de você ver. <strong class="text-neutral-100">2 passes é o normal; 3+ é sinal de brief errado.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-emerald-400">Self-critique embutido:</strong> em <code>discovery.ts</code> Step 8</li>
+            <li><strong class="text-emerald-400">Skill <code>critique</code> separada:</strong> versão manual mais profunda (M 2.6)</li>
+            <li><strong class="text-emerald-400">Threshold:</strong> &lt; 7 = re-roll; ≥ 8 = aceito; 7-7.5 = quick-wins</li>
+            <li><strong class="text-emerald-400">Radar chart no output:</strong> visual rápido das 5 dimensões</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">8</div><div><h2 class="text-2xl font-bold mb-2">🎲 "Variations, not the answer"</h2><p class="text-neutral-400">2-3 direções diferenciadas quando o usuário explora.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Quando o usuário não decide entre direções (ou quer comparar), o agente <strong>NÃO entrega 1 resposta única</strong>. Ele entrega <strong>2-3 variações genuinamente diferentes</strong> — não 3 versões do mesmo Modern Minimal com hue diferente. Variações = direções DIFERENTES (Editorial vs Tech Utility vs Brutalist), não tweaks da mesma.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">É o que evita "tudo parece igual". Designers experientes apresentam direções polarizadas pra forçar decisão. Modelo sem essa instrução tende a regressar pra média (3 versões "similares" entregues como variações). <strong class="text-neutral-100">Polarização &gt; média.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-emerald-400">2-3 variações, não 5+:</strong> demais = paralisia; menos = sem comparação</li>
+            <li><strong class="text-emerald-400">Diferenças polarizadas:</strong> direção visual ≠ apenas "cor"</li>
+            <li><strong class="text-emerald-400">Naming:</strong> cada variação tem nome ("Direção A: Editorial", etc.)</li>
+            <li><strong class="text-emerald-400">Trade-offs explícitos:</strong> cada variação cita o que ganha e o que perde</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-emerald-500/10 border-2 border-emerald-500/30 rounded-xl p-6 sm:p-8">
+      <h2 class="text-2xl font-bold mb-4 flex items-center"><span class="text-3xl mr-3">🛠️</span> Hands-on</h2>
+      <p class="text-neutral-300 mb-4">Aplique o protocolo manualmente em um caso real:</p>
+      <ol class="text-neutral-300 space-y-3 list-decimal ml-5 mb-5">
+        <li><strong class="text-emerald-400">Pegue um brief curto:</strong> "Faz uma landing pra meu app de meditação".</li>
+        <li><strong class="text-emerald-400">RULE 1 manual:</strong> escreva o question form (5 perguntas) que você bateria.</li>
+        <li><strong class="text-emerald-400">RULE 2 manual:</strong> em cada um dos 3 branches (A, B, C), escreva qual seria seu próximo movimento.</li>
+        <li><strong class="text-emerald-400">5 direções:</strong> classifique a marca de meditação em qual das 5 cabe melhor (provavelmente Soft Warm).</li>
+        <li><strong class="text-emerald-400">P0 checklist:</strong> escreva 5 P0 que você imporia (ex: "no purple gradient", "tipo display ≥ 48px").</li>
+        <li><strong class="text-emerald-400">Crítica 5-dim:</strong> escreva 1 frase por dimensão sobre como você avaliaria.</li>
+      </ol>
+      <div class="bg-dark-800 border border-emerald-500/30 rounded-lg p-4">
+        <p class="text-xs text-emerald-400 font-semibold mb-2">Leitura essencial</p>
+        <pre class="code-block">cd /caminho/para/open-design
+cat packages/contracts/src/prompts/discovery.ts | head -100
+cat packages/contracts/src/prompts/directions.ts | grep -E "^(##|###)"
+cat skills/critique/SKILL.md
+cat skills/critique/references/dimensions.md</pre>
+      </div>
+    </section>
+
+    <section class="bg-dark-800 border border-dark-600 rounded-xl p-6 sm:p-8">
+      <h2 class="text-2xl font-bold mb-4 flex items-center"><span class="text-3xl mr-3">📚</span> Fontes</h2>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div><h3 class="text-emerald-400 font-semibold mb-2 text-sm">No repositório</h3><ul class="text-neutral-300 space-y-1 text-sm">
+          <li><code class="text-emerald-400">packages/contracts/src/prompts/discovery.ts</code> (263L)</li>
+          <li><code class="text-emerald-400">packages/contracts/src/prompts/directions.ts</code> (284L)</li>
+          <li><code class="text-emerald-400">skills/critique/SKILL.md</code></li>
+          <li><code class="text-emerald-400">skills/tweaks/SKILL.md</code></li>
+        </ul></div>
+        <div><h3 class="text-emerald-400 font-semibold mb-2 text-sm">Externas</h3><ul class="text-neutral-300 space-y-1 text-sm">
+          <li><a class="text-sky-400 hover:text-sky-300" href="https://github.com/alchaincyf/huashu-design" target="_blank">github.com/alchaincyf/huashu-design</a></li>
+          <li>Anthropic — TodoWrite tool docs</li>
+        </ul></div>
+      </div>
+    </section>
+
+    <section class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 border border-emerald-500/30 rounded-xl p-6 sm:p-8">
+      <h2 class="text-2xl font-bold mb-4 flex items-center"><span class="text-3xl mr-3">📌</span> Resumo do Módulo</h2>
+      <div class="space-y-3 text-neutral-300">
+        <p><strong class="text-emerald-400">1.</strong> Junior-Designer Mode (huashu): humildade ritualizada como protocolo.</p>
+        <p><strong class="text-emerald-400">2.</strong> RULE 1 — question form de 5 perguntas no turn 1, sempre.</p>
+        <p><strong class="text-emerald-400">3.</strong> RULE 2 — 3 branches de marca: A (escolha direção), B (extração), C (improvisar).</p>
+        <p><strong class="text-emerald-400">4.</strong> 5 direções visuais: Editorial Monocle, Modern Minimal, Tech Utility, Brutalist, Soft Warm.</p>
+        <p><strong class="text-emerald-400">5.</strong> RULE 3 — TodoWrite live para janela de redireção.</p>
+        <p><strong class="text-emerald-400">6.</strong> P0/P1/P2 checklist gate pre-emit (P0 = hard gate).</p>
+        <p><strong class="text-emerald-400">7.</strong> Crítica 5-dim auto: Philosophy, Hierarchy, Execution, Specificity, Restraint.</p>
+        <p><strong class="text-emerald-400">8.</strong> "Variations, not the answer" — quando explora, entrega 2-3 polarizadas, não médias.</p>
+      </div>
+      <div class="mt-6 pt-6 border-t border-emerald-500/30"><p class="text-sm text-neutral-400 mb-2">Próxima trilha:</p><a href="../trilha2-exemplos/index.html" class="inline-flex items-center text-blue-400 hover:text-blue-300 font-semibold">Trilha 2 · Exemplos de Uso →</a></div>
+    </section>
+
+    <div class="flex flex-col sm:flex-row gap-4 mt-12">
+      <a href="modulo-1-5.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Módulo 1.5</a>
+      <a href="../trilha2-exemplos/index.html" class="flex-1 text-center px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-500 transition-colors">Trilha 2: Exemplos →</a>
+    </div>
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-16"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm"><p>Curso Open Design · Trilha 1 · Módulo 1.6 · 2026 · <a href="https://inema.club" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p></div></footer>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) { themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark'); } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => { themeToggleDarkIcon.classList.toggle('hidden'); themeToggleLightIcon.classList.toggle('hidden'); html.classList.toggle('dark'); localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light'); });
+  </script>
+</body>
+</html>

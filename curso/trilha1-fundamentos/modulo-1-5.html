@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 1.5 · Design Systems (DESIGN.md) | Curso Open Design</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }</script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; } .dark body { background-color: #111827; }
+    html:not(.dark) body { background-color: #f8fafc; } html:not(.dark) .bg-dark-900 { background-color: #fff; } html:not(.dark) .bg-dark-800 { background-color: #f9fafb; } html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; } html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; } html:not(.dark) .text-neutral-300 { color: #4b5563; } html:not(.dark) .text-neutral-400 { color: #6b7280; } html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; } html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-emerald-400 { color: #059669; } html:not(.dark) .bg-emerald-500\/20 { background-color: rgba(5,150,105,.12); } html:not(.dark) .bg-emerald-500\/10 { background-color: rgba(5,150,105,.08); } html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5,150,105,.25); }
+    html:not(.dark) .text-blue-400 { color: #2563eb; } html:not(.dark) .text-purple-400 { color: #7c3aed; } html:not(.dark) .text-amber-400 { color: #b45309; }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; } html:not(.dark) .text-sky-400 { color: #0369a1; } html:not(.dark) .text-yellow-400 { color: #a16207; } html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; } html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,.95); }
+    .topic-num { width: 3rem; height: 3rem; }
+    pre.code-block { background: #0b1220; color: #e5e7eb; padding: 1rem; border-radius: .5rem; overflow-x: auto; font-family: 'Menlo', monospace; font-size: .85rem; line-height: 1.5; }
+    html:not(.dark) pre.code-block { background: #111827; color: #f3f4f6; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"><div class="flex justify-between items-center h-14"><div class="flex items-center space-x-4"><a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300"><span class="text-2xl">🎨</span><span class="font-bold text-lg hidden sm:inline">Curso Open Design</span></a><span class="text-neutral-600">|</span><a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a></div><div class="flex items-center space-x-1 sm:space-x-2"><a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a><a href="../trilha2-exemplos/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Exemplos</span></a><a href="../trilha3-avancado/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span></a><button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2"><svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg><svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg></button></div></div></div></nav>
+
+  <div class="border-b border-dark-700"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 text-sm text-neutral-400"><a href="../../index.html" class="hover:text-emerald-400">Início</a><span class="mx-2 text-neutral-600">/</span><a href="index.html" class="hover:text-emerald-400">Trilha 1 · Fundamentos</a><span class="mx-2 text-neutral-600">/</span><span class="text-neutral-300">Módulo 1.5</span></div></div>
+
+  <header class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4">MÓDULO 1.5</span>
+    <h1 class="text-2xl font-bold mb-3">🎨 Design Systems (DESIGN.md) — o vocabulário visual</h1>
+    <p class="text-lg text-neutral-400 max-w-3xl">9 seções, OKLch, 72 sistemas curados. Como o agente lê e como você cria.</p>
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 max-w-2xl">
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">7</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">~50 min</div><div class="text-xs text-neutral-400">Duração</div></div>
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">Básico</div><div class="text-xs text-neutral-400">Nível</div></div>
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">72</div><div class="text-xs text-neutral-400">Catálogo</div></div>
+    </div>
+    <div class="mt-6 bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4 max-w-3xl"><p class="text-sm text-neutral-300"><strong class="text-emerald-400">🏁 Resultado:</strong> Você escreve um <code>DESIGN.md</code> válido para uma marca real, em OKLch, e sabe escolher quando usar um sistema do catálogo vs. criar um novo.</p></div>
+  </div></header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">1</div><div><h2 class="text-2xl font-bold mb-2">📐 O schema de 9 seções</h2><p class="text-neutral-400">Color, typography, spacing, layout, components, motion, voice, brand, anti-patterns.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Um <code>DESIGN.md</code> válido é Markdown com 9 seções obrigatórias (na ordem):</p>
+          <div class="grid md:grid-cols-3 gap-2 mt-4 text-sm">
+            <div class="bg-dark-700/50 rounded p-2"><strong class="text-emerald-400">1. color</strong></div>
+            <div class="bg-dark-700/50 rounded p-2"><strong class="text-emerald-400">2. typography</strong></div>
+            <div class="bg-dark-700/50 rounded p-2"><strong class="text-emerald-400">3. spacing</strong></div>
+            <div class="bg-dark-700/50 rounded p-2"><strong class="text-emerald-400">4. layout</strong></div>
+            <div class="bg-dark-700/50 rounded p-2"><strong class="text-emerald-400">5. components</strong></div>
+            <div class="bg-dark-700/50 rounded p-2"><strong class="text-emerald-400">6. motion</strong></div>
+            <div class="bg-dark-700/50 rounded p-2"><strong class="text-emerald-400">7. voice</strong></div>
+            <div class="bg-dark-700/50 rounded p-2"><strong class="text-emerald-400">8. brand</strong></div>
+            <div class="bg-dark-700/50 rounded p-2"><strong class="text-emerald-400">9. anti-patterns</strong></div>
+          </div>
+          <p class="text-neutral-300 mt-3">Cada uma usa formato consistente (tabela ou lista) que o parser do daemon entende.</p>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">9 seções é uma <strong>ABI estável</strong>: o agente sempre encontra cor em "color", motion em "motion". Skip de seção (cair direto em components) = output incoerente. <strong class="text-neutral-100">A ordem importa porque cor → tipografia → spacing → layout = árvore de decisão visual.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-emerald-400">color:</strong> tokens em OKLch + role (bg, surface, fg, accent, border)</li>
+            <li><strong class="text-emerald-400">typography:</strong> display + body + mono em font-stack</li>
+            <li><strong class="text-emerald-400">spacing:</strong> escala (4-8-12-16-24-32-48-64)</li>
+            <li><strong class="text-emerald-400">anti-patterns:</strong> 3-5 coisas <em>proibidas</em> nesse sistema (cruciais)</li>
+            <li><strong class="text-emerald-400">brand:</strong> 1 frase de "personality" — Editorial Monocle? Brutalist? Soft Warm?</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">2</div><div><h2 class="text-2xl font-bold mb-2">🌈 Por que OKLch e não HSL/HEX</h2><p class="text-neutral-400">Uniformidade perceptual, Display P3, predictabilidade WCAG.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">OKLch é um espaço de cor onde <strong>L (lightness) é perceptual</strong> — duas cores com mesmo L parecem ter o mesmo brilho, independente do hue. Em HSL/HEX, isso não é verdade: <code>hsl(60 100% 50%)</code> (amarelo) parece mais claro que <code>hsl(240 100% 50%)</code> (azul) — apesar de ambos terem L=50%.</p>
+          <pre class="code-block mt-3">/* HEX/HSL — inconsistente */
+--bg: #1a1a1a;
+--accent: #ff6b35;     /* parece muito mais claro que bg, embora L baixo */
+
+/* OKLch — uniforme */
+--bg: oklch(15% 0 0);
+--accent: oklch(58% 0.15 35);   /* L=58 é previsível em qualquer hue */</pre>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Três razões. <strong>1)</strong> Verifica contraste WCAG mecanicamente — se Lbg − Lfg ≥ 50, contraste é seguro. <strong>2)</strong> Display P3 (gama wide de iPhone/Pro Display) sem fallback estranho. <strong>3)</strong> Manipulação programática: "azul mais escuro" = baixar L sem cair em cinza. <strong class="text-neutral-100">É o motivo de o OD ter saltado HEX/HSL na primeira versão.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-emerald-400">L (lightness):</strong> 0-100%, perceptualmente uniforme</li>
+            <li><strong class="text-emerald-400">C (chroma):</strong> 0-0.4, "saturação" perceptual</li>
+            <li><strong class="text-emerald-400">h (hue):</strong> 0-360°, ângulo</li>
+            <li><strong class="text-emerald-400">Suporte de browsers:</strong> Chrome 111+, Safari 15.4+, Firefox 113+ (universal hoje)</li>
+            <li><strong class="text-emerald-400">Conversor:</strong> oklch.com — paste HEX → OKLch</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">3</div><div><h2 class="text-2xl font-bold mb-2">📚 Os 72 sistemas de produto</h2><p class="text-neutral-400">Taxonomia: AI/LLM, dev tools, productivity, fintech, e-commerce, media, automotive.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">O OD vem com 72 DESIGN.md curados de produtos reais — em <code>design-systems/</code>, organizados em 7 categorias:</p>
+          <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-2 mt-4 text-sm">
+            <div class="bg-dark-700/50 rounded p-2"><strong class="text-emerald-400">AI/LLM</strong> Anthropic, OpenAI, Mistral...</div>
+            <div class="bg-dark-700/50 rounded p-2"><strong class="text-emerald-400">Dev Tools</strong> Linear, Vercel, GitHub...</div>
+            <div class="bg-dark-700/50 rounded p-2"><strong class="text-emerald-400">Productivity</strong> Notion, Asana, Figma...</div>
+            <div class="bg-dark-700/50 rounded p-2"><strong class="text-emerald-400">Fintech</strong> Stripe, Mercury, Brex...</div>
+            <div class="bg-dark-700/50 rounded p-2"><strong class="text-emerald-400">E-commerce</strong> Shopify, Stripe Checkout...</div>
+            <div class="bg-dark-700/50 rounded p-2"><strong class="text-emerald-400">Media</strong> The New York Times, Monocle, FT...</div>
+          </div>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Antes de criar um sistema novo, <strong>cheque o catálogo</strong>. Linear-app já tem o "minimal dev tool" feito. Stripe já tem "fintech polished". Você não precisa redescobrir paleta — você customiza um existente. <strong class="text-neutral-100">Default sane &gt; tela em branco.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-emerald-400">design-systems/&lt;name&gt;/DESIGN.md:</strong> path padrão</li>
+            <li><strong class="text-emerald-400">README por categoria:</strong> índice e quando usar cada</li>
+            <li><strong class="text-emerald-400">Linear-app é canônico:</strong> ler primeiro pra entender o formato</li>
+            <li><strong class="text-emerald-400">Editorial Monocle:</strong> alternativa quando você quer "magazine-style"</li>
+            <li><strong class="text-emerald-400">Não é Theme:</strong> é vocabulário; mais do que cores e fontes</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">4</div><div><h2 class="text-2xl font-bold mb-2">🎯 Tokens compartilhados</h2><p class="text-neutral-400"><code>--bg</code>, <code>--surface</code>, <code>--fg</code>, <code>--muted</code>, <code>--border</code>, <code>--accent</code>.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Todo DESIGN.md mapeia para um conjunto canônico de tokens CSS injetados no <code>:root</code>:</p>
+          <pre class="code-block mt-3">:root {
+  --bg:      oklch(98% 0.01 90);   /* fundo da página */
+  --surface: oklch(96% 0.01 90);   /* card, modal */
+  --fg:      oklch(15% 0.02 90);   /* texto principal */
+  --muted:   oklch(45% 0.02 90);   /* texto secundário */
+  --border:  oklch(85% 0.01 90);   /* divisórias */
+  --accent:  oklch(58% 0.15 35);   /* cor de marca */
+}</pre>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Esses 6 tokens são o <strong>contrato entre DESIGN e SKILL</strong>. SKILLs (templates) usam <code>var(--bg)</code> sem saber qual sistema está ativo. Trocar de Linear pra Stripe muda os 6 valores; templates funcionam idênticos. <strong class="text-neutral-100">Você nunca acopla skill a sistema visual.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-emerald-400">--bg:</strong> fundo de página (o "papel")</li>
+            <li><strong class="text-emerald-400">--surface:</strong> elementos elevados (card, panel)</li>
+            <li><strong class="text-emerald-400">--fg / --muted:</strong> texto principal e secundário</li>
+            <li><strong class="text-emerald-400">--border:</strong> divisórias finas</li>
+            <li><strong class="text-emerald-400">--accent:</strong> uma cor de marca, sempre uma só</li>
+            <li><strong class="text-emerald-400">Dark mode:</strong> mesmo nome, outros valores em <code>[data-theme="dark"]</code></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">5</div><div><h2 class="text-2xl font-bold mb-2">🤖 Como o agente lê DESIGN.md</h2><p class="text-neutral-400">Pruning de seções via <code>design_system.sections</code>.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">DESIGN.md inteiro pode ter 600 linhas. O agente não precisa de todas. O daemon faz <strong>pruning</strong>: na hora de gerar uma landing, injeta só "color, typography, components". Pra um deck, injeta "color, typography, motion, voice". A skill ativa declara em <code>od:</code> qual subset precisa.</p>
+          <pre class="code-block mt-3">od:
+  design_system: linear-app
+  design_system_sections: [color, typography, components]</pre>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Sem pruning, você queima 6k tokens com seções irrelevantes (ex: "anti-patterns" pra cada gerada). Pruning = mais espaço pro brief do usuário e pra qualidade do output. <strong class="text-neutral-100">É a diferença entre "ler um livro" e "consultar uma página".</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-emerald-400">design_system_sections:</strong> array de strings (nomes das seções)</li>
+            <li><strong class="text-emerald-400">Default:</strong> color + typography + components (mais usado)</li>
+            <li><strong class="text-emerald-400">Override:</strong> SKILL pode forçar inclusão de "voice" se for um chatbot</li>
+            <li><strong class="text-emerald-400">Token budget:</strong> ~3k tokens é o máximo confortável de DESIGN injetado</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">6</div><div><h2 class="text-2xl font-bold mb-2">🔄 Importar do upstream</h2><p class="text-neutral-400"><code>scripts/sync-design-systems.ts</code> + <code>awesome-design-md</code>.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">A coleção de 72 sistemas é puxada de um repo upstream (<code>awesome-design-md</code>) via script automatizado. <code>pnpm sync-design-systems</code> faz pull, valida o schema das 9 seções, e atualiza os arquivos locais. Você pode contribuir com PR no upstream e ver seu sistema aparecer no OD oficial.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Coleção viva = você não fica preso a 72 sistemas estáticos. Se Vercel atualiza brand, alguém faz PR no upstream, você roda <code>sync</code> e tem a versão nova. <strong class="text-neutral-100">É o GitHub do design system, não uma biblioteca enlatada.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-emerald-400">Upstream:</strong> github.com/&lt;org&gt;/awesome-design-md (curated)</li>
+            <li><strong class="text-emerald-400">Sync script:</strong> valida schema, gera local copy</li>
+            <li><strong class="text-emerald-400">Frequência:</strong> rodar 1x por mês ou após PR aceito</li>
+            <li><strong class="text-emerald-400">PR pattern:</strong> add directory + DESIGN.md + README.md</li>
+            <li><strong class="text-emerald-400">Local override:</strong> coloque em <code>./design-systems/local/</code> sem upstream</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">7</div><div><h2 class="text-2xl font-bold mb-2">🧭 Quando criar um sistema novo</h2><p class="text-neutral-400">vs. estender um existente.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Heurística: <strong>se o seu cliente é "outro Linear"</strong> (dev tool minimal), use linear-app + customize accent. <strong>Se é "outro Stripe"</strong> (fintech polished), use stripe + customize. <strong>Se é genuinamente diferente</strong> (cliente brasileiro, sustentabilidade, identidade tropical com Caparaó tipográfico), aí faz DESIGN.md novo. <strong class="text-neutral-100">Default: estende. Exception: cria.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Designers gostam de criar sistema do zero — é tentador. Mas consome tempo: refletir sobre cor, tipografia, spacing, anti-patterns leva ~4 horas pra fazer bem. <strong>Estender</strong> leva 30 minutos. Reserve criação pra quando estender de verdade não cabe.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-emerald-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-emerald-400">Estender:</strong> copia DESIGN.md, edita 6 tokens + voice</li>
+            <li><strong class="text-emerald-400">Criar:</strong> 9 seções do zero, anti-patterns próprios</li>
+            <li><strong class="text-emerald-400">Brand-spec extraction (M 3.3):</strong> caminho intermediário — extrai do site do cliente</li>
+            <li><strong class="text-emerald-400">Versionamento:</strong> Git nas branches do sistema (refresh anual normal)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-emerald-500/10 border-2 border-emerald-500/30 rounded-xl p-6 sm:p-8">
+      <h2 class="text-2xl font-bold mb-4 flex items-center"><span class="text-3xl mr-3">🛠️</span> Hands-on</h2>
+      <p class="text-neutral-300 mb-4">Escreva um DESIGN.md mínimo válido para uma marca real:</p>
+      <ol class="text-neutral-300 space-y-3 list-decimal ml-5 mb-5">
+        <li><strong class="text-emerald-400">Escolha:</strong> uma marca que você usa (Notion, Spotify, Stripe…) — não invente.</li>
+        <li><strong class="text-emerald-400">Extraia:</strong> abra o site, pegue HEX da cor de marca; converta para OKLch em <a href="https://oklch.com" target="_blank" class="text-sky-400 hover:text-sky-300">oklch.com</a>.</li>
+        <li><strong class="text-emerald-400">Escreva 9 seções:</strong> use o template abaixo; mínimo 3-5 linhas por seção.</li>
+        <li><strong class="text-emerald-400">Compare:</strong> abra <code>design-systems/linear-app/DESIGN.md</code> do repo OD e veja se seu DESIGN.md tem o mesmo nível de detalhe.</li>
+      </ol>
+      <div class="bg-dark-800 border border-emerald-500/30 rounded-lg p-4">
+        <p class="text-xs text-emerald-400 font-semibold mb-2">Skeleton mínimo</p>
+        <pre class="code-block"># DESIGN: notion-fork
+
+## color
+- --bg: oklch(99% 0 0)
+- --fg: oklch(15% 0 0)
+- --accent: oklch(60% 0.15 250)
+...
+
+## typography
+- display: "Söhne", system-ui
+- body: system-ui, -apple-system
+...
+
+## anti-patterns
+- ❌ gradient backgrounds
+- ❌ rounded buttons &gt; 8px</pre>
+      </div>
+    </section>
+
+    <section class="bg-dark-800 border border-dark-600 rounded-xl p-6 sm:p-8">
+      <h2 class="text-2xl font-bold mb-4 flex items-center"><span class="text-3xl mr-3">📚</span> Fontes</h2>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div><h3 class="text-emerald-400 font-semibold mb-2 text-sm">No repositório</h3><ul class="text-neutral-300 space-y-1 text-sm">
+          <li><code class="text-emerald-400">design-systems/README.md</code></li>
+          <li><code class="text-emerald-400">design-systems/linear-app/DESIGN.md</code> (canônico)</li>
+          <li><code class="text-emerald-400">scripts/sync-design-systems.ts</code></li>
+        </ul></div>
+        <div><h3 class="text-emerald-400 font-semibold mb-2 text-sm">Externas</h3><ul class="text-neutral-300 space-y-1 text-sm">
+          <li><a href="https://evilmartians.com/chronicles/oklch-in-css-why-quit-rgb-hsl" target="_blank" class="text-sky-400 hover:text-sky-300">evilmartians.com — OKLCH in CSS</a></li>
+          <li>oklch.com (paleta + conversor)</li>
+          <li>github.com/awesome-design-md (upstream)</li>
+        </ul></div>
+      </div>
+    </section>
+
+    <section class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 border border-emerald-500/30 rounded-xl p-6 sm:p-8">
+      <h2 class="text-2xl font-bold mb-4 flex items-center"><span class="text-3xl mr-3">📌</span> Resumo do Módulo</h2>
+      <div class="space-y-3 text-neutral-300">
+        <p><strong class="text-emerald-400">1.</strong> DESIGN.md tem 9 seções obrigatórias na ordem — ABI estável para o agente.</p>
+        <p><strong class="text-emerald-400">2.</strong> OKLch &gt; HSL/HEX por uniformidade perceptual, P3 e WCAG mecanico.</p>
+        <p><strong class="text-emerald-400">3.</strong> 72 sistemas curados em 7 categorias — antes de criar, cheque.</p>
+        <p><strong class="text-emerald-400">4.</strong> 6 tokens canônicos (--bg, --surface, --fg, --muted, --border, --accent) são o contrato com SKILL.</p>
+        <p><strong class="text-emerald-400">5.</strong> Daemon faz pruning de seções via <code>design_system_sections</code> — economiza tokens.</p>
+        <p><strong class="text-emerald-400">6.</strong> Sync com <code>awesome-design-md</code> mantém coleção viva.</p>
+        <p><strong class="text-emerald-400">7.</strong> Default é estender; criar do zero só quando estender não cabe.</p>
+      </div>
+      <div class="mt-6 pt-6 border-t border-emerald-500/30"><p class="text-sm text-neutral-400 mb-2">Próximo módulo:</p><a href="modulo-1-6.html" class="inline-flex items-center text-emerald-400 hover:text-emerald-300 font-semibold">Módulo 1.6 · Junior-Designer Mode →</a></div>
+    </section>
+
+    <div class="flex flex-col sm:flex-row gap-4 mt-12">
+      <a href="modulo-1-4.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Módulo 1.4</a>
+      <a href="modulo-1-6.html" class="flex-1 text-center px-6 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-500 transition-colors">Módulo 1.6 →</a>
+    </div>
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-16"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm"><p>Curso Open Design · Trilha 1 · Módulo 1.5 · 2026 · <a href="https://inema.club" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p></div></footer>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) { themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark'); } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => { themeToggleDarkIcon.classList.toggle('hidden'); themeToggleLightIcon.classList.toggle('hidden'); html.classList.toggle('dark'); localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light'); });
+  </script>
+</body>
+</html>
