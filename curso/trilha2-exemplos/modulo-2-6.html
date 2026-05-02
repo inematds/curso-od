@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 2.6 · Crítica & Tweaks | Curso Open Design</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }</script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; } .dark body { background-color: #111827; }
+    html:not(.dark) body { background-color: #f8fafc; } html:not(.dark) .bg-dark-900 { background-color: #fff; } html:not(.dark) .bg-dark-800 { background-color: #f9fafb; } html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; } html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; } html:not(.dark) .text-neutral-300 { color: #4b5563; } html:not(.dark) .text-neutral-400 { color: #6b7280; } html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; } html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-blue-400 { color: #2563eb; } html:not(.dark) .bg-blue-500\/20 { background-color: rgba(37,99,235,.12); } html:not(.dark) .bg-blue-500\/10 { background-color: rgba(37,99,235,.08); } html:not(.dark) .border-blue-500\/30 { border-color: rgba(37,99,235,.25); }
+    html:not(.dark) .text-emerald-400 { color: #059669; } html:not(.dark) .text-purple-400 { color: #7c3aed; } html:not(.dark) .text-amber-400 { color: #b45309; }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; } html:not(.dark) .text-sky-400 { color: #0369a1; } html:not(.dark) .text-yellow-400 { color: #a16207; } html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; } html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,.95); }
+    .topic-num { width: 3rem; height: 3rem; }
+    pre.code-block { background: #0b1220; color: #e5e7eb; padding: 1rem; border-radius: .5rem; overflow-x: auto; font-family: 'Menlo', monospace; font-size: .85rem; line-height: 1.5; }
+    html:not(.dark) pre.code-block { background: #111827; color: #f3f4f6; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"><div class="flex justify-between items-center h-14"><div class="flex items-center space-x-4"><a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300"><span class="text-2xl">🎨</span><span class="font-bold text-lg hidden sm:inline">Curso Open Design</span></a><span class="text-neutral-600">|</span><a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a></div><div class="flex items-center space-x-1 sm:space-x-2"><a href="../trilha1-fundamentos/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a><a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 bg-blue-500/10"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Exemplos</span></a><a href="../trilha3-avancado/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span></a><button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2"><svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg><svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg></button></div></div></div></nav>
+
+  <div class="border-b border-dark-700"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 text-sm text-neutral-400"><a href="../../index.html" class="hover:text-blue-400">Início</a><span class="mx-2 text-neutral-600">/</span><a href="index.html" class="hover:text-blue-400">Trilha 2 · Exemplos de Uso</a><span class="mx-2 text-neutral-600">/</span><span class="text-neutral-300">Módulo 2.6</span></div></div>
+
+  <header class="bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-4">MÓDULO 2.6</span>
+    <h1 class="text-2xl font-bold mb-3">🔍 Crítica & Tweaks — fechando o loop</h1>
+    <p class="text-lg text-neutral-400 max-w-3xl">Skill <code>critique</code> para auditar artefatos e <code>tweaks</code> para ajustes finos guiados pelo modelo. Iteração estruturada, não chute.</p>
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 max-w-2xl">
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">7</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">~45 min</div><div class="text-xs text-neutral-400">Duração</div></div>
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">Prático</div><div class="text-xs text-neutral-400">Nível</div></div>
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">Loop</div><div class="text-xs text-neutral-400">Foco</div></div>
+    </div>
+    <div class="mt-6 bg-blue-500/10 border border-blue-500/30 rounded-lg p-4 max-w-3xl"><p class="text-sm text-neutral-300"><strong class="text-blue-400">🏁 Resultado:</strong> Você usa <code>critique</code> para auditar artefatos próprios e <code>tweaks</code> para ajustes finos guiados pelo modelo — fechando o ciclo de qualidade.</p></div>
+  </div></header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-blue-500/20 text-blue-400 text-xl font-bold flex items-center justify-center flex-shrink-0">1</div><div><h2 class="text-2xl font-bold mb-2">⏰ Quando rodar <code>critique</code></h2><p class="text-neutral-400">Após o primeiro draft, antes do export.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">A skill <code>critique</code> é manual e profunda — diferente da auto-crítica embutida (RULE 8 de discovery). Você roda <em>após</em> o agente entregar o primeiro draft, <em>antes</em> de exportar/compartilhar. Ela gera um relatório HTML com radar chart das 5 dimensões, lista de Keep / Fix / Quick-wins, e sugestões específicas.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Sem critique, você fica com o draft inicial — que tem 20-30% de oportunidade não-explorada. Critique é cheap (~30s) e high-signal. <strong class="text-neutral-100">É o "code review" do design.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-blue-400">Trigger:</strong> usuário invoca explicitamente <code>/skill critique</code></li>
+            <li><strong class="text-blue-400">Não-destrutivo:</strong> não muda o artefato; gera relatório</li>
+            <li><strong class="text-blue-400">Output:</strong> HTML com radar chart + lista de findings</li>
+            <li><strong class="text-blue-400">Latência:</strong> ~30s na maioria dos casos</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-blue-500/20 text-blue-400 text-xl font-bold flex items-center justify-center flex-shrink-0">2</div><div><h2 class="text-2xl font-bold mb-2">⭐ As 5 dimensões pontuadas 0-10</h2><p class="text-neutral-400">Philosophy, Visual Hierarchy, Detail, Functionality, Innovation.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Cada dimensão recebe nota 0-10 com justificativa:</p>
+          <div class="grid md:grid-cols-2 gap-3 mt-4 text-sm">
+            <div class="bg-dark-700/50 rounded p-3"><strong class="text-blue-400">Philosophy</strong><p class="text-neutral-300 mt-1">Coerência com tese da marca/direção</p></div>
+            <div class="bg-dark-700/50 rounded p-3"><strong class="text-blue-400">Visual Hierarchy</strong><p class="text-neutral-300 mt-1">Ordem de leitura, peso visual</p></div>
+            <div class="bg-dark-700/50 rounded p-3"><strong class="text-blue-400">Detail</strong><p class="text-neutral-300 mt-1">Microcopy, micro-spacing, polish</p></div>
+            <div class="bg-dark-700/50 rounded p-3"><strong class="text-blue-400">Functionality</strong><p class="text-neutral-300 mt-1">UX flow, acessibilidade, hit targets</p></div>
+            <div class="bg-dark-700/50 rounded p-3 md:col-span-2"><strong class="text-blue-400">Innovation</strong><p class="text-neutral-300 mt-1">Algo novo, não óbvio, com bom motivo</p></div>
+          </div>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Sem dimensões nomeadas, "dá uma melhorada" é ambíguo. Com 5 dimensões, conversa fica precisa: "Detail está em 6, vamos pra 8". Modelo entende exatamente o que melhorar. <strong class="text-neutral-100">Vocabulário compartilhado &gt; subjetividade.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-blue-400">0-10:</strong> resolução fina; 1-5 é coarse</li>
+            <li><strong class="text-blue-400">Threshold:</strong> &lt; 7 = re-roll; ≥ 8 = aceito</li>
+            <li><strong class="text-blue-400">Gap dimensions:</strong> diferença entre dimensions revela trade-off</li>
+            <li><strong class="text-blue-400">Justificativa obrigatória:</strong> nota sem texto = inválida</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-blue-500/20 text-blue-400 text-xl font-bold flex items-center justify-center flex-shrink-0">3</div><div><h2 class="text-2xl font-bold mb-2">📊 Output: relatório HTML com radar chart + Keep/Fix/Quick-wins</h2><p class="text-neutral-400">Visual + acionável.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Critique gera relatório HTML com 3 seções:</p>
+          <ul class="text-neutral-300 mt-3 space-y-1 text-sm list-disc ml-5">
+            <li><strong class="text-blue-400">Radar chart:</strong> 5 dimensões em pentágono visual</li>
+            <li><strong class="text-blue-400">Keep:</strong> 3-5 coisas que estão funcionando — não mexer</li>
+            <li><strong class="text-blue-400">Fix:</strong> 3-5 coisas a corrigir — texto específico do quê</li>
+            <li><strong class="text-blue-400">Quick-wins:</strong> 5-7 ajustes pequenos com alto impacto</li>
+          </ul>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">"Keep" é a parte subestimada. Sem ela, você corrige o que não tinha problema. <strong class="text-neutral-100">Saber o que está bom = resistir a refazer.</strong> Quick-wins são o ROI: 1 hora de trabalho, salto perceptível no output.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-blue-400">Radar chart:</strong> SVG inline com 5 vértices</li>
+            <li><strong class="text-blue-400">Keep specific:</strong> "manter hero monocromático" &gt; "manter hero"</li>
+            <li><strong class="text-blue-400">Fix actionable:</strong> "trocar Inter por Söhne em h1"</li>
+            <li><strong class="text-blue-400">Quick-wins ordenados:</strong> primeiro os de menor esforço</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-blue-500/20 text-blue-400 text-xl font-bold flex items-center justify-center flex-shrink-0">4</div><div><h2 class="text-2xl font-bold mb-2">🎚️ Skill <code>tweaks</code> — painel de ajustes</h2><p class="text-neutral-400">Sliders por hue, spacing, font-scale, opacity.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">A skill <code>tweaks</code> permite ajustes pós-emit via <strong>painel de sliders</strong> que o modelo gera contextualmente. Em vez de "deixa mais escuro", você arrasta um slider de hue/lightness/spacing/font-scale e vê o artefato atualizar. Modelo decide quais sliders fazem sentido para esse artefato específico.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Texto livre ("um pouco mais espaçado") é impreciso e custa tokens. Slider é direto. E mais: o modelo te dá <em>só</em> as alavancas que importam — sem overload de 50 sliders. <strong class="text-neutral-100">Constraint = decisão mais rápida.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-blue-400">Hue slider:</strong> 0-360°, em OKLch</li>
+            <li><strong class="text-blue-400">Spacing scale:</strong> 0.8x - 1.4x</li>
+            <li><strong class="text-blue-400">Font-scale:</strong> 0.9x - 1.3x</li>
+            <li><strong class="text-blue-400">Opacity de sub-elements:</strong> 0.5 - 1.0</li>
+            <li><strong class="text-blue-400">Modelo escolhe sliders:</strong> 3-5 por sessão, não overloading</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-blue-500/20 text-blue-400 text-xl font-bold flex items-center justify-center flex-shrink-0">5</div><div><h2 class="text-2xl font-bold mb-2">🤖 Quando o modelo decide o que tweakar</h2><p class="text-neutral-400">A heurística por trás dos sliders gerados.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Modelo lê o artefato + a critique + o histórico do chat, e decide quais sliders são <strong>load-bearing</strong>: alavancas onde 1 ajuste move muita coisa. Para um deck Editorial Monocle, hue da accent + spacing + font-scale são o set comum. Para dashboard Tech Utility, opacity de sparklines + spacing tabular + accent. <strong>Cada artefato tem alavancas diferentes.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Garante que cada slider mexido faz diferença visível. Sliders genéricos (50 sliders sempre presentes) viram ruído. Sliders contextuais = decisão guiada. <strong class="text-neutral-100">Modelo é seu copiloto, não dashboard de 50 botões.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-blue-400">Load-bearing:</strong> alavanca onde delta = visível</li>
+            <li><strong class="text-blue-400">3-5 sliders máximo:</strong> sweet spot</li>
+            <li><strong class="text-blue-400">Por skill:</strong> dashboard ≠ deck ≠ landing</li>
+            <li><strong class="text-blue-400">Stateful:</strong> ajuste persiste para próximo turn</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-blue-500/20 text-blue-400 text-xl font-bold flex items-center justify-center flex-shrink-0">6</div><div><h2 class="text-2xl font-bold mb-2">🔧 <code>POST /api/artifacts/lint</code> — checagem estrutural</h2><p class="text-neutral-400">Broken artifact, missing side-files, palette tokens velhos.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Endpoint do daemon que faz lint mecânico no artefato gerado:</p>
+          <ul class="text-neutral-300 mt-3 space-y-1 text-sm list-disc ml-5">
+            <li><strong>Broken &lt;artifact&gt; tag</strong> não fechada</li>
+            <li><strong>Missing side-files</strong> que o template referencia</li>
+            <li><strong>Palette tokens velhos</strong> — usa <code>#hex</code> em vez de <code>var(--accent)</code></li>
+            <li><strong>P0 violations</strong> declaradas no <code>checklist.md</code> da skill</li>
+          </ul>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Lint pega erros que crítica subjetiva não pega. <em>Tag não fechada</em>, <em>token errado</em>, <em>P0 violado</em> = problemas determinísticos, não opinião. Critique avalia "feel"; lint avalia "estrutura". <strong>Ambos são complementares.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-blue-400">POST /api/artifacts/lint:</strong> recebe HTML, devolve findings</li>
+            <li><strong class="text-blue-400">Severity levels:</strong> error / warning / info</li>
+            <li><strong class="text-blue-400">Auto-run:</strong> daemon roda lint após cada emit</li>
+            <li><strong class="text-blue-400">UI integration:</strong> findings aparecem como toast/lista</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-blue-500/20 text-blue-400 text-xl font-bold flex items-center justify-center flex-shrink-0">7</div><div><h2 class="text-2xl font-bold mb-2">🔁 Iteração: 2 passes é normal, 3+ é sinal de brief errado</h2><p class="text-neutral-400">A heurística da convergência.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Pipeline esperado: <strong>draft → critique → quick-wins → final</strong>. 2 passes ✓. Quando você está no terceiro ou quarto pass, pare. <strong>O brief está errado, não o output</strong>. Volte ao question form, refaça assunções de superfície/tom/escala. Iterar mais não converge — só consome tokens.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Sintoma comum de "AI freestyle": iterar infinitamente em pequenos ajustes, esperando milagre. Esse loop sintomatiza brief vago. <strong class="text-neutral-100">Sair do loop = revisitar a base, não persistir.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-blue-400">Pass 1:</strong> draft inicial</li>
+            <li><strong class="text-blue-400">Pass 2:</strong> critique + quick-wins (normal)</li>
+            <li><strong class="text-blue-400">Pass 3+:</strong> sinal vermelho — revise brief</li>
+            <li><strong class="text-blue-400">Sintoma de brief vago:</strong> "ainda não tá legal"</li>
+            <li><strong class="text-blue-400">Solução:</strong> refazer turn 1 (question form)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-blue-500/10 border-2 border-blue-500/30 rounded-xl p-6 sm:p-8">
+      <h2 class="text-2xl font-bold mb-4 flex items-center"><span class="text-3xl mr-3">🛠️</span> Hands-on</h2>
+      <p class="text-neutral-300 mb-4"><strong>Brief:</strong> Pegar um artefato gerado nos módulos 2.1-2.5 (qualquer um) e rodar <code>critique</code>. Aplicar Quick-wins. Re-pontuar.</p>
+      <ol class="text-neutral-300 space-y-3 list-decimal ml-5 mb-5">
+        <li><strong class="text-blue-400">Escolha um artefato:</strong> deck, landing, mobile, carrossel ou dashboard.</li>
+        <li><strong class="text-blue-400">Rode critique:</strong> <code>/skill critique</code> referenciando o artifact ID.</li>
+        <li><strong class="text-blue-400">Leia o relatório:</strong> note as 5 notas, os 3 Keeps, os 3 Fixes, os 5 Quick-wins.</li>
+        <li><strong class="text-blue-400">Aplique 5 quick-wins:</strong> peça pro agente ajustar especificamente esses.</li>
+        <li><strong class="text-blue-400">Re-rode critique:</strong> compare as notas antes/depois. Sweet spot: +1 a +2 em cada dimensão.</li>
+      </ol>
+      <div class="bg-dark-800 border border-blue-500/30 rounded-lg p-4">
+        <p class="text-xs text-blue-400 font-semibold mb-2">Comando</p>
+        <pre class="code-block">/skill critique
+# Output: relatório com radar + Keep/Fix/Quick-wins
+
+# Aplicar quick-wins:
+"Aplica os 5 quick-wins do relatório de critique"
+
+# Re-validar:
+/skill critique
+# Compara: deltas em cada dimensão</pre>
+      </div>
+    </section>
+
+    <section class="bg-dark-800 border border-dark-600 rounded-xl p-6 sm:p-8">
+      <h2 class="text-2xl font-bold mb-4 flex items-center"><span class="text-3xl mr-3">📚</span> Fontes</h2>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div><h3 class="text-blue-400 font-semibold mb-2 text-sm">No repositório</h3><ul class="text-neutral-300 space-y-1 text-sm">
+          <li><code class="text-blue-400">skills/critique/SKILL.md</code></li>
+          <li><code class="text-blue-400">skills/critique/references/dimensions.md</code></li>
+          <li><code class="text-blue-400">skills/tweaks/SKILL.md</code></li>
+          <li><code class="text-blue-400">apps/daemon/src/server.ts</code> (<code>/api/artifacts/lint</code>)</li>
+        </ul></div>
+        <div><h3 class="text-blue-400 font-semibold mb-2 text-sm">Externas</h3><ul class="text-neutral-300 space-y-1 text-sm">
+          <li>Code review patterns — analogia direta com critique</li>
+          <li>Tufte — princípios de density &amp; ink ratio</li>
+        </ul></div>
+      </div>
+    </section>
+
+    <section class="bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 border border-blue-500/30 rounded-xl p-6 sm:p-8">
+      <h2 class="text-2xl font-bold mb-4 flex items-center"><span class="text-3xl mr-3">📌</span> Resumo do Módulo</h2>
+      <div class="space-y-3 text-neutral-300">
+        <p><strong class="text-blue-400">1.</strong> Critique = "code review" do design — após draft, antes de export.</p>
+        <p><strong class="text-blue-400">2.</strong> 5 dimensões: Philosophy, Visual Hierarchy, Detail, Functionality, Innovation.</p>
+        <p><strong class="text-blue-400">3.</strong> Output = HTML com radar chart + Keep / Fix / Quick-wins.</p>
+        <p><strong class="text-blue-400">4.</strong> Skill <code>tweaks</code> emite painel de sliders contextuais (hue, spacing, font-scale).</p>
+        <p><strong class="text-blue-400">5.</strong> Modelo decide quais sliders são load-bearing — não dashboard genérico.</p>
+        <p><strong class="text-blue-400">6.</strong> <code>POST /api/artifacts/lint</code> faz checagem estrutural mecânica (complementa critique).</p>
+        <p><strong class="text-blue-400">7.</strong> Iteração: 2 passes é normal; 3+ = brief errado, refazer base.</p>
+      </div>
+      <div class="mt-6 pt-6 border-t border-blue-500/30"><p class="text-sm text-neutral-400 mb-2">Próxima trilha:</p><a href="../trilha3-avancado/index.html" class="inline-flex items-center text-purple-400 hover:text-purple-300 font-semibold">Trilha 3 · Técnicas Avançadas →</a></div>
+    </section>
+
+    <div class="flex flex-col sm:flex-row gap-4 mt-12">
+      <a href="modulo-2-5.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Módulo 2.5</a>
+      <a href="../trilha3-avancado/index.html" class="flex-1 text-center px-6 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-500 transition-colors">Trilha 3: Avançado →</a>
+    </div>
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-16"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm"><p>Curso Open Design · Trilha 2 · Módulo 2.6 · 2026 · <a href="https://inema.club" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p></div></footer>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) { themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark'); } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => { themeToggleDarkIcon.classList.toggle('hidden'); themeToggleLightIcon.classList.toggle('hidden'); html.classList.toggle('dark'); localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light'); });
+  </script>
+</body>
+</html>

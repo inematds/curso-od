@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 2.5 · Dashboard / Tool UI | Curso Open Design</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }</script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; } .dark body { background-color: #111827; }
+    html:not(.dark) body { background-color: #f8fafc; } html:not(.dark) .bg-dark-900 { background-color: #fff; } html:not(.dark) .bg-dark-800 { background-color: #f9fafb; } html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; } html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; } html:not(.dark) .text-neutral-300 { color: #4b5563; } html:not(.dark) .text-neutral-400 { color: #6b7280; } html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; } html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-blue-400 { color: #2563eb; } html:not(.dark) .bg-blue-500\/20 { background-color: rgba(37,99,235,.12); } html:not(.dark) .bg-blue-500\/10 { background-color: rgba(37,99,235,.08); } html:not(.dark) .border-blue-500\/30 { border-color: rgba(37,99,235,.25); }
+    html:not(.dark) .text-emerald-400 { color: #059669; } html:not(.dark) .text-purple-400 { color: #7c3aed; } html:not(.dark) .text-amber-400 { color: #b45309; } html:not(.dark) .text-red-400 { color: #dc2626; }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; } html:not(.dark) .text-sky-400 { color: #0369a1; } html:not(.dark) .text-yellow-400 { color: #a16207; } html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; } html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,.95); }
+    .topic-num { width: 3rem; height: 3rem; }
+    pre.code-block { background: #0b1220; color: #e5e7eb; padding: 1rem; border-radius: .5rem; overflow-x: auto; font-family: 'Menlo', monospace; font-size: .85rem; line-height: 1.5; }
+    html:not(.dark) pre.code-block { background: #111827; color: #f3f4f6; }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"><div class="flex justify-between items-center h-14"><div class="flex items-center space-x-4"><a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300"><span class="text-2xl">🎨</span><span class="font-bold text-lg hidden sm:inline">Curso Open Design</span></a><span class="text-neutral-600">|</span><a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a></div><div class="flex items-center space-x-1 sm:space-x-2"><a href="../trilha1-fundamentos/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a><a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 bg-blue-500/10"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Exemplos</span></a><a href="../trilha3-avancado/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span></a><button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2"><svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg><svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg></button></div></div></div></nav>
+
+  <div class="border-b border-dark-700"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 text-sm text-neutral-400"><a href="../../index.html" class="hover:text-blue-400">Início</a><span class="mx-2 text-neutral-600">/</span><a href="index.html" class="hover:text-blue-400">Trilha 2 · Exemplos de Uso</a><span class="mx-2 text-neutral-600">/</span><span class="text-neutral-300">Módulo 2.5</span></div></div>
+
+  <header class="bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-4">MÓDULO 2.5</span>
+    <h1 class="text-2xl font-bold mb-3">📊 Dashboard / Tool UI</h1>
+    <p class="text-lg text-neutral-400 max-w-3xl">KPIs + chart + tabela + sidebar onde <strong>densidade é feature</strong>, não bug. Sem shadows, sem gradients, sem rounded.</p>
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 max-w-2xl">
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">8</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">~55 min</div><div class="text-xs text-neutral-400">Duração</div></div>
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">Prático</div><div class="text-xs text-neutral-400">Nível</div></div>
+      <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">Density</div><div class="text-xs text-neutral-400">Tese</div></div>
+    </div>
+    <div class="mt-6 bg-blue-500/10 border border-blue-500/30 rounded-lg p-4 max-w-3xl"><p class="text-sm text-neutral-300"><strong class="text-blue-400">🏁 Resultado:</strong> Você gera dashboard denso (KPIs + chart + tabela + sidebar) onde densidade é feature, com tipografia tabular e zero decoração.</p></div>
+  </div></header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-blue-500/20 text-blue-400 text-xl font-bold flex items-center justify-center flex-shrink-0">1</div><div><h2 class="text-2xl font-bold mb-2">📐 Skill <code>dashboard</code> — premissa density-first</h2><p class="text-neutral-400">Por que landing-page-rules não cabem aqui.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Dashboard é o oposto da landing. <strong>Landing</strong> tem ar, hierarquia gigante, 1 mensagem. <strong>Dashboard</strong> tem informação cruzada, baixa hierarquia, dezenas de números visíveis. A skill <code>dashboard</code> tem checklist próprio: anti-shadows, anti-gradients, anti-rounded-buttons, anti-h1-gigante. <strong>Densidade é a feature.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Skill errada para o output errado = retrabalho. Aplicar regras de landing num dashboard = ele fica vazio, com whitespace exagerado. Saber qual skill usar = output certo na primeira tentativa.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-blue-400">Density-first:</strong> mais info por pixel</li>
+            <li><strong class="text-blue-400">Premissa "Bloomberg/Linear/SQL":</strong> denso, lido por olho treinado</li>
+            <li><strong class="text-blue-400">scenario: dashboard</strong></li>
+            <li><strong class="text-blue-400">design_system pareada:</strong> linear-app ou tech-utility</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-blue-500/20 text-blue-400 text-xl font-bold flex items-center justify-center flex-shrink-0">2</div><div><h2 class="text-2xl font-bold mb-2">🗂️ Sidebar fixa + canvas central + right rail</h2><p class="text-neutral-400">Layout canônico de tool UI.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Layout em 3 colunas:</p>
+          <pre class="code-block mt-3">┌──────┬───────────────────────┬────────┐
+│      │                       │        │
+│ Side │      Canvas           │ Right  │
+│ bar  │      central          │ rail   │
+│      │                       │        │
+│ 240px│      flex-1           │ 320px  │
+└──────┴───────────────────────┴────────┘</pre>
+          <p class="text-neutral-300 mt-3">Sidebar = nav + workspace; canvas = chart/table/KPIs principais; right rail (opcional) = filtros, properties, comments. Linear, Notion, Figma, Cursor — todos seguem.</p>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Esse é o layout que <strong>"se sente como dashboard"</strong> sem precisar dizer. Inverter = causa estranheza. Saber a convenção = parecer bullpen sem esforço.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-blue-400">Sidebar 240px:</strong> sweet spot — não come canvas</li>
+            <li><strong class="text-blue-400">Canvas flex-1:</strong> ocupa todo restante</li>
+            <li><strong class="text-blue-400">Right rail 320px:</strong> opcional, expandível/colapsável</li>
+            <li><strong class="text-blue-400">Mobile:</strong> sidebar e rail viram drawers</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-blue-500/20 text-blue-400 text-xl font-bold flex items-center justify-center flex-shrink-0">3</div><div><h2 class="text-2xl font-bold mb-2">🔢 Numerais tabulares (mono digits)</h2><p class="text-neutral-400">Por que e como.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Em fontes <strong>variáveis</strong> default, "1" tem largura diferente de "8" — números em colunas ficam desalinhados verticalmente. <strong>Tabular numerals</strong> (CSS <code>font-variant-numeric: tabular-nums</code>) força largura igual. Resultado: colunas de números alinhadas como Excel.</p>
+          <pre class="code-block mt-3">.kpi-value, table td.numeric, .price {
+  font-variant-numeric: tabular-nums;
+}</pre>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">É a regra mais subestimada. Olho do usuário compara números visualmente — desalinhamento causa "buraco" mental. Com tabular, comparação é instantânea. <strong class="text-neutral-100">É o detalhe que separa "dashboard amador" de "dashboard pro".</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-blue-400">font-variant-numeric: tabular-nums:</strong> CSS one-liner</li>
+            <li><strong class="text-blue-400">Inter, JetBrains Mono, Fira Code:</strong> default tabular</li>
+            <li><strong class="text-blue-400">font-variant-numeric: lining-nums:</strong> bonus, capitais não baixam</li>
+            <li><strong class="text-blue-400">Aplicar:</strong> KPIs, tabelas, prices, percentuais</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-blue-500/20 text-blue-400 text-xl font-bold flex items-center justify-center flex-shrink-0">4</div><div><h2 class="text-2xl font-bold mb-2">📈 KPIs: hierarquia visual, sparklines, deltas</h2><p class="text-neutral-400">Como fazer 4 KPIs em uma linha sem competir.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Cada KPI tem 3-4 elementos: <strong>label</strong> (small caps, muted) + <strong>value</strong> (display grande, tabular) + <strong>delta com sinal</strong> (verde/vermelho, +/-) + <strong>sparkline</strong> opcional (gráfico de linha de 12 pontos). Tudo em uma só "card" sem border, separados só por whitespace.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">KPIs são a "primeira coisa que olho" do dashboard. Hierarquia ruim = usuário não sabe qual é o KPI principal. Com label small + value grande + delta + sparkline, atenção flui em milissegundos.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-blue-400">Label:</strong> uppercase, 11-12px, color muted</li>
+            <li><strong class="text-blue-400">Value:</strong> 32-48px, tabular, font weight 600</li>
+            <li><strong class="text-blue-400">Delta:</strong> +12.4% verde / -3.1% vermelho, com seta sutil</li>
+            <li><strong class="text-blue-400">Sparkline:</strong> SVG inline, 12 pontos, 60×24px, opacity 0.6</li>
+            <li><strong class="text-blue-400">Sem ícone:</strong> emoji ou ícone deco quebra hierarquia</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-blue-500/20 text-blue-400 text-xl font-bold flex items-center justify-center flex-shrink-0">5</div><div><h2 class="text-2xl font-bold mb-2">📋 Tabela com tipografia tabular, hover row, sticky header</h2><p class="text-neutral-400">Detalhes que separam tabela "uso" de tabela "decoração".</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Tabela de dashboard tem 5 atributos não negociáveis:</p>
+          <ul class="text-neutral-300 mt-3 space-y-1 text-sm list-disc ml-5">
+            <li><strong class="text-blue-400">Tabular nums</strong> em colunas numéricas</li>
+            <li><strong class="text-blue-400">Sticky header</strong> ao scroll vertical</li>
+            <li><strong class="text-blue-400">Hover row</strong> com bg sutil (cor &lt; 5% chroma)</li>
+            <li><strong class="text-blue-400">Row dividers</strong> finos (1px hairline)</li>
+            <li><strong class="text-blue-400">Right-align numéricas</strong>, left-align strings</li>
+          </ul>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Tabela é onde o usuário fica mais tempo. Sticky header em scroll = sempre lê header. Hover row = guia do olho. Right-align numéricas = comparação rápida. <strong class="text-neutral-100">Tabela bonita não é a que tem ícones; é a que se navega bem.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-blue-400">position: sticky; top: 0:</strong> header fixo</li>
+            <li><strong class="text-blue-400">tr:hover:</strong> bg-color: oklch(... / 0.03)</li>
+            <li><strong class="text-blue-400">border-bottom 1px:</strong> divisor sutil</li>
+            <li><strong class="text-blue-400">text-align: right:</strong> em colunas numéricas</li>
+            <li><strong class="text-blue-400">Sortable header:</strong> clique → ↑↓ visual</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-blue-500/20 text-blue-400 text-xl font-bold flex items-center justify-center flex-shrink-0">6</div><div><h2 class="text-2xl font-bold mb-2">📊 Chart: SVG inline &gt; biblioteca pesada</h2><p class="text-neutral-400">Quando o agente escolhe SVG vs Recharts/Chart.js.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Para sparklines e charts simples (line, bar, area com 12-50 pontos), <strong>SVG inline é o caminho</strong>: 30 linhas de código, zero dependências, customização total. Para charts complexos (heatmap, scatter de milhares de pontos), Recharts ou Chart.js. <strong>Default = SVG inline</strong>; library entra como exceção.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Bibliotecas pesadas inflam bundle, impõem look próprio (que vira "cara de Recharts"), e são chatas de customizar. SVG inline integra com seu DESIGN.md naturalmente. <strong class="text-neutral-100">Sempre comece SVG; library só se SVG não couber.</strong></p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-blue-400">SVG line:</strong> &lt;path d="M0,12 L10,8 L20,15 ..."&gt;</li>
+            <li><strong class="text-blue-400">SVG area:</strong> add &lt;polygon&gt; com fill semi-transparente</li>
+            <li><strong class="text-blue-400">Tooltip:</strong> JS vanilla com hover events</li>
+            <li><strong class="text-blue-400">Recharts:</strong> só quando &gt; 100 pontos ou múltiplas séries</li>
+            <li><strong class="text-blue-400">D3:</strong> overkill em 99% dos dashboards</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-blue-500/20 text-blue-400 text-xl font-bold flex items-center justify-center flex-shrink-0">7</div><div><h2 class="text-2xl font-bold mb-2">🚫 Sem decoração: shadows, gradients e rounded são inimigos</h2><p class="text-neutral-400">Anti-patterns que destroem tool UI.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">Em dashboard, três defaults de UI moderno são inimigos:</p>
+          <div class="grid sm:grid-cols-3 gap-3 mt-4 text-sm">
+            <div class="bg-red-500/10 border border-red-500/30 rounded p-3"><strong class="text-red-400">❌ Shadows</strong><p class="text-neutral-300 mt-1">Sombras competem com hover state — confunde leitura</p></div>
+            <div class="bg-red-500/10 border border-red-500/30 rounded p-3"><strong class="text-red-400">❌ Gradients</strong><p class="text-neutral-300 mt-1">Gradiente de fundo derrota dark/light controlado por dado</p></div>
+            <div class="bg-red-500/10 border border-red-500/30 rounded p-3"><strong class="text-red-400">❌ Rounded &gt; 4px</strong><p class="text-neutral-300 mt-1">Cards muito arredondados parecem "marketing", não "tool"</p></div>
+          </div>
+        </div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Esses elementos são "default chic" em landing — mas em dashboard <strong>tiram</strong> da experiência. Linear, Stripe Dashboard, Cursor: todos seguem essa estética anti-decoração. É a "voz visual" do tool UI.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-blue-400">Border-radius:</strong> 0-4px máximo</li>
+            <li><strong class="text-blue-400">Box-shadow:</strong> usar 1px ring solid em vez (border)</li>
+            <li><strong class="text-blue-400">Background:</strong> solid only, sem gradient</li>
+            <li><strong class="text-blue-400">Card divider:</strong> 1px hairline border, não shadow elevation</li>
+            <li><strong class="text-blue-400">P0 mecânico:</strong> grep "box-shadow" → warning</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="flex items-start space-x-4 mb-6"><div class="topic-num rounded-full bg-blue-500/20 text-blue-400 text-xl font-bold flex items-center justify-center flex-shrink-0">8</div><div><h2 class="text-2xl font-bold mb-2">💕 <code>dating-web</code> como caso editorial dentro de dashboard</h2><p class="text-neutral-400">Quando densidade encontra editorial.</p></div></div>
+      <div class="space-y-4 ml-0 sm:ml-16">
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">O que é</h3><p class="text-neutral-300">A skill <code>dating-web</code> é um caso especial: <strong>dashboard com voz editorial</strong>. Inspirada em sites como Pudding/The Information, mistura denso (números) com narrativa (parágrafos prosa). Mantém numerais tabulares; quebra a regra "sem decoração" controladamente — uma única flourish editorial por seção.</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Por que aprender</h3><p class="text-neutral-300">Mostra que regras existem para serem quebradas <em>conscientemente</em>. <code>dating-web</code> deliberadamente quebra "sem decoração" porque o produto é content, não tool. Você pode aplicar essa lógica para dashboards de relatório, post-mortem, "data journalism".</p></div>
+        <div class="bg-dark-800 border border-dark-600 rounded-lg p-5"><h3 class="text-blue-400 font-semibold mb-2">Conceitos-chave</h3>
+          <ul class="text-neutral-300 space-y-2 text-sm">
+            <li><strong class="text-blue-400">Editorial dashboard:</strong> narrativa + dado</li>
+            <li><strong class="text-blue-400">Mantém:</strong> tabular numerals, sticky table</li>
+            <li><strong class="text-blue-400">Quebra:</strong> permite 1 flourish (pull quote, ilustração)</li>
+            <li><strong class="text-blue-400">Use case:</strong> relatório anual, post-mortem público, data story</li>
+            <li><strong class="text-blue-400">Não para:</strong> tool diária (admin, CRUD)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-blue-500/10 border-2 border-blue-500/30 rounded-xl p-6 sm:p-8">
+      <h2 class="text-2xl font-bold mb-4 flex items-center"><span class="text-3xl mr-3">🛠️</span> Hands-on</h2>
+      <p class="text-neutral-300 mb-4"><strong>Brief:</strong> Dashboard de métricas de uma startup B2B SaaS — MRR, churn, NPS, top 10 contas.</p>
+      <p class="text-neutral-300 mb-4"><strong>Output:</strong> index.html denso, dark mode, real-data feel.</p>
+      <div class="bg-dark-700/50 rounded-lg p-4 mt-3">
+        <p class="text-sm text-blue-400 font-semibold mb-2">Estrutura sugerida:</p>
+        <ul class="text-neutral-300 space-y-1 text-sm list-disc ml-5">
+          <li><strong>Sidebar (240px):</strong> Logo + 5-7 itens de nav (Overview, Customers, Billing, Settings)</li>
+          <li><strong>Canvas — linha 1:</strong> 4 KPIs (MRR, Churn, NPS, Active accounts) com sparklines</li>
+          <li><strong>Canvas — linha 2:</strong> Chart de MRR ao longo do tempo (SVG inline)</li>
+          <li><strong>Canvas — linha 3:</strong> Tabela de top 10 contas (account, MRR, status, last seen)</li>
+          <li><strong>Right rail (opcional):</strong> alertas + filtros de período</li>
+        </ul>
+      </div>
+      <div class="bg-dark-800 border border-blue-500/30 rounded-lg p-4 mt-4">
+        <p class="text-xs text-blue-400 font-semibold mb-2">Comando</p>
+        <pre class="code-block">/skill dashboard
+/design-system linear-app   # tool UI canônico
+
+# Brief
+Dashboard métricas B2B SaaS:
+- 4 KPIs (MRR, Churn, NPS, Active)
+- Chart MRR ao longo do tempo (SVG inline)
+- Tabela top 10 contas com status
+- Sidebar 240 + canvas + right rail
+- Dark mode default
+- Anti-patterns: zero shadows, zero gradients, rounded ≤ 4px</pre>
+      </div>
+    </section>
+
+    <section class="bg-dark-800 border border-dark-600 rounded-xl p-6 sm:p-8">
+      <h2 class="text-2xl font-bold mb-4 flex items-center"><span class="text-3xl mr-3">📚</span> Fontes</h2>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div><h3 class="text-blue-400 font-semibold mb-2 text-sm">No repositório</h3><ul class="text-neutral-300 space-y-1 text-sm">
+          <li><code class="text-blue-400">skills/dashboard/</code></li>
+          <li><code class="text-blue-400">skills/dating-web/</code></li>
+          <li><code class="text-blue-400">design-systems/linear-app/DESIGN.md</code></li>
+        </ul></div>
+        <div><h3 class="text-blue-400 font-semibold mb-2 text-sm">Externas</h3><ul class="text-neutral-300 space-y-1 text-sm">
+          <li>Edward Tufte — Visual Display of Quantitative Information</li>
+          <li>Linear, Stripe Dashboard, Cursor — referências canônicas</li>
+          <li>Pudding/The Information — editorial dashboards</li>
+        </ul></div>
+      </div>
+    </section>
+
+    <section class="bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 border border-blue-500/30 rounded-xl p-6 sm:p-8">
+      <h2 class="text-2xl font-bold mb-4 flex items-center"><span class="text-3xl mr-3">📌</span> Resumo do Módulo</h2>
+      <div class="space-y-3 text-neutral-300">
+        <p><strong class="text-blue-400">1.</strong> Skill <code>dashboard</code> tem premissa density-first — anti regra de landing.</p>
+        <p><strong class="text-blue-400">2.</strong> Layout 3-col canônico: sidebar 240px + canvas + right rail 320px.</p>
+        <p><strong class="text-blue-400">3.</strong> Tabular numerals em KPIs e tabelas — alinhamento mecânico.</p>
+        <p><strong class="text-blue-400">4.</strong> KPIs com label small + value grande + delta colorido + sparkline opcional.</p>
+        <p><strong class="text-blue-400">5.</strong> Tabela com sticky header, hover row, right-align numéricas.</p>
+        <p><strong class="text-blue-400">6.</strong> Charts em SVG inline; biblioteca só quando &gt; 100 pontos.</p>
+        <p><strong class="text-blue-400">7.</strong> Sem shadows, sem gradients, rounded ≤ 4px.</p>
+        <p><strong class="text-blue-400">8.</strong> <code>dating-web</code> é exceção controlada: editorial dashboard com 1 flourish.</p>
+      </div>
+      <div class="mt-6 pt-6 border-t border-blue-500/30"><p class="text-sm text-neutral-400 mb-2">Próximo módulo:</p><a href="modulo-2-6.html" class="inline-flex items-center text-blue-400 hover:text-blue-300 font-semibold">Módulo 2.6 · Crítica & Tweaks →</a></div>
+    </section>
+
+    <div class="flex flex-col sm:flex-row gap-4 mt-12">
+      <a href="modulo-2-4.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Módulo 2.4</a>
+      <a href="modulo-2-6.html" class="flex-1 text-center px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-500 transition-colors">Módulo 2.6 →</a>
+    </div>
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-16"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm"><p>Curso Open Design · Trilha 2 · Módulo 2.5 · 2026 · <a href="https://inema.club" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p></div></footer>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) { themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark'); } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => { themeToggleDarkIcon.classList.toggle('hidden'); themeToggleLightIcon.classList.toggle('hidden'); html.classList.toggle('dark'); localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light'); });
+  </script>
+</body>
+</html>
