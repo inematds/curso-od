@@ -92,8 +92,42 @@
 
   <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
+    <!-- NAVEGAÇÃO RÁPIDA — Grid com nome dos 6 módulos -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold mb-1">📚 Os 6 Módulos da Trilha</h2>
+      <p class="text-sm text-neutral-400 mb-6">Clique para pular direto a um módulo, ou role para ver os tópicos expansíveis.</p>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+        <a href="#modulo-3-1" class="bg-dark-800 border border-dark-600 hover:border-purple-500/40 hover:bg-purple-500/5 rounded-lg p-4 transition-colors block">
+          <div class="flex items-center justify-between mb-1"><span class="text-purple-400 font-bold text-sm">3.1</span><span class="text-xs text-neutral-500">~80 min</span></div>
+          <div class="text-base font-semibold">🔌 BYOK Proxy & Multi-modelo</div>
+        </a>
+        <a href="#modulo-3-2" class="bg-dark-800 border border-dark-600 hover:border-purple-500/40 hover:bg-purple-500/5 rounded-lg p-4 transition-colors block">
+          <div class="flex items-center justify-between mb-1"><span class="text-purple-400 font-bold text-sm">3.2</span><span class="text-xs text-neutral-500">~60 min</span></div>
+          <div class="text-base font-semibold">🔗 ACP & adapters</div>
+        </a>
+        <a href="#modulo-3-3" class="bg-dark-800 border border-dark-600 hover:border-purple-500/40 hover:bg-purple-500/5 rounded-lg p-4 transition-colors block">
+          <div class="flex items-center justify-between mb-1"><span class="text-purple-400 font-bold text-sm">3.3</span><span class="text-xs text-neutral-500">~50 min</span></div>
+          <div class="text-base font-semibold">🎨 Brand-Spec Extraction</div>
+        </a>
+        <a href="#modulo-3-4" class="bg-dark-800 border border-dark-600 hover:border-purple-500/40 hover:bg-purple-500/5 rounded-lg p-4 transition-colors block">
+          <div class="flex items-center justify-between mb-1"><span class="text-purple-400 font-bold text-sm">3.4</span><span class="text-xs text-neutral-500">~50 min</span></div>
+          <div class="text-base font-semibold">⭐ Critique 5-dim como Loop</div>
+        </a>
+        <a href="#modulo-3-5" class="bg-dark-800 border border-dark-600 hover:border-purple-500/40 hover:bg-purple-500/5 rounded-lg p-4 transition-colors block">
+          <div class="flex items-center justify-between mb-1"><span class="text-purple-400 font-bold text-sm">3.5</span><span class="text-xs text-neutral-500">~75 min</span></div>
+          <div class="text-base font-semibold">🛠️ Criando uma Skill Própria</div>
+        </a>
+        <a href="#modulo-3-6" class="bg-dark-800 border border-dark-600 hover:border-purple-500/40 hover:bg-purple-500/5 rounded-lg p-4 transition-colors block">
+          <div class="flex items-center justify-between mb-1"><span class="text-purple-400 font-bold text-sm">3.6</span><span class="text-xs text-neutral-500">~70 min</span></div>
+          <div class="text-base font-semibold">⚙️ Daemon, Sidecar IPC</div>
+        </a>
+      </div>
+    </section>
+
+    <div class="border-t border-dark-600 pt-2 mb-8"><h3 class="text-sm font-semibold text-neutral-500 uppercase tracking-wide">Conteúdo Detalhado</h3></div>
+
     <!-- MÓDULO 3.1 -->
-    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+    <div id="modulo-3-1" class="scroll-mt-20 bg-dark-800 rounded-xl border border-dark-600 mb-6">
       <div class="p-6 border-b border-dark-600">
         <div class="flex items-center justify-between mb-2"><span class="text-purple-400 font-bold">3.1</span><span class="text-xs text-neutral-500">~80 min</span></div>
         <h3 class="text-2xl font-bold mb-2">🔌 BYOK Proxy & Multi-modelo</h3>
@@ -115,7 +149,7 @@
     </div>
 
     <!-- MÓDULO 3.2 -->
-    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+    <div id="modulo-3-2" class="scroll-mt-20 bg-dark-800 rounded-xl border border-dark-600 mb-6">
       <div class="p-6 border-b border-dark-600">
         <div class="flex items-center justify-between mb-2"><span class="text-purple-400 font-bold">3.2</span><span class="text-xs text-neutral-500">~90 min</span></div>
         <h3 class="text-2xl font-bold mb-2">🔗 Agent Client Protocol (ACP) & adapters</h3>
@@ -137,7 +171,7 @@
     </div>
 
     <!-- MÓDULO 3.3 -->
-    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+    <div id="modulo-3-3" class="scroll-mt-20 bg-dark-800 rounded-xl border border-dark-600 mb-6">
       <div class="p-6 border-b border-dark-600">
         <div class="flex items-center justify-between mb-2"><span class="text-purple-400 font-bold">3.3</span><span class="text-xs text-neutral-500">~75 min</span></div>
         <h3 class="text-2xl font-bold mb-2">🎨 Brand-Spec Extraction Avançada</h3>
@@ -160,7 +194,7 @@
     </div>
 
     <!-- MÓDULO 3.4 -->
-    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+    <div id="modulo-3-4" class="scroll-mt-20 bg-dark-800 rounded-xl border border-dark-600 mb-6">
       <div class="p-6 border-b border-dark-600">
         <div class="flex items-center justify-between mb-2"><span class="text-purple-400 font-bold">3.4</span><span class="text-xs text-neutral-500">~70 min</span></div>
         <h3 class="text-2xl font-bold mb-2">🔄 Critique 5-dim como Loop</h3>
@@ -183,7 +217,7 @@
     </div>
 
     <!-- MÓDULO 3.5 -->
-    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+    <div id="modulo-3-5" class="scroll-mt-20 bg-dark-800 rounded-xl border border-dark-600 mb-6">
       <div class="p-6 border-b border-dark-600">
         <div class="flex items-center justify-between mb-2"><span class="text-purple-400 font-bold">3.5</span><span class="text-xs text-neutral-500">~90 min</span></div>
         <h3 class="text-2xl font-bold mb-2">🛠️ Criando uma Skill Própria</h3>
@@ -207,7 +241,7 @@
     </div>
 
     <!-- MÓDULO 3.6 -->
-    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+    <div id="modulo-3-6" class="scroll-mt-20 bg-dark-800 rounded-xl border border-dark-600 mb-6">
       <div class="p-6 border-b border-dark-600">
         <div class="flex items-center justify-between mb-2"><span class="text-purple-400 font-bold">3.6</span><span class="text-xs text-neutral-500">~85 min</span></div>
         <h3 class="text-2xl font-bold mb-2">⚙️ Daemon, Sidecar IPC & Multi-namespace</h3>
